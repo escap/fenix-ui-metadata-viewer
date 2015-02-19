@@ -1,2 +1,2 @@
-# fenix-ui-metadata-viewer
+# FENIX UI Metadata Viewer
 FENIX component to visualize metadata.
