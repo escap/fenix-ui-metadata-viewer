@@ -28,6 +28,16 @@ define(['jquery',
         /* Fix the language, if needed. */
         this.CONFIG.lang = this.CONFIG.lang != null ? this.CONFIG.lang : 'en';
 
+        /* Load main structure. */
+        var source = $(templates).filter('#main_structure').html();
+        var template = Handlebars.compile(source);
+        var dynamic_data = {
+            title: 'This is the title',
+            subtitle: "this is the subtitle"
+        };
+        var html = template(dynamic_data);
+        $('#' + this.CONFIG.placeholder_id).html(html);
+
     };
 
     return FUIMDV;
