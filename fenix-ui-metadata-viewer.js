@@ -40,7 +40,7 @@ define(['jquery',
 
         /* Link test alert. */
         $('#alert_button').click(function() {
-            sweetAlert('This is a very nice alert provided by SweetAlert');
+            sweetAlert('This is a new feature');
         });
 
     };
