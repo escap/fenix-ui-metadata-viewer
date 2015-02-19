@@ -38,6 +38,11 @@ define(['jquery',
         var html = template(dynamic_data);
         $('#' + this.CONFIG.placeholder_id).html(html);
 
+        /* Link test alert. */
+        $('#alert_button').click(function() {
+            sweetAlert('This is a very nice alert provided by SweetAlert');
+        });
+
     };
 
     return FUIMDV;
