@@ -45,74 +45,14 @@ define(['jquery',
                 if (typeof json == 'string')
                     json = $.parseJSON(response);
 
-                var s = '<ul>';
-                for (var key in json) {
-                    var s1 = '<li>';
-                    if (typeof json[key] == 'object') {
-                        s1 += '<ul>';
-                        for (var key1 in json[key]) {
-                            if (typeof json[key][key1] == 'object') {
-                                s1 += '<ul>';
-                                for (var key2 in json[key][key1]) {
-                                    if (typeof json[key][key1][key2] == 'object') {
-                                        s1 += '<ul>';
-                                        for (var key3 in json[key][key1][key2]) {
-                                            if (typeof json[key][key1][key2][key3] == 'object') {
-                                                s1 += '<ul>';
-                                                for (var key4 in json[key][key1][key2][key3]) {
-                                                    if (typeof json[key][key1][key2][key3][key4] == 'object') {
-                                                        s1 += '<ul>';
-                                                        for (var key5 in json[key][key1][key2][key3][key4]) {
-                                                            if (typeof json[key][key1][key2][key3][key4][key5] == 'object') {
-                                                                s1 += '<ul>';
-                                                                for (var key6 in json[key][key1][key2][key3][key4][key5]) {
-                                                                    if (typeof json[key][key1][key2][key3][key4][key5][key6] == 'object') {
-                                                                        s1 += '<ul>';
-                                                                        for (var key7 in json[key][key1][key2][key3][key4][key5][key6]) {
-                                                                            if (typeof json[key][key1][key2][key3][key4][key5][key6][key7] == 'object') {
-                                                                                s1 += 'HHHHH';
-                                                                            } else {
-                                                                                s1 += '<li><b>' + key7 + ':</b> ' + json[key][key1][key2][key3][key4][key5][key6][key7] + '</li>';
-                                                                            }
-                                                                        }
-                                                                        s1 += '<ul>';
-                                                                    } else {
-                                                                        s1 += '<li><b>' + key6 + ':</b> ' + json[key][key1][key2][key3][key4][key5][key6] + '</li>';
-                                                                    }
-                                                                }
-                                                                s1 += '<ul>';
-                                                            } else {
-                                                                s1 += '<li><b>' + key5 + ':</b> ' + json[key][key1][key2][key3][key4][key5] + '</li>';
-                                                            }
-                                                        }
-                                                        s1 += '<ul>';
-                                                    } else {
-                                                        s1 += '<li><b>' + key4 + ':</b> ' + json[key][key1][key2][key3][key4] + '</li>';
-                                                    }
-                                                }
-                                                s1 += '</ul>';
-                                            } else {
-                                                s1 += '<li><b>' + key3 + ':</b> ' + json[key][key1][key2][key3] + '</li>';
-                                            }
-                                        }
-                                        s1 += '</ul>';
-                                    } else {
-                                        s1 += '<li><b>' + key2 + ':</b> ' + json[key][key1][key2] + '</li>';
-                                    }
-                                }
-                                s1 += '</ul>';
-                            } else {
-                                s1 += '<li><b>' + key1 + ':</b> ' + json[key][key1] + '</li>';
-                            }
-                        }
-                        s1 += '</ul>';
-                    } else {
-                        s1 += '<li><b>' + key + ':</b> ' + json[key] + '</li>';
-                    }
-                    s += s1;
-                }
-                s += '</ul>';
-                $('#' + _this.CONFIG.placeholder_id).html(s);
+                /* Static accordion. */
+                var source = $(templates).filter('#test').html();
+                var template = Handlebars.compile(source);
+                var dynamic_data = {
+
+                };
+                var html = template(dynamic_data);
+                $('#' + _this.CONFIG.placeholder_id).html(html);
 
             },
 
