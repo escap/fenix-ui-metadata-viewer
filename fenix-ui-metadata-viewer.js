@@ -112,7 +112,6 @@ define(['jquery',
                     s += s1;
                 }
                 s += '</ul>';
-                console.log(s);
                 $('#' + _this.CONFIG.placeholder_id).html(s);
 
             },
