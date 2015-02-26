@@ -4,7 +4,7 @@
     <button id='alert_button'>try me!</button>
 </template>
 
-<template id='iteration' type="text/x-handlebars-template">
+<script id='iteration' type='text/x-handlebars-template'>
     <div class='panel-group'>
         {{#each panels}}
         <div class='panel panel-default'>
@@ -18,35 +18,21 @@
             <div id='{{panel_id}}' class='panel-collapse collapse in'>
                 <div class='panel-body'>
                 {{#each lines}}
-                    <div class='form-group'>
-                        <div class='row'>
-                            <div class='col-sm-4'>
-                                <label>
-                                    {{field_name}}
-                                </label>
-                            </div>
-                            <div class='col-sm-7'>
-                                {{field_value}}
-                            </div>
-                            <div class='col-sm-1'>
-                                <i class='fa fa-info-circle'></i>
-                            </div>
-                        </div>
-                    </div>
+                    {{> single_line}}
                 {{/each}}
                 </div>
             </div>
         </div>
         {{/each}}
     </div>
-</template>
+</script>
 
 <template id='panel_group'>
     <div class='panel-group'>
     </div>
 </template>
 
-<template id='single_line'>
+<script id='single_line' type='text/x-handlebars-template'>
     <div class='form-group'>
         <div class='row'>
             <div class='col-sm-4'>
@@ -62,7 +48,7 @@
             </div>
         </div>
     </div>
-</template>
+</script>
 
 <template id='test'>
 

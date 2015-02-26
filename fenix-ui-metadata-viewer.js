@@ -55,22 +55,24 @@ define(['jquery',
                             panel_header_label: 'Header',
                             lines: [
                                 {
-                                    field_name: 'asd',
-                                    field_value: 'ads'
+                                    field_name: 'pongo',
+                                    field_value: 'pongo'
                                 },
                                 {
                                     field_name: 'asd',
-                                    field_value: 'ads'
+                                    field_value: 'peggy'
                                 },
                                 {
                                     field_name: 'asd',
-                                    field_value: 'ads'
+                                    field_value: 'bau'
                                 }
                             ]
                         }
                     ]
                 };
+                Handlebars.registerPartial('single_line', $(templates).filter('#single_line').html());
                 var html = template(dynamic_data);
+
                 $('#' + _this.CONFIG.placeholder_id).html(html);
 
             },
