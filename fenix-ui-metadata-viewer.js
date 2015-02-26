@@ -46,10 +46,29 @@ define(['jquery',
                     json = $.parseJSON(response);
 
                 /* Static accordion. */
-                var source = $(templates).filter('#test').html();
+                var source = $(templates).filter('#iteration').html();
                 var template = Handlebars.compile(source);
                 var dynamic_data = {
-
+                    panels: [
+                        {
+                            panel_id: 'pippo',
+                            panel_header_label: 'Header',
+                            lines: [
+                                {
+                                    field_name: 'asd',
+                                    field_value: 'ads'
+                                },
+                                {
+                                    field_name: 'asd',
+                                    field_value: 'ads'
+                                },
+                                {
+                                    field_name: 'asd',
+                                    field_value: 'ads'
+                                }
+                            ]
+                        }
+                    ]
                 };
                 var html = template(dynamic_data);
                 $('#' + _this.CONFIG.placeholder_id).html(html);
