@@ -11,7 +11,8 @@ define(['jquery',
         this.CONFIG = {
             lang: 'en',
             placeholder_id: 'placeholder',
-            url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid/GE?full=true'
+            url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid/GE?full=true',
+            view_type: null
         };
 
     }
@@ -48,6 +49,16 @@ define(['jquery',
                 /* Store the DB result. */
                 _this.CONFIG.metadata = json;
 
+                /* Render the metadata. */
+                switch (_this.CONFIG.view_type) {
+                    case 'accordion':
+                        _this.view_as_accordion();
+                        break;
+                    default:
+                        _this.view_as_accordion();
+                        break;
+                }
+
             },
 
             error: function (a, b, c) {
@@ -62,7 +73,74 @@ define(['jquery',
 
     };
 
-    FUIMDV.prototype.view_as_accordion = function(config) {
+    FUIMDV.prototype.view_as_accordion = function() {
+
+        ///* Initiate variables. */
+        //var panels = [];
+        //
+        ///* Iterate over DB result. */
+        //for (var key in this.CONFIG.metadata) {
+        //    if (typeof this.CONFIG.metadata[key] != 'object') {
+        //        panels.push({
+        //            panel_id: key,
+        //            panel_header_label: this.CONFIG.metadata[key],
+        //            lines: [
+        //                {
+        //                    field_name: 'Name',
+        //                    field_value: 'value'
+        //                }
+        //            ]
+        //        });
+        //    }
+        //}
+        //
+        ///* Static accordion. */
+        //var source = $(templates).filter('#iteration').html();
+        //var template = Handlebars.compile(source);
+        //var dynamic_data = {
+        //    panels: panels
+        //};
+        //Handlebars.registerPartial('single_line', $(templates).filter('#single_line').html());
+        //var html = template(dynamic_data);
+        //$('#' + this.CONFIG.placeholder_id).html(html);
+
+
+        /* Test: language. */
+        var language = {
+            version: "1998",
+            codes: [
+                {
+                    code: "eng",
+                    label: {
+                        EN: "English"
+                    }
+                }
+            ],
+            idCodeList: "ISO639-2",
+            extendedName: {
+                EN: "International Standard Organization - Language"
+            }
+        };
+        var source = $(templates).filter('#language').html();
+        var template = Handlebars.compile(source);
+        var language = {
+            label: translate.language,
+            version: '1998',
+            codes: [
+                {
+                    code: 'eng',
+                    label: {
+                        EN: "English"
+                    }
+                }
+            ],
+            idCodeList: 'ISO639-2',
+            extendedName: {
+                EN: 'International Standard Organization - Language'
+            }
+        };
+        var html = template(dynamic_data);
+        $('#' + this.CONFIG.placeholder_id).html(html);
 
     };
 

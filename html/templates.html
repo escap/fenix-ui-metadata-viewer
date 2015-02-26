@@ -9,7 +9,7 @@
                     </a>
                 </h5>
             </div>
-            <div id='{{panel_id}}' class='panel-collapse collapse in'>
+            <div id='{{panel_id}}' class='panel-collapse collapse'>
                 <div class='panel-body'>
                 {{#each lines}}
                     {{> single_line}}
@@ -31,6 +31,26 @@
             </div>
             <div class='col-sm-7'>
                 {{field_value}}
+            </div>
+            <div class='col-sm-1'>
+                <i class='fa fa-info-circle'></i>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id='language' type='text/x-handlebars-template'>
+    <div class='form-group'>
+        <div class='row'>
+            <div class='col-sm-4'>
+                <label>
+                    {{label}}
+                </label>
+            </div>
+            <div class='col-sm-7'>
+                {{#each codes}}
+                    {{label.EN}}
+                {{/each}}
             </div>
             <div class='col-sm-1'>
                 <i class='fa fa-info-circle'></i>
