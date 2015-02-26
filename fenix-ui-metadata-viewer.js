@@ -45,35 +45,8 @@ define(['jquery',
                 if (typeof json == 'string')
                     json = $.parseJSON(response);
 
-                /* Static accordion. */
-                var source = $(templates).filter('#iteration').html();
-                var template = Handlebars.compile(source);
-                var dynamic_data = {
-                    panels: [
-                        {
-                            panel_id: 'pippo',
-                            panel_header_label: 'Header',
-                            lines: [
-                                {
-                                    field_name: 'pongo',
-                                    field_value: 'pongo'
-                                },
-                                {
-                                    field_name: 'asd',
-                                    field_value: 'peggy'
-                                },
-                                {
-                                    field_name: 'asd',
-                                    field_value: 'bau'
-                                }
-                            ]
-                        }
-                    ]
-                };
-                Handlebars.registerPartial('single_line', $(templates).filter('#single_line').html());
-                var html = template(dynamic_data);
-
-                $('#' + _this.CONFIG.placeholder_id).html(html);
+                /* Store the DB result. */
+                _this.CONFIG.metadata = json;
 
             },
 
@@ -86,6 +59,10 @@ define(['jquery',
             }
 
         });
+
+    };
+
+    FUIMDV.prototype.view_as_accordion = function(config) {
 
     };
 
