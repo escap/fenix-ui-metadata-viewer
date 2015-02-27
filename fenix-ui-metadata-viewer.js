@@ -75,72 +75,57 @@ define(['jquery',
 
     FUIMDV.prototype.view_as_accordion = function() {
 
-        ///* Initiate variables. */
-        //var panels = [];
-        //
-        ///* Iterate over DB result. */
-        //for (var key in this.CONFIG.metadata) {
-        //    if (typeof this.CONFIG.metadata[key] != 'object') {
-        //        panels.push({
-        //            panel_id: key,
-        //            panel_header_label: this.CONFIG.metadata[key],
-        //            lines: [
-        //                {
-        //                    field_name: 'Name',
-        //                    field_value: 'value'
-        //                }
-        //            ]
-        //        });
-        //    }
-        //}
-        //
-        ///* Static accordion. */
-        //var source = $(templates).filter('#iteration').html();
-        //var template = Handlebars.compile(source);
-        //var dynamic_data = {
-        //    panels: panels
-        //};
-        //Handlebars.registerPartial('single_line', $(templates).filter('#single_line').html());
-        //var html = template(dynamic_data);
-        //$('#' + this.CONFIG.placeholder_id).html(html);
+        /* Initiate variables. */
+        var panels = [];
 
-
-        /* Test: language. */
-        var language = {
-            version: "1998",
-            codes: [
-                {
-                    code: "eng",
-                    label: {
-                        EN: "English"
-                    }
-                }
-            ],
-            idCodeList: "ISO639-2",
-            extendedName: {
-                EN: "International Standard Organization - Language"
+        /* Iterate over DB result. */
+        for (var key in this.CONFIG.metadata) {
+            if (typeof this.CONFIG.metadata[key] != 'object') {
+                panels.push({
+                    panel_id: key,
+                    panel_header_label: this.CONFIG.metadata[key],
+                    lines: [
+                        {
+                            field_name: 'Name',
+                            field_value: 'value'
+                        }
+                    ]
+                });
             }
-        };
-        var source = $(templates).filter('#language').html();
+        }
+
+        /* Static accordion. */
+        var source = $(templates).filter('#iteration').html();
         var template = Handlebars.compile(source);
-        var language = {
-            label: translate.language,
-            version: '1998',
-            codes: [
-                {
-                    code: 'eng',
-                    label: {
-                        EN: "English"
-                    }
-                }
-            ],
-            idCodeList: 'ISO639-2',
-            extendedName: {
-                EN: 'International Standard Organization - Language'
-            }
+        var dynamic_data = {
+            panels: panels
         };
+        Handlebars.registerPartial('single_line', $(templates).filter('#single_line').html());
         var html = template(dynamic_data);
         $('#' + this.CONFIG.placeholder_id).html(html);
+
+
+        ///* Test: language. */
+        //var source = $(templates).filter('#language').html();
+        //var template = Handlebars.compile(source);
+        //var dynamic_data = {
+        //    label: translate.language,
+        //    version: '1998',
+        //    codes: [
+        //        {
+        //            code: 'eng',
+        //            label: {
+        //                EN: "English"
+        //            }
+        //        }
+        //    ],
+        //    idCodeList: 'ISO639-2',
+        //    extendedName: {
+        //        EN: 'International Standard Organization - Language'
+        //    }
+        //};
+        //var html = template(dynamic_data);
+        //$('#' + this.CONFIG.placeholder_id).html(html);
 
     };
 
