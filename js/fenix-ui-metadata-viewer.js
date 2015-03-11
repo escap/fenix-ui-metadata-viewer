@@ -2,7 +2,7 @@ define(['jquery',
         'handlebars',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
-        'sweet-alert'], function ($, Handlebars, templates, translate) {
+        'sweetAlert'], function ($, Handlebars, templates, translate) {
 
     'use strict';
 
