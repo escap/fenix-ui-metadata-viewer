@@ -10,8 +10,9 @@ define(['jquery',
 
         this.CONFIG = {
             lang: 'en',
+            domain: 'GT',
             placeholder_id: 'placeholder',
-            url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid/GE?full=true',
+            url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid',
             view_type: null
         };
 
@@ -35,7 +36,7 @@ define(['jquery',
 
         $.ajax({
 
-            url: this.CONFIG.url_d3s,
+            url: this.CONFIG.url_d3s + '/' + this.CONFIG.domain + '?full=true',
             type: 'GET',
             dataType: 'json',
 
@@ -103,29 +104,6 @@ define(['jquery',
         Handlebars.registerPartial('single_line', $(templates).filter('#single_line').html());
         var html = template(dynamic_data);
         $('#' + this.CONFIG.placeholder_id).html(html);
-
-
-        ///* Test: language. */
-        //var source = $(templates).filter('#language').html();
-        //var template = Handlebars.compile(source);
-        //var dynamic_data = {
-        //    label: translate.language,
-        //    version: '1998',
-        //    codes: [
-        //        {
-        //            code: 'eng',
-        //            label: {
-        //                EN: "English"
-        //            }
-        //        }
-        //    ],
-        //    idCodeList: 'ISO639-2',
-        //    extendedName: {
-        //        EN: 'International Standard Organization - Language'
-        //    }
-        //};
-        //var html = template(dynamic_data);
-        //$('#' + this.CONFIG.placeholder_id).html(html);
 
     };
 
