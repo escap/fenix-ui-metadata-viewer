@@ -1,6 +1,7 @@
 define({
     root : {
-        language: 'Language'
+        language: 'Language',
+        error: 'FENIX UI Metadata Viewer'
     },
     fr : true,
     es : true

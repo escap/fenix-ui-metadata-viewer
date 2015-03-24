@@ -2,7 +2,8 @@ define(['jquery',
         'handlebars',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
-        'sweetAlert'], function ($, Handlebars, templates, translate) {
+        'jsonEditor',
+        'sweetAlert'], function ($, Handlebars, templates, translate, JSONEditor) {
 
     'use strict';
 
@@ -10,10 +11,12 @@ define(['jquery',
 
         this.CONFIG = {
             lang: 'en',
+            edit: false,
             domain: 'GT',
+            view_type: null,
             placeholder_id: 'placeholder',
-            url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid',
-            view_type: null
+            url_mdsd: 'http://faostat3.fao.org/d3s2/v2/mdsd',
+            url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
         };
 
     }
@@ -34,9 +37,10 @@ define(['jquery',
         /* This... */
         var _this = this;
 
+        /* Load JSON schema. */
         $.ajax({
 
-            url: this.CONFIG.url_d3s + '/' + this.CONFIG.domain + '?full=true',
+            url: this.CONFIG.url_mdsd,
             type: 'GET',
             dataType: 'json',
 
@@ -47,18 +51,19 @@ define(['jquery',
                 if (typeof json == 'string')
                     json = $.parseJSON(response);
 
-                /* Store the DB result. */
-                _this.CONFIG.metadata = json;
+                /* Initiate JSON editor. */
+                var editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id),{
+                    schema: json,
+                    theme: 'bootstrap3',
+                    iconlib: 'fontawesome4',
+                    remove_empty_properties: true,
+                    disable_edit_json: true,
+                    disable_properties: true
+                });
 
-                /* Render the metadata. */
-                switch (_this.CONFIG.view_type) {
-                    case 'accordion':
-                        _this.view_as_accordion();
-                        break;
-                    default:
-                        _this.view_as_accordion();
-                        break;
-                }
+                /* Disable editing. */
+                if (!_this.CONFIG.edit)
+                    editor.disable();
 
             },
 
@@ -66,44 +71,11 @@ define(['jquery',
                 swal({
                     title: translate.error,
                     type: 'error',
-                    text: a
+                    text: a.responseText
                 });
             }
 
         });
-
-    };
-
-    FUIMDV.prototype.view_as_accordion = function() {
-
-        /* Initiate variables. */
-        var panels = [];
-
-        /* Iterate over DB result. */
-        for (var key in this.CONFIG.metadata) {
-            if (typeof this.CONFIG.metadata[key] != 'object') {
-                panels.push({
-                    panel_id: key,
-                    panel_header_label: this.CONFIG.metadata[key],
-                    lines: [
-                        {
-                            field_name: 'Name',
-                            field_value: 'value'
-                        }
-                    ]
-                });
-            }
-        }
-
-        /* Static accordion. */
-        var source = $(templates).filter('#iteration').html();
-        var template = Handlebars.compile(source);
-        var dynamic_data = {
-            panels: panels
-        };
-        Handlebars.registerPartial('single_line', $(templates).filter('#single_line').html());
-        var html = template(dynamic_data);
-        $('#' + this.CONFIG.placeholder_id).html(html);
 
     };
 
