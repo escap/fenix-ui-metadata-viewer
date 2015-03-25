@@ -3,7 +3,7 @@ define(['jquery',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
         'jsonEditor',
-        'sweetAlert'], function ($, Handlebars, templates, translate, JSONEditor) {
+        'sweetAlert'], function ($, Handlebars, templates, translate) {
 
     'use strict';
 
@@ -56,9 +56,15 @@ define(['jquery',
                     schema: json,
                     theme: 'bootstrap3',
                     iconlib: 'fontawesome4',
-                    remove_empty_properties: true,
                     disable_edit_json: true,
-                    disable_properties: true
+                    disable_properties: true,
+                    collapsed: true,
+                    disable_array_add: true,
+                    disable_array_delete: true,
+                    disable_array_reorder: true,
+                    disable_collapse: true,
+                    grid_columns: 6,
+                    remove_empty_properties: false
                 });
 
                 /* Disable editing. */

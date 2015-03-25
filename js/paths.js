@@ -8,6 +8,9 @@ define(function() {
         shim: {
             bootstrap: {
                 deps: ['jquery']
+            },
+            jsonEditor: {
+                deps: ['jquery', 'bootstrap']
             }
         }
     };
