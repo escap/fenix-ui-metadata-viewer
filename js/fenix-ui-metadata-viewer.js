@@ -71,6 +71,10 @@ define(['jquery',
                 if (!_this.CONFIG.edit)
                     editor.disable();
 
+                /* Remove unwanted labels. */
+                $('#' + _this.CONFIG.placeholder_id).find('div:first').find('h3:first').empty();
+                $('#' + _this.CONFIG.placeholder_id).find('div:first').find('p:first').empty();
+
             },
 
             error: function (a, b, c) {
