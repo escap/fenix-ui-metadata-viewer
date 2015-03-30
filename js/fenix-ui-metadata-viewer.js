@@ -2,8 +2,9 @@ define(['jquery',
         'handlebars',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
+        'text!fenix_ui_metadata_viewer/config/application_settings.json',
         'jsonEditor',
-        'sweetAlert'], function ($, Handlebars, templates, translate) {
+        'sweetAlert'], function ($, Handlebars, templates, translate, application_settings) {
 
     'use strict';
 
@@ -14,6 +15,7 @@ define(['jquery',
             edit: false,
             domain: 'GT',
             view_type: null,
+            application_name: 'faostat',
             placeholder_id: 'placeholder',
             url_mdsd: 'http://168.202.28.57:8080/wds/rest/mdsd/',
             url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
@@ -39,6 +41,8 @@ define(['jquery',
 
         /* Clear previous editor, if any. */
         $('#' + _this.CONFIG.placeholder_id).empty();
+
+
 
         /* Load JSON schema. */
         $.ajax({
@@ -90,6 +94,34 @@ define(['jquery',
 
     };
 
+    FUIMDV.prototype.apply_settings = function(data) {
+
+        /* Cast settings, if needed. */
+        if (typeof application_settings == 'string')
+            application_settings = $.parseJSON(application_settings);
+
+        /* Apply application settings. */
+        var settings = application_settings[this.CONFIG.application_name];
+
+        /* Filter by blacklist... */
+        if (settings.blacklist != null && settings.blacklist.length > 0) {
+            settings.blacklist.forEach(function(setting) {
+                delete data[setting.toString()]
+            });
+        }
+
+        /* ...or by whitelist. */
+        else {
+            for (var key in data) {
+                if ($.inArray(key, settings.whitelist) < 0) {
+                    delete data[key.toString()]
+                }
+            }
+        }
+
+        return data;
+    };
+
     FUIMDV.prototype.load_data = function(editor) {
 
         /* This... */
@@ -108,6 +140,9 @@ define(['jquery',
                 var json = response;
                 if (typeof json == 'string')
                     json = $.parseJSON(response);
+
+                /* Apply application settings. */
+                json = _this.apply_settings(json);
 
                 /* Populate the editor. */
                 editor.setValue(json);
