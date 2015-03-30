@@ -15,7 +15,7 @@ define(['jquery',
             domain: 'GT',
             view_type: null,
             placeholder_id: 'placeholder',
-            url_mdsd: 'http://faostat3.fao.org/d3s2/v2/mdsd',
+            url_mdsd: 'http://168.202.28.57:8080/wds/rest/mdsd/',
             url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
         };
 
@@ -52,7 +52,7 @@ define(['jquery',
                     json = $.parseJSON(response);
 
                 /* Initiate JSON editor. */
-                var editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id),{
+                var editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id), {
                     schema: json,
                     theme: 'bootstrap3',
                     iconlib: 'fontawesome4',
@@ -63,17 +63,59 @@ define(['jquery',
                     disable_array_delete: true,
                     disable_array_reorder: true,
                     disable_collapse: true,
-                    grid_columns: 6,
                     remove_empty_properties: false
                 });
-
-                /* Disable editing. */
-                if (!_this.CONFIG.edit)
-                    editor.disable();
 
                 /* Remove unwanted labels. */
                 $('#' + _this.CONFIG.placeholder_id).find('div:first').find('h3:first').empty();
                 $('#' + _this.CONFIG.placeholder_id).find('div:first').find('p:first').empty();
+
+                /* Load data. */
+                _this.load_data(editor);
+
+            },
+
+            error: function (a, b, c) {
+                swal({
+                    title: translate.error,
+                    type: 'error',
+                    text: a.responseText
+                });
+            }
+
+        });
+
+    };
+
+    FUIMDV.prototype.load_data = function(editor) {
+
+        /* This... */
+        var _this = this;
+
+        /* Load JSON schema. */
+        $.ajax({
+
+            url: this.CONFIG.url_d3s + '/' + this.CONFIG.domain + '?full=true',
+            type: 'GET',
+            dataType: 'json',
+
+            success: function (response) {
+
+                /* Cast the result, if required. */
+                var json = response;
+                if (typeof json == 'string')
+                    json = $.parseJSON(response);
+
+                /* Blacklist unwanted properties. */
+                delete json.rid;
+                delete json.dsd;
+
+                /* Populate the editor. */
+                editor.setValue(json);
+
+                /* Disable editing. */
+                if (!_this.CONFIG.edit)
+                    editor.disable();
 
             },
 
