@@ -37,6 +37,9 @@ define(['jquery',
         /* This... */
         var _this = this;
 
+        /* Clear previous editor, if any. */
+        $('#' + _this.CONFIG.placeholder_id).empty();
+
         /* Load JSON schema. */
         $.ajax({
 
@@ -95,7 +98,7 @@ define(['jquery',
         /* Load JSON schema. */
         $.ajax({
 
-            url: this.CONFIG.url_d3s + '/' + this.CONFIG.domain + '?full=true',
+            url: this.CONFIG.url_d3s + '/' + this.CONFIG.domain.toUpperCase() + '?full=true',
             type: 'GET',
             dataType: 'json',
 
@@ -105,10 +108,6 @@ define(['jquery',
                 var json = response;
                 if (typeof json == 'string')
                     json = $.parseJSON(response);
-
-                /* Blacklist unwanted properties. */
-                delete json.rid;
-                delete json.dsd;
 
                 /* Populate the editor. */
                 editor.setValue(json);
