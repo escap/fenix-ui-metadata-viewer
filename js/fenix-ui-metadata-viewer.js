@@ -17,7 +17,7 @@ define(['jquery',
             view_type: null,
             application_name: 'faostat',
             placeholder_id: 'placeholder',
-            url_mdsd: 'http://168.202.28.57:8080/wds/rest/mdsd/',
+            url_mdsd: 'http://faostat3.fao.org/d3s2/v2/mdsd',
             url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
         };
 
