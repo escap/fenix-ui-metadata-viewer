@@ -42,8 +42,6 @@ define(['jquery',
         /* Clear previous editor, if any. */
         $('#' + _this.CONFIG.placeholder_id).empty();
 
-
-
         /* Load JSON schema. */
         $.ajax({
 
@@ -59,19 +57,24 @@ define(['jquery',
                     json = $.parseJSON(response);
 
                 /* Initiate JSON editor. */
-                var editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id), {
-                    schema: json,
-                    theme: 'bootstrap3',
-                    iconlib: 'fontawesome4',
-                    disable_edit_json: true,
-                    disable_properties: true,
-                    collapsed: true,
-                    disable_array_add: true,
-                    disable_array_delete: true,
-                    disable_array_reorder: true,
-                    disable_collapse: true,
-                    remove_empty_properties: false
-                });
+                var editor;
+                try {
+                    editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id), {
+                        schema: json,
+                        theme: 'bootstrap3',
+                        iconlib: 'fontawesome4',
+                        disable_edit_json: true,
+                        disable_properties: true,
+                        collapsed: true,
+                        disable_array_add: true,
+                        disable_array_delete: true,
+                        disable_array_reorder: true,
+                        disable_collapse: true,
+                        remove_empty_properties: false
+                    });
+                } catch (e) {
+                    
+                }
 
                 /* Remove unwanted labels. */
                 $('#' + _this.CONFIG.placeholder_id).find('div:first').find('h3:first').empty();
@@ -106,7 +109,11 @@ define(['jquery',
         /* Filter by blacklist... */
         if (settings.blacklist != null && settings.blacklist.length > 0) {
             settings.blacklist.forEach(function(setting) {
-                delete data[setting.toString()]
+                try {
+                    delete data[setting.toString()]
+                } catch (e) {
+
+                }
             });
         }
 
@@ -114,7 +121,11 @@ define(['jquery',
         else {
             for (var key in data) {
                 if ($.inArray(key, settings.whitelist) < 0) {
-                    delete data[key.toString()]
+                    try {
+                        delete data[key.toString()]
+                    } catch (e) {
+
+                    }
                 }
             }
         }
@@ -127,10 +138,13 @@ define(['jquery',
         /* This... */
         var _this = this;
 
+        /* ID to be used for D3S. */
+        var d3s_id = this.CONFIG.domain != null ? this.CONFIG.domain : this.CONFIG.group;
+
         /* Load JSON schema. */
         $.ajax({
 
-            url: this.CONFIG.url_d3s + '/' + this.CONFIG.domain.toUpperCase() + '?full=true',
+            url: this.CONFIG.url_d3s + '/' + d3s_id.toUpperCase() + '?full=true',
             type: 'GET',
             dataType: 'json',
 
@@ -145,7 +159,8 @@ define(['jquery',
                 json = _this.apply_settings(json);
 
                 /* Populate the editor. */
-                editor.setValue(json);
+                if (json != null)
+                    editor.setValue(json);
 
                 /* Disable editing. */
                 if (!_this.CONFIG.edit)
