@@ -73,7 +73,7 @@ define(['jquery',
                         remove_empty_properties: false
                     });
                 } catch (e) {
-                    
+
                 }
 
                 /* Remove unwanted labels. */
