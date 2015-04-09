@@ -1,10 +1,11 @@
 define(['jquery',
         'handlebars',
+        'FAOSTAT_UI_COMMONS',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
         'text!fenix_ui_metadata_viewer/config/application_settings.json',
         'jsonEditor',
-        'sweetAlert'], function ($, Handlebars, templates, translate, application_settings) {
+        'sweetAlert'], function ($, Handlebars, Commons, templates, translate, application_settings) {
 
     'use strict';
 
@@ -14,9 +15,10 @@ define(['jquery',
             lang: 'en',
             edit: false,
             domain: 'GT',
-            view_type: null,
+            lang_faostat: 'E',
             application_name: 'faostat',
             placeholder_id: 'placeholder',
+            url_wds_table: 'http://faostat3.fao.org/wds/rest/table/json',
             url_mdsd: 'http://faostat3.fao.org/d3s2/v2/mdsd',
             url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
         };
@@ -35,6 +37,9 @@ define(['jquery',
 
         /* Fix the language, if needed. */
         this.CONFIG.lang = this.CONFIG.lang != null ? this.CONFIG.lang : 'en';
+
+        /* Store FAOSTAT language. */
+        this.CONFIG.lang_faostat = Commons.iso2faostat(this.CONFIG.lang);
 
         /* This... */
         var _this = this;
