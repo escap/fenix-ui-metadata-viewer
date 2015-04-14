@@ -41,6 +41,72 @@ define(['jquery',
         /* Store FAOSTAT language. */
         this.CONFIG.lang_faostat = Commons.iso2faostat(this.CONFIG.lang);
 
+        /* FENIX Platform Theme. */
+        JSONEditor.defaults.themes.fenix_platform = JSONEditor.AbstractTheme.extend({
+
+            getFormControl: function (label, input, description) {
+
+                if (label.innerHTML == 'Resource identification code') {
+                    console.log(label.innerHTML);
+                    console.log(input);
+                    console.log(description.innerHTML);
+                }
+
+                var group = document.createElement('div');
+
+                if (label && input.type === 'checkbox') {
+                    group.className += ' checkbox';
+                    label.appendChild(input);
+                    label.style.fontSize = '14px';
+                    group.style.marginTop = '0';
+                    group.appendChild(label);
+
+                    /* Custom implementation for the description field. */
+                    if (description)
+                        group.appendChild(this.createDescription(description));
+
+                    input.style.position = 'relative';
+                    input.style.cssFloat = 'left';
+                }
+
+                else {
+
+                    group.className += ' form-group';
+
+                    if (label) {
+                        label.className += ' control-label';
+                        group.appendChild(label);
+                    }
+
+                    /* Custom implementation for the description field. */
+                    if (description)
+                        group.appendChild(this.createDescription(description));
+
+                    group.appendChild(input);
+
+                }
+
+                return group;
+
+            },
+
+            createDescription: function(description) {
+                var icon = document.createElement('i');
+                icon.className = 'fa fa-info-circle';
+                icon.style.float = 'right';
+                icon.onclick = function() {
+                    window.sweetAlert({
+                        title: '',
+                        type: 'info',
+                        text: description.innerHTML,
+                        html: true
+                    });
+                };
+                return icon;
+            }
+
+        });
+
         /* This... */
         var _this = this;
 
@@ -66,7 +132,7 @@ define(['jquery',
                 try {
                     editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id), {
                         schema: json,
-                        theme: 'bootstrap3',
+                        theme: 'fenix_platform',
                         iconlib: 'fontawesome4',
                         disable_edit_json: true,
                         disable_properties: true,
@@ -74,7 +140,7 @@ define(['jquery',
                         disable_array_add: true,
                         disable_array_delete: true,
                         disable_array_reorder: true,
-                        disable_collapse: true,
+                        disable_collapse: false,
                         remove_empty_properties: false
                     });
                 } catch (e) {
