@@ -213,6 +213,9 @@ define(['jquery',
                 if (!_this.CONFIG.edit)
                     editor.disable();
 
+                /* Collapse editor. */
+                $('.btn.btn-default.json-editor-btn-collapse').click();
+
             },
 
             error: function (a, b, c) {
