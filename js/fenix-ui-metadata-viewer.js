@@ -75,9 +75,7 @@ define(['jquery',
                 json['properties']['meIdentification'] = {};
                 json['properties']['meIdentification']['propertyOrder'] = 1;
                 json['properties']['meIdentification']['type'] = 'object';
-                json['properties']['meIdentification']['title'] = 'IDENTIFICATION';
-                json['properties']['meIdentification']['description'] = 'Description';
-                json['properties']['meIdentification']['title'] = 'IDENTIFICATION';
+                json['properties']['meIdentification']['title'] = translate.identification;
                 json['properties']['meIdentification']['properties'] = {};
                 var section_regex = /[me]{2}[A-Z]/;
                 var properties = json.properties;
