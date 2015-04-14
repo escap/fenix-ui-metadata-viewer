@@ -1,11 +1,12 @@
 define(['jquery',
         'handlebars',
         'FAOSTAT_UI_COMMONS',
+        'FAOSTAT_THEME',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
         'text!fenix_ui_metadata_viewer/config/application_settings.json',
         'jsonEditor',
-        'sweetAlert'], function ($, Handlebars, Commons, templates, translate, application_settings) {
+        'sweetAlert'], function ($, Handlebars, Commons, FAOSTAT_THEME, templates, translate, application_settings) {
 
     'use strict';
 
@@ -41,71 +42,8 @@ define(['jquery',
         /* Store FAOSTAT language. */
         this.CONFIG.lang_faostat = Commons.iso2faostat(this.CONFIG.lang);
 
-        /* FENIX Platform Theme. */
-        JSONEditor.defaults.themes.fenix_platform = JSONEditor.AbstractTheme.extend({
-
-            getFormControl: function (label, input, description) {
-
-                if (label.innerHTML == 'Resource identification code') {
-                    console.log(label.innerHTML);
-                    console.log(input);
-                    console.log(description.innerHTML);
-                }
-
-                var group = document.createElement('div');
-
-                if (label && input.type === 'checkbox') {
-                    group.className += ' checkbox';
-                    label.appendChild(input);
-                    label.style.fontSize = '14px';
-                    group.style.marginTop = '0';
-                    group.appendChild(label);
-
-                    /* Custom implementation for the description field. */
-                    if (description)
-                        group.appendChild(this.createDescription(description));
-
-                    input.style.position = 'relative';
-                    input.style.cssFloat = 'left';
-                }
-
-                else {
-
-                    group.className += ' form-group';
-
-                    if (label) {
-                        label.className += ' control-label';
-                        group.appendChild(label);
-                    }
-
-                    /* Custom implementation for the description field. */
-                    if (description)
-                        group.appendChild(this.createDescription(description));
-
-                    group.appendChild(input);
-
-                }
-
-                return group;
-
-            },
-
-            createDescription: function(description) {
-                var icon = document.createElement('i');
-                icon.className = 'fa fa-info-circle';
-                icon.style.float = 'right';
-                icon.onclick = function() {
-                    window.sweetAlert({
-                        title: '',
-                        type: 'info',
-                        text: description.innerHTML,
-                        html: true
-                    });
-                };
-                return icon;
-            }
-
-        });
+        /* Apply FAOSTAT theme for json-editor. */
+        JSONEditor.defaults.themes.fenix_platform = JSONEditor.AbstractTheme.extend(FAOSTAT_THEME);
 
         /* This... */
         var _this = this;
