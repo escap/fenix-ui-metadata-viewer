@@ -39,11 +39,17 @@ define(['jquery',
         /* Fix the language, if needed. */
         this.CONFIG.lang = this.CONFIG.lang != null ? this.CONFIG.lang : 'en';
 
+        /* Cast application settings. */
+        if (typeof application_settings == 'string')
+            application_settings = $.parseJSON(application_settings);
+
         /* Store FAOSTAT language. */
         this.CONFIG.lang_faostat = Commons.iso2faostat(this.CONFIG.lang);
 
         /* Apply FAOSTAT theme for json-editor. */
-        JSONEditor.defaults.themes.fenix_platform = JSONEditor.AbstractTheme.extend(FAOSTAT_THEME);
+        JSONEditor.defaults.themes.faostat_theme = JSONEditor.AbstractTheme.extend(FAOSTAT_THEME);
+
+        JSONEditor.defaults.editors.string = JSONEditor.defaults.editors.string.extend(this.custom_string_editor);
 
         /* This... */
         var _this = this;
@@ -65,12 +71,33 @@ define(['jquery',
                 if (typeof json == 'string')
                     json = $.parseJSON(response);
 
+                /* Regular expression test to reorganize metadata sections. */
+                json['properties']['meIdentification'] = {};
+                json['properties']['meIdentification']['propertyOrder'] = 1;
+                json['properties']['meIdentification']['type'] = 'object';
+                json['properties']['meIdentification']['title'] = 'IDENTIFICATION';
+                json['properties']['meIdentification']['description'] = 'Description';
+                json['properties']['meIdentification']['title'] = 'IDENTIFICATION';
+                json['properties']['meIdentification']['properties'] = {};
+                var section_regex = /[me]{2}[A-Z]/;
+                var properties = json.properties;
+                for (var key in properties) {
+                    if (!section_regex.test(key)) {
+                        if (key == 'title') {
+                            json['properties']['meIdentification']['properties']['title_fenix'] = json['properties'][key];
+                        } else {
+                            json['properties']['meIdentification']['properties'][key] = json['properties'][key];
+                        }
+                        delete json['properties'][key];
+                    }
+                }
+
                 /* Initiate JSON editor. */
                 var editor;
                 try {
                     editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id), {
                         schema: json,
-                        theme: 'fenix_platform',
+                        theme: 'faostat_theme',
                         iconlib: 'fontawesome4',
                         disable_edit_json: true,
                         disable_properties: true,
@@ -108,16 +135,12 @@ define(['jquery',
 
     FUIMDV.prototype.apply_settings = function(data) {
 
-        /* Cast settings, if needed. */
-        if (typeof application_settings == 'string')
-            application_settings = $.parseJSON(application_settings);
-
         /* Apply application settings. */
         var settings = application_settings[this.CONFIG.application_name];
 
         /* Filter by blacklist... */
-        if (settings.blacklist != null && settings.blacklist.length > 0) {
-            settings.blacklist.forEach(function(setting) {
+        if (settings['blacklist'] != null && settings['blacklist'].length > 0) {
+            settings['blacklist'].forEach(function(setting) {
                 try {
                     delete data[setting.toString()]
                 } catch (e) {
@@ -129,7 +152,7 @@ define(['jquery',
         /* ...or by whitelist. */
         else {
             for (var key in data) {
-                if ($.inArray(key, settings.whitelist) < 0) {
+                if ($.inArray(key, settings['whitelist']) < 0) {
                     try {
                         delete data[key.toString()]
                     } catch (e) {
@@ -167,6 +190,21 @@ define(['jquery',
                 /* Apply application settings. */
                 json = _this.apply_settings(json);
 
+                /* Regular expression test to reorganize metadata sections. */
+                json['meIdentification'] = {};
+                var section_regex = /[me]{2}[A-Z]/;
+                var properties = json;
+                for (var key in properties) {
+                    if (!section_regex.test(key)) {
+                        if (key == 'title') {
+                            json['meIdentification']['title_fenix'] = json[key];
+                        } else {
+                            json['meIdentification'][key] = json[key];
+                        }
+                        delete json[key];
+                    }
+                }
+
                 /* Populate the editor. */
                 if (json != null)
                     editor.setValue(json);
@@ -186,6 +224,73 @@ define(['jquery',
             }
 
         });
+
+    };
+
+    FUIMDV.prototype.custom_string_editor = {
+
+        setValue: function (value, initial, from_template) {
+
+            var self = this;
+
+            if (this.template && !from_template)
+                return;
+
+            if (value === null) {
+                value = '';
+            } else if (typeof value === "object") {
+                value = JSON.stringify(value);
+            } else if (typeof value !== "string") {
+                value = "" + value;
+            }
+
+            /* Convert milliseconds to valid date. */
+            if (this.format == 'date') {
+                try {
+                    var d = new Date(parseFloat(value));
+                    value = d.toISOString().substring(0, 10);
+                } catch (e) {
+
+                }
+            }
+
+            if (value === this.serialized)
+                return;
+
+            /* Sanitize value before setting it */
+            var sanitized = this.sanitize(value);
+
+            if (this.input.value === sanitized)
+                return;
+
+            this.input.value = sanitized;
+
+            /* If using SCEditor, update the WYSIWYG */
+            if (this.sceditor_instance) {
+                this.sceditor_instance.val(sanitized);
+            } else if (this.epiceditor) {
+                this.epiceditor.importFile(null, sanitized);
+            } else if (this.ace_editor) {
+                this.ace_editor.setValue(sanitized);
+            }
+
+            var changed = from_template || this.getValue() !== value;
+
+            this.refreshValue();
+
+            if (initial) {
+                this.is_dirty = false;
+            } else if (this.jsoneditor.options.show_errors === "change") {
+                this.is_dirty = true;
+            }
+
+            if (this.adjust_height)
+                this.adjust_height(this.input);
+
+            /* Bubble this setValue to parents if the value changed */
+            this.onChange(changed);
+
+        }
 
     };
 
