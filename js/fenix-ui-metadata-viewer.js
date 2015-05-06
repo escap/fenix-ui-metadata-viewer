@@ -232,9 +232,7 @@ define(['jquery',
     FUIMDV.prototype.populate_editor = function(editor) {
 
         /* Apply application settings. */
-        console.log(this.CONFIG.data);
         this.CONFIG.data = this.apply_settings(this.CONFIG.data);
-        console.log(this.CONFIG.data);
 
         /* Display the editor... */
         if (this.CONFIG.data != undefined) {
