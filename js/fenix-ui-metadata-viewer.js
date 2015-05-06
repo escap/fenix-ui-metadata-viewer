@@ -5,8 +5,9 @@ define(['jquery',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
         'text!fenix_ui_metadata_viewer/config/application_settings.json',
-        'jsonEditor',
-        'sweetAlert'], function ($, Handlebars, Commons, FAOSTAT_THEME, templates, translate, application_settings) {
+        'sweetAlert',
+        'jsonEditor'
+        ], function ($, Handlebars, Commons, FAOSTAT_THEME, templates, translate, application_settings, sweetAlert) {
 
     'use strict';
 
@@ -58,7 +59,13 @@ define(['jquery',
         var _this = this;
 
         /* Clear previous editor, if any. */
-        $('#' + _this.CONFIG.placeholder_id).empty();
+        if (_this.CONFIG.hasOwnProperty('placeholder')) {
+            _this.CONFIG.container =  $(_this.CONFIG.placeholder);
+        } else {
+            _this.CONFIG.container =   $('#' + _this.CONFIG.placeholder_id);
+        }
+
+        _this.CONFIG.container.empty();
 
         /* Load the schema from DB, if needed. */
         this.CONFIG.schema == null ? this.load_schema_from_db() : this.create_editor();
@@ -107,7 +114,7 @@ define(['jquery',
         this.CONFIG.schema = this.refactor_schema(this.CONFIG.schema);
 
         /* Initiate JSON editor. */
-        var editor = new JSONEditor(document.getElementById(this.CONFIG.placeholder_id), {
+        var editor = new JSONEditor( this.CONFIG.container[0], {
             schema: this.CONFIG.schema,
             theme: 'faostat_theme',
             iconlib: 'fontawesome4',
@@ -122,11 +129,11 @@ define(['jquery',
         });
 
         /* Remove unwanted labels. */
-        $('#' + this.CONFIG.placeholder_id).find('div:first').find('h3:first').empty();
-        $('#' + this.CONFIG.placeholder_id).find('div:first').find('p:first').empty();
+        this.CONFIG.container.find('div:first').find('h3:first').empty();
+        this.CONFIG.container.find('div:first').find('p:first').empty();
 
         /* Load data, if needed. */
-        this.CONFIG.data != null ? this.populate_editor(editor) : this.load_data(editor);
+        this.CONFIG.data !== null ? this.populate_editor(editor) : this.load_data(editor);
 
     };
 
@@ -225,7 +232,9 @@ define(['jquery',
     FUIMDV.prototype.populate_editor = function(editor) {
 
         /* Apply application settings. */
+        console.log(this.CONFIG.data);
         this.CONFIG.data = this.apply_settings(this.CONFIG.data);
+        console.log(this.CONFIG.data);
 
         /* Display the editor... */
         if (this.CONFIG.data != undefined) {
@@ -254,7 +263,7 @@ define(['jquery',
                 editor.disable();
 
             /* Collapse editor. */
-            $('.btn.btn-default.json-editor-btn-collapse').click();
+            this.CONFIG.container.find('.btn.btn-default.json-editor-btn-collapse').click();
 
         }
 
@@ -272,7 +281,7 @@ define(['jquery',
             message: translate.courtesy
         };
         var html = template(dynamic_data);
-        $('#' + this.CONFIG.placeholder_id).html(html);
+        this.CONFIG.container.html(html);
     };
 
     FUIMDV.prototype.custom_string_editor = {
