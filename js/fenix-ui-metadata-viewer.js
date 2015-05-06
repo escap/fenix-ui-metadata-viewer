@@ -188,31 +188,41 @@ define(['jquery',
                 /* Apply application settings. */
                 json = _this.apply_settings(json);
 
-                /* Regular expression test to reorganize metadata sections. */
-                json['meIdentification'] = {};
-                var section_regex = /[me]{2}[A-Z]/;
-                var properties = json;
-                for (var key in properties) {
-                    if (!section_regex.test(key)) {
-                        if (key == 'title') {
-                            json['meIdentification']['title_fenix'] = json[key];
-                        } else {
-                            json['meIdentification'][key] = json[key];
+                /* Display the editor... */
+                if (json != undefined) {
+
+                    /* Regular expression test to reorganize metadata sections. */
+                    json['meIdentification'] = {};
+                    var section_regex = /[me]{2}[A-Z]/;
+                    var properties = json;
+                    for (var key in properties) {
+                        if (!section_regex.test(key)) {
+                            if (key == 'title') {
+                                json['meIdentification']['title_fenix'] = json[key];
+                            } else {
+                                json['meIdentification'][key] = json[key];
+                            }
+                            delete json[key];
                         }
-                        delete json[key];
                     }
+
+                    /* Populate the editor. */
+                    if (json != null)
+                        editor.setValue(json);
+
+                    /* Disable editing. */
+                    if (!_this.CONFIG.edit)
+                        editor.disable();
+
+                    /* Collapse editor. */
+                    $('.btn.btn-default.json-editor-btn-collapse').click();
+
                 }
 
-                /* Populate the editor. */
-                if (json != null)
-                    editor.setValue(json);
-
-                /* Disable editing. */
-                if (!_this.CONFIG.edit)
-                    editor.disable();
-
-                /* Collapse editor. */
-                $('.btn.btn-default.json-editor-btn-collapse').click();
+                /* ...or a courtesy message. */
+                else {
+                    _this.display_courtesy_message();
+                }
 
             },
 
@@ -226,6 +236,16 @@ define(['jquery',
 
         });
 
+    };
+
+    FUIMDV.prototype.display_courtesy_message = function() {
+        var source = $(templates).filter('#courtesy_message').html();
+        var template = Handlebars.compile(source);
+        var dynamic_data = {
+            message: translate.courtesy
+        };
+        var html = template(dynamic_data);
+        $('#' + this.CONFIG.placeholder_id).html(html);
     };
 
     FUIMDV.prototype.custom_string_editor = {
