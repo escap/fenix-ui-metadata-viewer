@@ -16,6 +16,7 @@ define(['jquery',
             lang: 'en',
             edit: false,
             domain: 'GT',
+            schema: null,
             lang_faostat: 'E',
             application_name: 'faostat',
             placeholder_id: 'placeholder',
@@ -49,6 +50,7 @@ define(['jquery',
         /* Apply FAOSTAT theme for json-editor. */
         JSONEditor.defaults.themes.faostat_theme = JSONEditor.AbstractTheme.extend(FAOSTAT_THEME);
 
+        /* Extend string editor. */
         JSONEditor.defaults.editors.string = JSONEditor.defaults.editors.string.extend(this.custom_string_editor);
 
         /* This... */
@@ -56,6 +58,16 @@ define(['jquery',
 
         /* Clear previous editor, if any. */
         $('#' + _this.CONFIG.placeholder_id).empty();
+
+        /* Load the schema from DB, if needed. */
+        this.CONFIG.schema == null ? this.load_schema_from_db() : this.create_editor();
+
+    };
+
+    FUIMDV.prototype.load_schema_from_db = function() {
+
+        /* This... */
+        var _this = this;
 
         /* Load JSON schema. */
         $.ajax({
@@ -67,55 +79,12 @@ define(['jquery',
             success: function (response) {
 
                 /* Cast the result, if required. */
-                var json = response;
-                if (typeof json == 'string')
-                    json = $.parseJSON(response);
-
-                /* Regular expression test to reorganize metadata sections. */
-                json['properties']['meIdentification'] = {};
-                json['properties']['meIdentification']['propertyOrder'] = 1;
-                json['properties']['meIdentification']['type'] = 'object';
-                json['properties']['meIdentification']['title'] = translate.identification;
-                json['properties']['meIdentification']['properties'] = {};
-                var section_regex = /[me]{2}[A-Z]/;
-                var properties = json.properties;
-                for (var key in properties) {
-                    if (!section_regex.test(key)) {
-                        if (key == 'title') {
-                            json['properties']['meIdentification']['properties']['title_fenix'] = json['properties'][key];
-                        } else {
-                            json['properties']['meIdentification']['properties'][key] = json['properties'][key];
-                        }
-                        delete json['properties'][key];
-                    }
-                }
+                _this.CONFIG.schema = response;
+                if (typeof _this.CONFIG.schema == 'string')
+                    _this.CONFIG.schema = $.parseJSON(response);
 
                 /* Initiate JSON editor. */
-                var editor;
-                try {
-                    editor = new JSONEditor(document.getElementById(_this.CONFIG.placeholder_id), {
-                        schema: json,
-                        theme: 'faostat_theme',
-                        iconlib: 'fontawesome4',
-                        disable_edit_json: true,
-                        disable_properties: true,
-                        collapsed: true,
-                        disable_array_add: true,
-                        disable_array_delete: true,
-                        disable_array_reorder: true,
-                        disable_collapse: false,
-                        remove_empty_properties: false
-                    });
-                } catch (e) {
-
-                }
-
-                /* Remove unwanted labels. */
-                $('#' + _this.CONFIG.placeholder_id).find('div:first').find('h3:first').empty();
-                $('#' + _this.CONFIG.placeholder_id).find('div:first').find('p:first').empty();
-
-                /* Load data. */
-                _this.load_data(editor);
+                _this.create_editor();
 
             },
 
@@ -129,6 +98,56 @@ define(['jquery',
 
         });
 
+    };
+
+    FUIMDV.prototype.create_editor = function() {
+
+        /* Refactor schema. */
+        this.CONFIG.schema = this.refactor_schema(this.CONFIG.schema);
+
+        /* Initiate JSON editor. */
+        var editor = new JSONEditor(document.getElementById(this.CONFIG.placeholder_id), {
+            schema: this.CONFIG.schema,
+            theme: 'faostat_theme',
+            iconlib: 'fontawesome4',
+            disable_edit_json: true,
+            disable_properties: true,
+            collapsed: true,
+            disable_array_add: true,
+            disable_array_delete: true,
+            disable_array_reorder: true,
+            disable_collapse: false,
+            remove_empty_properties: false
+        });
+
+        /* Remove unwanted labels. */
+        $('#' + this.CONFIG.placeholder_id).find('div:first').find('h3:first').empty();
+        $('#' + this.CONFIG.placeholder_id).find('div:first').find('p:first').empty();
+
+        /* Load data. */
+        this.load_data(editor);
+
+    };
+
+    FUIMDV.prototype.refactor_schema = function(json) {
+        json['properties']['meIdentification'] = {};
+        json['properties']['meIdentification']['propertyOrder'] = 1;
+        json['properties']['meIdentification']['type'] = 'object';
+        json['properties']['meIdentification']['title'] = translate.identification;
+        json['properties']['meIdentification']['properties'] = {};
+        var section_regex = /[me]{2}[A-Z]/;
+        var properties = json.properties;
+        for (var key in properties) {
+            if (!section_regex.test(key)) {
+                if (key == 'title') {
+                    json['properties']['meIdentification']['properties']['title_fenix'] = json['properties'][key];
+                } else {
+                    json['properties']['meIdentification']['properties'][key] = json['properties'][key];
+                }
+                delete json['properties'][key];
+            }
+        }
+        return json;
     };
 
     FUIMDV.prototype.apply_settings = function(data) {
