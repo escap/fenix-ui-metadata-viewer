@@ -17,6 +17,7 @@ define(['jquery',
             edit: false,
             domain: 'GT',
             schema: null,
+            data: null,
             lang_faostat: 'E',
             application_name: 'faostat',
             placeholder_id: 'placeholder',
@@ -124,8 +125,8 @@ define(['jquery',
         $('#' + this.CONFIG.placeholder_id).find('div:first').find('h3:first').empty();
         $('#' + this.CONFIG.placeholder_id).find('div:first').find('p:first').empty();
 
-        /* Load data. */
-        this.load_data(editor);
+        /* Load data, if needed. */
+        this.CONFIG.data != null ? this.populate_editor(editor) : this.load_data(editor);
 
     };
 
@@ -200,48 +201,12 @@ define(['jquery',
             success: function (response) {
 
                 /* Cast the result, if required. */
-                var json = response;
-                if (typeof json == 'string')
-                    json = $.parseJSON(response);
+                _this.CONFIG.data = response;
+                if (typeof _this.CONFIG.data == 'string')
+                    _this.CONFIG.data = $.parseJSON(response);
 
-                /* Apply application settings. */
-                json = _this.apply_settings(json);
-
-                /* Display the editor... */
-                if (json != undefined) {
-
-                    /* Regular expression test to reorganize metadata sections. */
-                    json['meIdentification'] = {};
-                    var section_regex = /[me]{2}[A-Z]/;
-                    var properties = json;
-                    for (var key in properties) {
-                        if (!section_regex.test(key)) {
-                            if (key == 'title') {
-                                json['meIdentification']['title_fenix'] = json[key];
-                            } else {
-                                json['meIdentification'][key] = json[key];
-                            }
-                            delete json[key];
-                        }
-                    }
-
-                    /* Populate the editor. */
-                    if (json != null)
-                        editor.setValue(json);
-
-                    /* Disable editing. */
-                    if (!_this.CONFIG.edit)
-                        editor.disable();
-
-                    /* Collapse editor. */
-                    $('.btn.btn-default.json-editor-btn-collapse').click();
-
-                }
-
-                /* ...or a courtesy message. */
-                else {
-                    _this.display_courtesy_message();
-                }
+                /* Populate editor. */
+                _this.populate_editor(editor);
 
             },
 
@@ -254,6 +219,49 @@ define(['jquery',
             }
 
         });
+
+    };
+
+    FUIMDV.prototype.populate_editor = function(editor) {
+
+        /* Apply application settings. */
+        this.CONFIG.data = this.apply_settings(this.CONFIG.data);
+
+        /* Display the editor... */
+        if (this.CONFIG.data != undefined) {
+
+            /* Regular expression test to reorganize metadata sections. */
+            this.CONFIG.data['meIdentification'] = {};
+            var section_regex = /[me]{2}[A-Z]/;
+            var properties = this.CONFIG.data;
+            for (var key in properties) {
+                if (!section_regex.test(key)) {
+                    if (key == 'title') {
+                        this.CONFIG.data['meIdentification']['title_fenix'] = this.CONFIG.data[key];
+                    } else {
+                        this.CONFIG.data['meIdentification'][key] = this.CONFIG.data[key];
+                    }
+                    delete this.CONFIG.data[key];
+                }
+            }
+
+            /* Populate the editor. */
+            if (this.CONFIG.data != null)
+                editor.setValue(this.CONFIG.data);
+
+            /* Disable editing. */
+            if (!this.CONFIG.edit)
+                editor.disable();
+
+            /* Collapse editor. */
+            $('.btn.btn-default.json-editor-btn-collapse').click();
+
+        }
+
+        /* ...or a courtesy message. */
+        else {
+            this.display_courtesy_message();
+        }
 
     };
 
