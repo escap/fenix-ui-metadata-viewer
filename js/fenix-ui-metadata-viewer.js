@@ -1,13 +1,13 @@
 define(['jquery',
         'handlebars',
-        'FAOSTAT_UI_COMMONS',
+        'faostat_commons',
         'FAOSTAT_THEME',
         'text!fenix_ui_metadata_viewer/html/templates.html',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
         'text!fenix_ui_metadata_viewer/config/application_settings.json',
         'sweetAlert',
         'jsonEditor'
-        ], function ($, Handlebars, Commons, FAOSTAT_THEME, templates, translate, application_settings, sweetAlert) {
+        ], function ($, Handlebars, FAOSTATCommons, FAOSTAT_THEME, templates, translate, application_settings, sweetAlert) {
 
     'use strict';
 
@@ -47,7 +47,7 @@ define(['jquery',
             application_settings = $.parseJSON(application_settings);
 
         /* Store FAOSTAT language. */
-        this.CONFIG.lang_faostat = Commons.iso2faostat(this.CONFIG.lang);
+        this.CONFIG.lang_faostat = FAOSTATCommons.iso2faostat(this.CONFIG.lang);
 
         /* Apply FAOSTAT theme for json-editor. */
         JSONEditor.defaults.themes.faostat_theme = JSONEditor.AbstractTheme.extend(FAOSTAT_THEME);
