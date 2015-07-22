@@ -22,7 +22,7 @@ define(['jquery',
             lang_faostat: 'E',
             application_name: 'faostat',
             placeholder_id: 'placeholder',
-            url_wds_table: 'http://faostat3.fao.org/wds/rest/table/json',
+            url_wds_table: 'http://fenixapps2.fao.org/wds_5.2.1/rest/table/json',
             url_mdsd: 'http://faostat3.fao.org/d3s2/v2/mdsd',
             url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
         };
@@ -97,11 +97,11 @@ define(['jquery',
             },
 
             error: function (a, b, c) {
-                swal({
-                    title: translate.error,
-                    type: 'error',
-                    text: a.responseText
-                });
+                //swal({
+                //    title: translate.error,
+                //    type: 'error',
+                //    text: a.responseText
+                //});
             }
 
         });
