@@ -1,3 +1,18 @@
+<script type='text/x-handlebars-template' id='export_pdf_button_structure'>
+    <div class='row'>
+        <div class='col-xs-9'>
+            &nbsp;
+        </div>
+        <div class='col-xs-3'>
+            <div class='pull-right'>
+                <button class='btn btn-primary' style='width: 100%;' id='export_pdf_button'>
+                    <i class='fa fa-file-pdf-o'></i> {{export_pdf_label}}
+                </button>
+            </div>
+        </div>
+    </div>
+</script>
+
 <script id='iteration' type='text/x-handlebars-template'>
     <div class='panel-group'>
         {{#each panels}}

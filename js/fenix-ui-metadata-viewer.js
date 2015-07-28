@@ -132,9 +132,27 @@ define(['jquery',
         this.CONFIG.container.find('div:first').find('h3:first').empty();
         this.CONFIG.container.find('div:first').find('p:first').empty();
 
+        /* Add Export to PDF button. */
+        var source = $(templates).filter('#export_pdf_button_structure').html();
+        var template = Handlebars.compile(source);
+        var dynamic_data = {
+            export_pdf_label: translate.export_pdf_label
+        };
+        var html = template(dynamic_data);
+        $(this.CONFIG.container[0]).prepend(html);
+
+        /* Bind listener. */
+        this.export_pdf();
+
         /* Load data, if needed. */
         this.CONFIG.data !== null ? this.populate_editor(editor) : this.load_data(editor);
 
+    };
+
+    FUIMDV.prototype.export_pdf = function() {
+        $('#export_pdf_button').click(function() {
+            alert('asd');
+        });
     };
 
     FUIMDV.prototype.refactor_schema = function(json) {
