@@ -2,12 +2,14 @@ define(['jquery',
         'handlebars',
         'faostat_commons',
         'FAOSTAT_THEME',
+        'fx-report',
         'text!fenix_ui_metadata_viewer/html/templates.hbs',
         'i18n!fenix_ui_metadata_viewer/nls/translate',
         'text!fenix_ui_metadata_viewer/config/application_settings.json',
         'sweetAlert',
         'jsonEditor'
-        ], function ($, Handlebars, FAOSTATCommons, FAOSTAT_THEME, templates, translate, application_settings, sweetAlert) {
+        ], function ($, Handlebars, FAOSTATCommons, FAOSTAT_THEME, FENIX_UI_REPORTS,
+                     templates, translate, application_settings, sweetAlert) {
 
     'use strict';
 
@@ -22,8 +24,9 @@ define(['jquery',
             lang_faostat: 'E',
             application_name: 'faostat',
             placeholder_id: 'placeholder',
-            url_wds_table: 'http://fenixapps2.fao.org/wds_5.2.1/rest/table/json',
             url_mdsd: 'http://faostat3.fao.org/d3s2/v2/mdsd',
+            url_pdf_service: 'http://fenixapps2.fao.org/fenixExport',
+            url_wds_table: 'http://fenixapps2.fao.org/wds_5.2.1/rest/table/json',
             url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
         };
 
@@ -96,12 +99,12 @@ define(['jquery',
 
             },
 
-            error: function (a, b, c) {
-                //swal({
-                //    title: translate.error,
-                //    type: 'error',
-                //    text: a.responseText
-                //});
+            error: function (a) {
+                swal({
+                    title: translate.error,
+                    type: 'error',
+                    text: a.responseText
+                });
             }
 
         });
@@ -150,8 +153,27 @@ define(['jquery',
     };
 
     FUIMDV.prototype.export_pdf = function() {
-        $('#export_pdf_button').click(function() {
-            alert('asd');
+        $('#export_pdf_button').click({url_pdf_service: this.CONFIG.url_pdf_service,
+                                       uid: this.CONFIG.domain,
+                                       lang: this.CONFIG.lang,
+                                       filename: 'FAOSTAT_metadata_' + this.CONFIG.domain + '_' + this.CONFIG.lang + '.pdf'}, function(e) {
+            var url = e.data.url_pdf_service;
+            var payload = {
+                input: {
+                    config: {
+                        uid: e.data.uid
+                    }
+                },
+                output: {
+                    config: {
+                        lang: e.data.lang.toUpperCase(),
+                        fileName: e.data.filename
+                    }
+                }
+            };
+            var fenix_export = new FENIX_UI_REPORTS();
+            fenix_export.init('metadataExport');
+            fenix_export.exportData(payload, url);
         });
     };
 
