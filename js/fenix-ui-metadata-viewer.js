@@ -26,7 +26,7 @@ define(['jquery',
             placeholder_id: 'placeholder',
             url_mdsd: 'http://faostat3.fao.org/d3s2/v2/mdsd',
             url_pdf_service: 'http://fenixapps2.fao.org/fenixExport',
-            url_wds_table: 'http://fenixapps2.fao.org/wds_5.2.1/rest/table/json',
+            url_wds_table: 'http://fenixapps2.fao.org/wds_5.1/rest/table/json',
             url_d3s: 'http://faostat3.fao.org/d3s2/v2/msd/resources/metadata/uid'
         };
 
