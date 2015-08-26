@@ -5,8 +5,9 @@ define(function() {
             FENIX_UI_METADATA_VIEWER: 'fenix-ui-metadata-viewer',
             fenix_ui_metadata_viewer: '../',
             sweetAlert: 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.5.0/sweet-alert.min',
-            jsonEditor: '{FENIX_CDN}/js/json-editor/0.7.17/jsoneditor'
-        },
+            jsonEditor: '{FENIX_CDN}/js/json-editor/0.7.17/jsoneditor',
+            FAOSTAT_THEME: '../submodules/json-editor-faostat-theme/js/faostat-theme'
+       },
         shim: {
             bootstrap: {
                 deps: ['jquery']
