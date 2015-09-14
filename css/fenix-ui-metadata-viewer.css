@@ -12,3 +12,5 @@
   color: #2ab896; }
 #metadata_container .form-control[disabled] {
   background-color: #fff; }
+#metadata_container .form-control {
+  font-weight: 100; }
