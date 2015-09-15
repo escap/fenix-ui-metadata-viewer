@@ -1,3 +1,6 @@
+/*global define*/
+/* TODO: dividere il JOSN Schema in create_editor. */
+/* TODO: dividere i dati in populate_editor. */
 define(['jquery',
         'handlebars',
         'faostat_commons',
