@@ -147,7 +147,8 @@ define(['jquery',
             disable_array_delete: true,
             disable_array_reorder: true,
             disable_collapse: false,
-            remove_empty_properties: false
+            remove_empty_properties: false,
+            expand_height: true
         });
 
         /* Remove unwanted labels. */
