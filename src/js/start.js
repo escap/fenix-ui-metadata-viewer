@@ -1,8 +1,9 @@
 define(['jquery',
         'text!../../config/special_metadata_fenix.json',
         'text!../../tests/schema.json',
+        'fx-md-v-visualization-creator',
         'text!../../tests/GN.json', 'text!template/template.hbs', 'handlebars', 'treegrid', 'bootstrap'],
-    function ($, SpecialFields,SCHEMA, DATA, Template, Handlebars) {
+    function ($, SpecialFields,SCHEMA,VisualizationCreator, DATA, Template, Handlebars) {
 
         'use strict';
 
@@ -65,7 +66,8 @@ define(['jquery',
                 this.$properties = schema.properties;
                 this.$title = this._getTitleFromData(data, schema.properties)
                 this.$internDataModel = this._prepareInternModelData(data, schema.properties);
-                console.log(this.$internDataModel);
+                this.$creatorVisualizationData = new VisualizationCreator;
+                this.$creatorVisualizationData.init(this.$internDataModel);
             } else {
                 this.$internModel = s.defaultOptions.NOVALUE_OBJECT;
             }
@@ -106,7 +108,7 @@ define(['jquery',
 
            var metadataSorted = this._sortMetadataByPropertyOrder(metadata);
 
-            debugger;
+
             for(var i= 0,length = metadataSorted.length; i<length; i++) {
 
                 var attribute = metadataSorted[i][0];
@@ -122,7 +124,6 @@ define(['jquery',
                         }
 
                         else if (this._isObjectAttribute(metadata[attribute])) {
-
                             // 1: exists properties attribute
                             // 2: exists pattern properties
                             // 3: exists a reference
@@ -131,39 +132,46 @@ define(['jquery',
                                 temporaryObject = this._addRecursiveModel(metadata[attribute], attribute);
                                 temporaryObject['value']= this._prepareInternModelData(data[attribute], metadata[attribute][s.metadataOptions.PROPERTIES_ATTR])
                                 result.push(temporaryObject);
-                            /*    result[attribute] = this._addRecursiveModel(metadata[attribute], attribute);
-                                result[attribute]['value'] = this._prepareInternModelData(data[attribute], metadata[attribute][s.metadataOptions.PROPERTIES_ATTR])
-*/
+
                             }
 
-                          /*  else if (this._existsPatternProperties(metadata[attribute]) && this._existsPatternPropertiesValue(data[attribute])) {
-                                result[attribute] = this._addPatternModel(metadata[attribute], data[attribute], attribute);
-                                result[attribute]['value'] = (data[attribute][(this.$lang).toUpperCase()]) ? data[attribute][(this.$lang).toUpperCase()] : data[attribute][(s.defaultOptions.DEFAULT_LANG).toUpperCase()];
+                            else if (this._existsPatternProperties(metadata[attribute]) && this._existsPatternPropertiesValue(data[attribute])) {
+                                var temporaryObject = {};
+                                temporaryObject= this._addPatternModel(metadata[attribute], data[attribute], attribute);
+                                result.push(temporaryObject);
                             }
 
                             else if (this._existsAReference(metadata[attribute])) {
-                                result[attribute] = this._addRecursiveModel(metadata[attribute], attribute);
+                                var temporaryObject = {};
+
+                                temporaryObject= this._addRecursiveModel(metadata[attribute], attribute);
                                 var refAttribute = this._getAttributeFromReference(metadata[attribute]);
-                                result[attribute]['value'] = this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][s.metadataOptions.PROPERTIES_ATTR]);
+                                temporaryObject['value']= this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][s.metadataOptions.PROPERTIES_ATTR]);
+                                result.push(temporaryObject);
 
-                            }*/
+                            }
 
-                        }/*
+                        }
                         else if (this._isAnArrayAttribute(metadata[attribute])) {
-                            result[attribute] = this._addRecursiveModel(metadata[attribute], attribute);
+                            var temporaryObject = {};
+                            temporaryObject = this._addArrayModel(metadata[attribute], attribute);
 
                             if (this._isASimpleArrayItem(metadata[attribute])) {
-                                result[attribute]['value'] = data[attribute];
+                                this._fillNoChildrenAttribute(temporaryObject);
+                                temporaryObject['value'] = data[attribute];
+                                result.push(temporaryObject);
                             }
                             else if (this._isARefArrayItem(metadata[attribute])) {
-                                result[attribute]['value'] = [];
+                                this._fillChildrenAttribute(temporaryObject);
+                                temporaryObject['value'] = [];
                                 var refAttribute = this._getAttributeFromReference(metadata[attribute][s.metadataOptions.ITEMS_PROPERTIES]);
-                                for (var i = 0, length = data[attribute].length; i < length; i++) {
-                                    result[attribute]['value'].push(this._prepareInternModelData(data[attribute][i], this.$definitions[refAttribute][s.metadataOptions.PROPERTIES_ATTR]));
+                                for (var j = 0, lengthArray = data[attribute].length; j < lengthArray; j++) {
+                                    temporaryObject['value'].push(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][s.metadataOptions.PROPERTIES_ATTR]));
                                 }
+                                result.push(temporaryObject);
                             }
 
-                        }*/
+                        }
                     }
                 }
             }
@@ -230,6 +238,15 @@ define(['jquery',
         };
 
 
+        Starter.prototype._addArrayModel = function (metadata, attribute) {
+            var result = {};
+            this._fillTitle(metadata, attribute, result);
+            this._fillDescription(metadata, attribute, result);
+            this._fillAttributeBean(attribute, result);
+            return result;
+        };
+
+
         Starter.prototype._addBaseModel = function (metadata, data, attribute) {
             var result = {};
             this._fillTitle(metadata, attribute, result);
@@ -244,7 +261,9 @@ define(['jquery',
             var result = {};
             this._fillTitle(metadata, attribute, result);
             this._fillDescription(metadata, attribute, result);
-            result['value'] = (data[this.$lang]) ? data[this.$lang] : (data[s.defaultOptions.DEFAULT_LANG]);
+            this._fillAttributeBean(attribute,result);
+            this._fillNoChildrenAttribute(result);
+            result['value'] = (data[this.$lang.toUpperCase()]) ? data[this.$lang.toUpperCase()] : (data[s.defaultOptions.DEFAULT_LANG.toUpperCase()]);
             return result;
         };
 

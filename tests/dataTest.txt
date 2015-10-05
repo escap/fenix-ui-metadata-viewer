@@ -1,0 +1,18 @@
+uid
+start.js:115 version
+start.js:115 parentIdentifiers
+start.js:115 language
+start.js:115 languageDetails
+start.js:115 creationDate
+start.js:115 characterSet
+start.js:115 metadataStandardName
+start.js:115 metadataStandardVersion
+start.js:115 metadataLanguage
+start.js:115 contacts
+start.js:115 pointOfContact
+start.js:115 organization
+start.js:115 organizationUnit
+start.js:115 position
+start.js:115 role
+start.js:115 specify
+start.js:115 contactInfo

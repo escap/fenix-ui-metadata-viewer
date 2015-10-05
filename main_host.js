@@ -26,7 +26,9 @@ requirejs.config({
         swiper: "//fenixrepo.fao.org/cdn/js/swiper/3.0.7/dist/js/swiper.min",
         jstree: "//fenixrepo.fao.org/cdn/js/jstree/3.0.8/dist/jstree",
         alpaca: '//code.cloudcms.com/alpaca/1.5.13/bootstrap/alpaca',
-        treegrid : '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min'
+        treegrid : '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
+
+        'fx-md-v-visualization-creator' : 'CreatorVisualizationData'
 
 
     },
