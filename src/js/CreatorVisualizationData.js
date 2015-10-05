@@ -6,9 +6,7 @@ define(['jquery'], function($){
 
 
     CreatorVisualizationData.prototype.init = function(model) {
-        console.log(model);
         var data = this._trasformDataToVisualizationModel(model, 'noParent');
-
         console.log(data);
     };
 
@@ -25,10 +23,15 @@ define(['jquery'], function($){
                     'bean' : model[i]['bean'],
                     'parentBean' : parentBean
                 })
-                debugger;
 
-                result = result.concat(this._trasformDataToVisualizationModel(model[i]['value'][0], model[i]['bean']))
-            }else if(model[i].hasChildren === false) {
+                if(this._trasformDataToVisualizationModel(model[i]['value'], model[i]['bean']).length ===0){
+                    debugger;
+                };
+
+                result = result.concat(this._trasformDataToVisualizationModel(model[i]['value'], model[i]['bean']))
+            }
+
+            else if(model[i].hasChildren === false) {
                 result.push({
                     'title' : model[i]['title'],
                     'desc' : model[i]['description'],

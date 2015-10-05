@@ -166,7 +166,7 @@ define(['jquery',
                                 temporaryObject['value'] = [];
                                 var refAttribute = this._getAttributeFromReference(metadata[attribute][s.metadataOptions.ITEMS_PROPERTIES]);
                                 for (var j = 0, lengthArray = data[attribute].length; j < lengthArray; j++) {
-                                    temporaryObject['value'].push(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][s.metadataOptions.PROPERTIES_ATTR]));
+                                    temporaryObject['value'] =  temporaryObject['value'].concat(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][s.metadataOptions.PROPERTIES_ATTR]));
                                 }
                                 result.push(temporaryObject);
                             }
