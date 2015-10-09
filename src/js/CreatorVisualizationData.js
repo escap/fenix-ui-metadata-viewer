@@ -6,44 +6,51 @@ define(['jquery'], function($){
 
 
     CreatorVisualizationData.prototype.init = function(model) {
-        var data = this._trasformDataToVisualizationModel(model, 'noParent');
-        console.log(data);
+        var data = this._trasformDataToVisualizationModel(model, 'noParent', 0);
+       return  {'data':data};
+
     };
 
 
-    CreatorVisualizationData.prototype._trasformDataToVisualizationModel = function(model, parentBean) {
+    CreatorVisualizationData.prototype._trasformDataToVisualizationModel = function(model, parentBean, levelCounter) {
 
 
         var result = [];
         for(var i= 0, length = model.length; i<length; i++) {
-            if(model[i].hasChildren && model[i].hasChildren === true) {
+
+            if(model[i].hasChildren && model[i].hasChildren === true ) {
+
+                var className = (parentBean!= 'noParent') ?
+                'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean + ' '+'depth-level-'+levelCounter:
+                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter;
+
                 result.push({
                     'title' : model[i]['title'],
                     'desc' : model[i]['description'],
                     'bean' : model[i]['bean'],
-                    'parentBean' : parentBean
+                    'parentBean' : parentBean,
+                    'className' : className
                 })
 
-                if(this._trasformDataToVisualizationModel(model[i]['value'], model[i]['bean']).length ===0){
-                    debugger;
-                };
-
-                result = result.concat(this._trasformDataToVisualizationModel(model[i]['value'], model[i]['bean']))
+                result = result.concat(this._trasformDataToVisualizationModel(model[i]['value'], model[i]['bean'],levelCounter+1))
             }
 
             else if(model[i].hasChildren === false) {
+                var className = (parentBean!= 'noParent') ?
+                'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean+ ' '+'depth-level-'+levelCounter:
+                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter;
+
                 result.push({
                     'title' : model[i]['title'],
                     'desc' : model[i]['description'],
                     'bean' : model[i]['bean'],
                     'value' : model[i]['value'],
-                    'parentBean' : parentBean
-
+                    'parentBean' : parentBean,
+                    'className' : className
                 })
             }
         }
         return result;
-
     };
 
     return CreatorVisualizationData;

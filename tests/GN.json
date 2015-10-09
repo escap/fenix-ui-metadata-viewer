@@ -1,23 +1,10 @@
 {
   "creationDate" : 1416438000000,
-  "language" : {
-    "version" : "1998",
-    "codes" : [ {
-      "code" : "eng",
-      "label" : {
-        "EN" : "English"
-      }
-    } ],
-    "idCodeList" : "ISO639-2",
-    "extendedName" : {
-      "EN" : "International Standard Organization - Language"
-    }
-  },
   "title" : {
-    "EN" : "Energy use"
+    "EN" : "Emissions - Land Use, Burning - Biomass"
   },
-  "uid" : "GN",
-  "rid" : "9_288",
+  "uid" : "GI",
+  "rid" : "9_282",
   "languageDetails" : {
     "EN" : ""
   },
@@ -60,19 +47,22 @@
   } ],
   "meContent" : {
     "description" : {
-      "EN" : "\"Greenhouse gas (GHG) emissions from direct energy use consist of carbon dioxide, methane and nitrous oxide gases associated with fuel burning and generation of electricity used in agriculture (including fisheries).\r\nFAOSTAT emission estimates are computed at Tier 1 following the IPCC 2006 Guidelines for National GHG Inventories, vol. 2, ch. 2 and 3 (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol2.html).\r\nGHG emissions are provided by country, regions and sepcial groups, with global coverage, relative to the period 1970-present (with annual updates), expressed both as Gg CH4, Gg N2O, Gg CO2, Gg CO2eq and Gg CO2eq from both CH4 and N2O, by motor gasoline (gas-diesel oils, gasoline, natural gas, liquified petroleum gas, residual fuel oil, hard coal, electricity, gas-diesel oils in fisheries, residual fuel oil in fisheries and energy for power irrigation) and by aggregates (total energy, trasport fuel consumed in agriculture excluding fishery, energy consumed in fishery). Implied emission factors for N2O, CH4 and CO2  as well activity data (consumption of gasolines in agriculture) are also provided.\"\r\n\r\n\r\n\"This domain contains data on GHG emissions, associated emission factors and underlying activity data. The FAOSTAT Emissions data are estimates by FAO and do not coincide with GHG data reported by member countries to UNFCCC. The database is intended primarily as a service to help member countries assess and report their emissions, as well as a useful international benchmark. The FAOSTAT Emissions data are disseminated publicly to facilitate continuous feedback from member countries.\r\n\r\nAcknowledgments:\r\nThe FAOSTAT Emissions database was produced by the FAO Monitoring and Assessment of Greenhouse Gas Emissions and Mitigation Potential in Agriculture project (MAGHG), with generous funding from the Governments of Norway and Germany, trust funds GCP/GLO/286/GER and GCP/GLO/325/NOR.\"\r\n"
+      "EN" : "\"Greenhouse Gas (GHG) emissions from burning of biomass consist of methane and nitrous oxide gases from biomass combustion of forest land cover classes ‘Humid and Tropical Forest’ and ‘Other Forests’, and of methane, nitrous oxide, and carbon dioxide gases from combustion of organic soils.\r\nFAOSTAT emission estimates are computed at Tier 1 following the IPCC 2006 Guidelines for National GHG Inventories (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol4.html).\r\nGHG emissions are provided by country, with global coverage, relative to the period 1990-present (with annual updates), expressed as Gg CH4, Gg N2O, Gg CO2, Gg CO2eq and Gg CO2eq from both CH4 and N2O, by land cover class (humid tropical forest, other forest, organic soils) and by aggregate (burning - all categories). Implied emission factors for N2O, CH4 and CO2  as well activity data (burned area and biomass burned) are also provided.\"\r\n\r\n\r\n\"This sub-domain contains data on GHG emissions, associated emission factors, underlying activity data (area and biomass burned statistics). Estimations are first produced within spatially distributed grids and then aggregated to national level. The FAOSTAT Emissions data are estimates by FAO and do not coincide with GHG data reported by member countries to UNFCCC. The database is intended primarily as a service to help member countries assess and report their emissions, as well as a useful international benchmark. The FAOSTAT Emissions data are disseminated publicly to facilitate continuous feedback from member countries.\r\n\r\nAcknowledgments:\r\nThe FAOSTAT Emissions database was produced by the FAO Monitoring and Assessment of Greenhouse Gas Emissions and Mitigation Potential in Agriculture project (MAGHG), with generous funding from the Governments of Norway and Germany, trust funds GCP/GLO/286/GER and GCP/GLO/325/NOR.\"\r\n"
+    },
+    "resourceRepresentationTypeLabel" : {
+      "EN" : "Dataset"
     },
     "resourceRepresentationType" : "dataset",
-    "keywords" : [ "Emissions", "Energy use", "Agriculture", "Energy use" ],
+    "keywords" : [ "Biomass", "Land use", "Land use" ],
     "statisticalConceptsDefinitions" : {
-      "EN" : "Greenhouse gas (GHG) emissions from direct energy use consist of carbon dioxide, methane and nitrous oxide gases associated with fuel burning and generation of electricity used in agriculture (including fisheries).\r\n"
+      "EN" : "Greenhouse Gas (GHG) emissions from burning of biomass consist of methane and nitrous oxide gases from biomass combustion of forest land cover classes ‘Humid and Tropical Forest’ and ‘Other Forests’, and of methane, nitrous oxide, and carbon dioxide gases from combustion of organic soils. \r\n"
     },
     "seReferencePopulation" : {
       "statisticalPopulation" : {
-        "EN" : "Energy used in agriculture and fishery at country level\r\n"
+        "EN" : "Biomass burned at country level\r\n"
       },
       "statisticalUnit" : {
-        "EN" : "Energy used in agriculture and fishery at country level"
+        "EN" : "Biomass burned at country level"
       },
       "referencePeriod" : {
         "version" : "1.0",
@@ -116,7 +106,7 @@
         "EN" : "Agriculture, Forestry and Other Land Use, Greenhouse Gas Emissions\r\n"
       },
       "coverageTime" : {
-        "from" : -3600000,
+        "from" : 631148400000,
         "to" : 1419980400000
       },
       "coverageGeographic" : {
@@ -132,9 +122,6 @@
           "EN" : "Global administrative unit layer country level"
         }
       }
-    },
-    "resourceRepresentationTypeLabel" : {
-      "EN" : "Dataset"
     }
   },
   "meDocuments" : [ {
@@ -142,7 +129,7 @@
       "title" : {
         "EN" : "FAO Statistical Yearbooks"
       },
-      "link" : "http://www.fao.org/economic/ess/ess-publications/ess-yearbook/en/#.VJPt3sAAA",
+      "link" : "http://www.fao.org/economic/ess/ess-publications/ess-yearbook/en/#.VJLprdKG98E",
       "documentKind" : "scientificPaper",
       "documentContact" : {
         "organization" : {
@@ -150,8 +137,8 @@
         },
         "role" : "distributor",
         "contactInfo" : {
-          "address" : "Economic and Social Development Department Viale delle Terme di Caracalla  00153 Rome, Italy   ",
-          "emailAddress" : "FAO-statistics@fao.org"
+          "emailAddress" : "FAO-statistics@fao.org",
+          "address" : "Economic and Social Development Department Viale delle Terme di Caracalla  00153 Rome, Italy   "
         },
         "organizationUnit" : {
           "EN" : "ESS"
@@ -180,7 +167,7 @@
     "seDataDissemination" : {
       "seReleasePolicy" : {
         "releaseCalendar" : {
-          "EN" : "\"Data are released once a year or when they are available. \r\nAn updated calendar is available online (http://faostat3.fao.org/home/faostatReleaseCalendar.html).\"\r\n\r\nUser data access in FAOSTAT is regulated by the FAO Statistics Quality Assurance Framework (http://www.fao.org/docrep/019/i3664e/i3664e.pdf) in application of the \" Priniciples governing international statistical activities on Fundamental Principles of Official Statistics\" (http://unstats.un.org/unsd/methods/statorg/Principles_stat_activities/principles_stat_activities.pdf).\r\n"
+          "EN" : "\"Data are released once a year or when they are available. \r\nAn updated calendar is available online (http://faostat3.fao.org/home/faostatReleaseCalendar.html).\"\r\n\r\nUser data access in FAOSTAT is regulated by the FAO Statistics Quality Assurance Framework (http://www.fao.org/docrep/019/i3664e/i3664e.pdf) in application of the  \" Priniciples governing international statistical activities on Fundamental Principles of Official Statistics\" (http://unstats.un.org/unsd/methods/statorg/Principles_stat_activities/principles_stat_activities.pdf).\r\n"
         },
         "releaseCalendarAccess" : "http://faostat3.fao.org/home/faostatReleaseCalendar.html\r\n",
         "disseminationPeriodicity" : {
@@ -197,11 +184,15 @@
           }
         },
         "embargoTime" : { }
+      },
+      "seDistribution" : {
+        "onlineResource" : "http://faostat3.fao.org/faostat-gateway/go/to/home/E",
+        "disseminationFormat" : [ "Excel", "CSV" ]
       }
     },
     "seClarity" : {
       "clarity" : {
-        "EN" : "FAO Satistics Working Papers (http://www.fao.org/economic/ess/ess-publications/workingpapers/en/), other publications from the Economic and Social Development Department (ESS)  and the Monitoring and Assessment of Greenhouse Gas Emissions and Mitigation Potential in Agriculture (MAGHG) project (http://www.fao.org/climatechange/micca/ghg/en/)\r\n\r\n\"IPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Prepared by the National Greenhouse Gas Inventories Programme, Eggleston H.S., Buendia L., Miwa K., Ngara T. and Tanabe K. (Eds), IGES, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol2.html)\r\n\"\r\n\r\nNo quality report is available. However, quality assessment (12.2), relevance(13), accuracy (14), timeliness (15), as well as comparability (16) and coherence (17) altogether indicate a good quality of estimates, compatibly with the underlying Tier 1 IPCC methodology applied.\r\n"
+        "EN" : "\"IPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Prepared by the National Greenhouse Gas Inventories Programme, Eggleston H.S., Buendia L., Miwa K., Ngara T. and Tanabe K. (Eds), IGES, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol4.html)\r\n\"\r\nNo quality report is available. However, quality assessment (12.2), relevance(13), accuracy (14), timeliness (15), as well as comparability (16) and coherence (17) altogether indicate a good quality of estimates, compatibly with the underlying Tier 1 IPCC methodology applied.\r\n"
       }
     },
     "seConfidentiality" : {
@@ -228,25 +219,25 @@
   },
   "meDataQuality" : {
     "qualityManagement" : {
-      "EN" : "Not available\r\n"
+      "EN" : ""
     },
     "qualityAssessment" : {
-      "EN" : "\"For emission estimates:\r\nA peer-review process was launched (details of results in http://www.fao.org/climatechange/35293-0586769eafd852c772743b5e92ca84868.pdf).\r\nFurther to this, results were presented in a series of peer-reviewed publications (links at: http://www.fao.org/climatechange/micca/ghg/en), including the IPCC Fifth Assessment Report (http://report.mitigation2014.org/drafts/final-draft-postplenary/ipcc_wg3_ar5_final-draft_postplenary_chapter11.pdf)\r\n\r\nFor source data:\r\n- Activity data relative to fuels are taken from the United Nations Statistics Division (UNSD) Energy Statistics database (http://unstats.un.org/unsd/energy/edbase.htm);\r\n\r\n- data relative to fuels used in fisheries, specifically “Gas-Diesel oils used in fisheries” and “Residual fuel oil used in fisheries” are taken from the International Energy Agency (IEA) database “World energy balances” (http://wds.iea.org/wds/pdf/documentation_worldbes.pdf).\r\n\r\n- in the energy for power irrigation, the irrigated area is taken from FAO AQUASTAT (http://www.fao.org/nr/water/aquastat/catalogues/MD_in_AQUASTAT_DB_20140707.pdf)\"\r\n"
+      "EN" : "\"For emission estimates:\r\nA peer-review process was launched (details of results in http://www.fao.org/climatechange/35293-0586769eafd852c772743b5e92ca84868.pdf).\r\nFurther to this, results were presented in a series of peer-reviewed publications (links at: http://www.fao.org/climatechange/micca/ghg/en), including the IPCC Fifth Assessment Report (http://report.mitigation2014.org/drafts/final-draft-postplenary/ipcc_wg3_ar5_final-draft_postplenary_chapter11.pdf)\r\n\r\nFor source data:\r\nGFED data and methodologies have been widely presented in peer-reviewed papers as listed on the GFED's web site: http://www.globalfiredata.org/index.html\"\r\n"
     },
     "qualityAssurance" : {
-      "EN" : "Not available\r\n"
+      "EN" : ""
     },
     "seAccuracy" : {
       "accuracyNonSampling" : {
-        "EN" : "\"Accuracy in estimates of GHG emissions depends on the accuracy of source data, emission factors as well as on the choice of methodology for calculating emissions. FAOSTAT emission estimates are based on standard IPCC methodology and emission factors at Tier 1 (reckoned the simplest of methods). Inaccuracy may be due to, inter alia, genericity of algorithms, natural variability, partitioning fractions, lack of spatial or temporal coverage, spatial aggregation. See 11.2 and 20.5\r\nIn the case of energy use detailed information is available in the IPCC guidelines, 2006: Vol.2, Ch. 2 and 3 (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol2.html)\"\r\n"
+        "EN" : "Accuracy in estimates of GHG emissions depends on the accuracy of source and derived activity data, emission factors as well as on the choice of methodology for calculating emissions. FAOSTAT emission estimates are based on standard IPCC methodology and emission factors at Tier 1 (reckoned the simplest of methods). Inaccuracy may be due to, inter alia, genericity of algorithms, natural variability, partitioning fractions, lack of spatial or temporal coverage, spatial aggregation, errors in satellite data. See 11.2 and 20.5. In the case of biomass burning more detailed information is available in the IPCC guidelines, 2006: Vol.4, Ch. 2 and Ch.4 (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol4.html)\r\n"
       },
       "accuracySampling" : {
-        "EN" : ""
+        "EN" : "Not available\r\n"
       }
     },
     "seDataRevision" : {
       "revisionPolicy" : {
-        "EN" : "As deemed necessary\r\n"
+        "EN" : "In case the GFED research team publishes a revised GFED dataset, the revision is reflected in the database.\r\n"
       },
       "revisionPractice" : {
         "EN" : "Data are revised as deemed necessary or when new activity data are published.\r\n"
@@ -260,32 +251,27 @@
         "EN" : "No user satisfaction studies have been conducted as yet.\r\n"
       },
       "completeness" : {
-        "EN" : "\"Completeness of emission estimates reflects completeness of  source data, as follows:\r\n\r\nFor the Energy Statistics Database (http://unstats.un.org/unsd/energy/edbase.htm), the main source of information for the Energy Statistics Database is the UNSD Annual Questionnaire on Energy Statistics. Additional sources of information for the database include national, regional and international statistical publications - including, but not limited to publications from: the International Energy Agency (IEA), the Statistical Office of the European Communities (Eurostat), the International Atomic Energy Agency (IAEA), the Organization of the Petroleum Exporting Countries (OPEC), the Organización Latinoamericana de Energía (OLADE). The UN Statistics Division prepares estimates where official data are incomplete or inconsistent. \r\n\r\nFor the World Energy Balances (http://www.iea.org/statistics/topics/energybalances/), completeness is sketched out country by country here http://wds.iea.org/wds/pdf/documentation_worldbes.pdf\r\n\r\nFor the irrigated areas from FAO AQUASTAT, completeness is described here http://www.fao.org/nr/water/aquastat/catalogues/MD_in_AQUASTAT_DB_20140707.pdf\r\n\r\n\r\n\r\n\"\r\n"
+        "EN" : "\"Completeness of emission estimates reflects completeness of  source data. In the current version (4), GFED data are likely to be unable to fully capture burned areas in persistently cloudy regions. Data for August 2000 and June 2001 were computed due to technical outage of the remote sensing instrument.\r\n\r\nAll countries are covered with various degrees of completeness depending on the region and the land cover class. Aggregated emission estimates (by country, by land cover class) necessarily reflect this.\"\r\n"
       }
     },
     "seComparability" : {
       "comparabilityGeographical" : {
-        "EN" : "Comparability of emissions estimates reflects comparability of the individual source data. See references in 13.3 for more information\r\n"
+        "EN" : "Comparability of emissions estimates reflects comparability of source data. In certain areas, cloud persistency may affect uncertainty/ comparability of GFED data and, therefore, of the FAOSTAT burning of biomass emissions. See 13.3\r\n"
       },
       "comparabilityTime" : {
-        "EN" : "Comparability of emissions estimates reflects comparability of the individual source data. See references in 13.3 for more information\r\n"
+        "EN" : "Fairly good comparability in the short and medium terms.\r\n"
       },
       "coherenceIntern" : {
-        "EN" : "It is expected that the internal coherence be checked by Countries based on the application of a IPCC tier methoology (tier 2 or 3) higher than FAOSTAT (tier 1), if possible\r\n"
+        "EN" : "Not available for the time being. A paper is being drafted on this topic and will be published soon.\r\n\r\nIt is expected that the internal coherence be checked by Countries based on the application of a IPCC tier methoology (tier 2 or 3) higher than FAOSTAT (tier 1), if possible\r\n"
       }
     },
     "seTimelinessPunctuality" : {
       "timeliness" : {
-        "EN" : "Average production time is six months from release of new activity data.\r\n"
+        "EN" : "Average production time is 6 months from release of new activity datasets (GFED burned areas).\r\n"
       },
       "punctuality" : {
         "EN" : "Not available\r\n"
       }
-    }
-  },
-  "meMaintenance" : {
-    "maintenanceAgency" : {
-      "EN" : "Food and Agriculture Organization of the United Nations\r\n"
     }
   },
   "meStatisticalProcessing" : {
@@ -293,24 +279,31 @@
       "seSecondaryDataCollection" : {
         "originOfCollectedData" : {
           "version" : "1.0",
-          "codes" : [ {
-            "code" : "G",
-            "label" : {
-              "EN" : "Mixture of data source"
-            }
-          } ],
           "idCodeList" : "FAOSTAT_OriginData",
           "extendedName" : {
             "EN" : "Origin of collected data"
           }
         },
         "rawDataDescription" : {
-          "EN" : "Activity data are collected from the respective sources every year\r\n"
+          "EN" : "Activity data are collected from the GFED database every year\r\n"
         },
         "dataCollection" : {
-          "EN" : "FAOSTAT Emissions data are computed based on a number of source data as listed in 13.3\r\n\r\n\r\n\"When no activity (source) data is available, FAOSTAT emissions database results in no data (i.e. no imputations are made) .\r\n\r\nGHG emissions from direct energy use consist of carbon dioxide (CO2), methane (CH4) and nitrous oxide (N2O) gases associated with fuel burning and generation of electricity used in agriculture (including fisheries). The FAOSTAT data are computed at Tier 1, following IPCC 2006 Vol. 2, Ch. 2 and 3 with the exception of the country emission factors electricity-only (see below).\r\nData are estimated per main energy carrier (fuels and electricity) used in agriculture, for the following energy carriers: Motor gasoline; Gas-Diesel oil; Natural gas; Residual fuel oil; Liquefied petroleum gas; Coal and Electricity; and per selected agriculture sub-domains (i.e. irrigation, fisheries). Renewable energy for electricity contributes to the GHG emission calculation indirectly, via country emission factors, which depend on a country’s energy mix for electricity generation.\r\n\r\nThe emissions are estimated at country level, using the formula: \r\nEmission = A * EF \r\nwhere:\r\nA = Activity data, representing the amount of fuel consumed in Kt (1,000 metric tons) yr-1, TJ (terajoule) yr-1 or ktoe (k tons of oil equivalent) yr-1 for fuels, and GWh yr-1 for electricity (1);\r\nEF = Tier 1, default IPCC emission factors, expressed as kg of gas emitted per terajoule (for fuels) or gram per kilowatt hour (for electricity) of energy used per year (2).\r\n\r\n(1) Activity data relative to fuels are taken from the United Nations Statistics Division (UNSD) Energy Statistics database; data relative to fuels used in fisheries, specifically “Gas-Diesel oil used in fisheries” and “Residual fuel oil used in fisheries” are taken from the International Energy Agency (IEA) database “World energy balances”; finally for energy used for power irrigation the irrigated area is taken from FAO AQUASTAT (*). The activity data (**) cover the following:\r\na. Gas-Diesel oil (incl. fisheries);\r\nb. Motor gasoline;\r\nc. Natural gas (incl. Liquefied Natural Gas);\r\nd. Liquefied petroleum gas;\r\ne. Residual fuel oil (incl. fisheries);\r\nf. Coal (Other bituminous coal or, if not available, Hard coal);\r\ng. Electricity;\r\nh. Gas-diesel oil used in fisheries;\r\ni. Residual fuel oil used in fisheries;\r\nj. Energy for power irrigation\r\n\r\n(*) The irrigated area considered is the sum of “Total area equipped for full control irrigation: sprinkler” and “Total area equipped for full control irrigation: localized” taken from the FAO AQUASTAT database. Annual values in FAOSTAT are estimated by repeating the last-available value reported in AQUASTAT within the associated time interval. Regional factors indicating the energy needed to irrigate one hectare of land (Stout, 1990) have been applied to estimate the energy consumed for irrigation. Specifically: Europe, Northern America, Oceania: 1,929 kWh/ha; Africa, Asia: 2,411 kWh/ha; Central America, South America, Caribbean: 2,170 kWh/ha.\r\n\r\n(**) For a., b., d., e. and f. the amount of energy from the mass of fuels was derived using the Net Calorific Values reported in IPCC 2006, Vol. 2, Ch. 1, Tab. 1.2; \r\n\r\n(2) The EF values are those reported by energy carrier in IPCC 2006, Vol. 2, Ch. 2, Tab.2.5 and Ch.3, Tab 3.31. A summary table is shown below:\r\nEnergy carrier - Use - CO2 - CH4 - N2O - kg/TJ\r\nGas/Diesel oil - Mobile - 74,100 - 4.15 - 28.6\r\nMotor gasoline - Mobile - 69,300 - 80 - 2\r\nNatural gas liquids - Stationary - 64,200 - 10 - 0.6\r\nResidual fuel oil -Stationary - 77,400 - 10 - 0.6\r\nLiquefied petroleum gases - Stationary - 63,100 - 5 - 0.1\r\nCoal (Other Bituminous Coal) - Stationary - 94,600 - 300 - 1.5\r\n\r\nFor electricity, country emission factors for CO2, namely electricity-only factors, are those reported by IEA (OECD/IEA, 2012). They are based on 1996 IPCC Guidelines for National Greenhouse Gas Inventories and the 1990 country emission factors are applied to previous years. Non-CO2 emissions factors for electricity used for all countries are estimated on the basis the IEA global electricity emission factor for CO2, considering these emissions as a fraction of the CO2 emitted (CH4: 300/98300 for coal, 5/56100 for natural gas, 10/73300 for crude oil; N2O: 1.5/98300 for coal, 0.1/56100 for natural gas, 0.6/73300 for crude oil) and an energy mix for electricity as follows: 48% coal, 22% natural gas, 6% crude oil. \r\n\r\nDimensionless conversion factors used are:\r\n10-6, to convert kg to Gg; and\r\nGWP-CH4= 21; GWP-N2O= 310 (100-year time horizon global warming potential), to convert Gg CH4 or Gg N2O to Gg CO2eq. (IPCC, 1996: Technical Summary, Tab. 4 pg. 22);\r\n1 GWh = 3.6 TJ.\r\n\r\n\r\nReferences\r\n\r\nIPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Prepared by the National Greenhouse Gas Inventories Programme, Eggleston H.S., Buendia L., Miwa K., Ngara T. and Tanabe K. (Eds), IGES, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/)\r\n\r\nOECD/IEA. 2012. CO2 emissions from fuel combustion - Highlights - 2012 edition, Paris, France (www.iea.org/publications/freepublications/publication/name,4010,en.html)\r\n\r\nOECD/IEA. 2005. Energy Statistics Manual. Prepared by the Energy Statistics Division (ESD) of the International Energy Agency (IEA) in co-operation with the Statistical Office of the European Communities (Eurostat), Paris, France.\r\n\r\nStout B., 1990. Handbook of Energy for World Agriculture. New York, NY: Elsevier Applied Science.\r\n\r\nUNSD. UN Data portal. (http://data.un.org/)\r\n\r\nUNSD. 2011. International Recommendations for Energy Statistics (IRES) – Draft version. Prepared by the United Nations Statistics Division, New York, USA. (http://unstats.un.org/unsd/energy/ires)\"\r\n"
+          "EN" : "Data are revised as deemed necessary or when new activity data are published.\r\n\r\n\"When no activity (source) data is available, FAOSTAT emissions database results in no data (i.e. no imputations are made) .\r\n\r\nGreenhouse Gas (GHG) emissions from burning of biomass consist of gases produced from the burning of biomass for the following items: ‘Humid Tropical Forest,’ ‘Other Forests’ and ‘Organic Soils’. They consist of methane (CH4), nitrous oxide (N2O), and, only in the case of Organic Soils, also Carbon Dioxide (CO2). \r\nHumid Tropical Forest is defined by aggregation of the following FAO-FRA Global Ecological Zones (FAO 2012): “Tropical rainforest” and ‘’Tropical moist deciduous forest”.\r\n\r\nOther Forest area contains the rest of the FAO-FRA Global Ecological Zones for Forest.\r\n\r\nOrganic Soils are defined as the Histosols class in the Harmonized World Soil Database (FAO et al., 2012), consistently with the FAOSTAT Emissions database ‘’Cultivation Organic Soils’’ definitions. \r\n\r\nEmissions are estimated following IPCC, 2006, Vol. 4, Ch. 2, Eq. 2.27, by aggregation to the national level of spatially distributed information, produced on a spatial grid at 0.25 degree resolution (approximately 25 km at the equator). \r\n\r\nFor each item, and at each pixel, the following formula is used: \r\nEmission = A * EF \r\n\r\nwhere:\r\nEmission = GHG emissions in g CH4 , g N2O and g CO2.\r\nA = Activity data, representing the total mass of fuel burned, in kg of dry matter (1);\r\nEF = Tier 1 IPCC emission factor, expressed in g CH4 , g N2O or g CO2 , per kg of burned dry matter (2).\r\n\r\n(1) Total mass of fuel burned is computed by multiplying burned area (i) by fuel biomass consumption values (ii).\r\n\r\n(i) Yearly composite values of burned area are obtained as the sum of monthly burned area data from the Global Fire Emission Database v.4 (GFED4; Giglio et al. 2013). For forest, the GFED4 burned forest area is an aggregate of burned area in the following MODIS land cover classes (MCD12Q1, Hansen et al., 2000): Evergreen Needle-leaf, Evergreen Broadleaf, Deciduous Needle-leaf, Deciduous Broadleaf, and Mixed Forest. \r\nFor ‘’Humid Tropical Forest,’’ burned area is obtained by overlapping GFED4 Burned Forest area data with the relevant FAO-FRA Global Ecological Zones.\r\nFor ‘’Other Forest,’’ burned area is obtained as GFED4 burned Forest area minus Humid Tropical Forest burned area.\r\nFor “Organic Soils,’’ burned areas is obtained by overlapping GFED4 Burned area data with the Histosols class information of the Harmonized World Soil Database (FAO et al., 2012), assuming even distribution of organic soils within the grid cell. \r\n\r\n(ii) Fuel biomass consumption values are taken from IPCC, 2006: Vol.4, Ch. 2, Tab. 2.4. The different values are climate dependent, and were geographically allocated using the JRC Climate Zones map (EC-JRC, 2010).\r\n\r\n(2) EF values are taken from IPCC, 2006: Vol. 4, Ch. 2, Tab. 2.5. The different values were assigned at pixel level to the relevant climate zone. The climatic zones map used has been developed by the Joint Research Centre of the European Commission (EC-JRC, 2010), following the IPCC prescriptions.\r\nFor each item, Emissions at pixel level were subsequently aggregated at country level, using the FAO Global Administrative Unit Layers (GAUL) dataset. \r\n\r\nDimensionless conversion factors used are:\r\n10-9, to convert the emissions from g CH4 to Gg CH4  and g N2O to Gg N2O;\r\nGWP- CH4 = 21 (100-year time horizon global warming potential), to convert Gg CH4 to Gg CO2eq.                 \r\nGWP-N2O = 310 (100-year time horizon global warming potential), to convert Gg N2O to Gg CO2eq (IPCC, 1996: Technical Summary, Tab. 4 pg. 22).\r\n\r\n\r\nReferences\r\n\r\nEC-JRC 2010. European Soil Portal. http://eusoils.jrc.ec.europa.eu/projects/RenewableEnergy\r\n\r\nFAO. 2012. Global ecological zones for FAO forest reporting: 2010 Update. Forest Resources Assessment Working Paper 179. FAO, Rome, Italy. (http://www.fao.org/docrep/017/ap861e/ap861e00.pdf)\r\n\r\nFAO/IIASA/ISRIC/ISSCAS/JRC, 2012. Harmonized World Soil Database (version 1.2). FAO, Rome, Italy and IIASA, Laxenburg, Austria. (http://www.fao.org/soils-portal/soil-survey/soil-maps-and-databases/harmonized-world-soil-database-v12/en/)\r\n\r\nGiglio, L., J. T. Randerson, , and G. R.van der Werf. 2013. Analysis of daily, monthly, and annual burned area using the fourth generation Global Fire Emissions Database (GFED4). Journal of Geophysical Research: Biogeosciences 118: 1-12. (http://escholarship.org/uc/item/1r26b9mf#page-1)\r\n\r\nHansen, M. C., R. S. DeFries, J. R. G. Townshend, and R. Sohlberg. 2000. Global land cover classification at 1km spatial resolution using a classification tree approach. International Journal of Remote Sensing 21: 1331– 1364. (http://www.glcf.umd.edu/library/guide/ijrs21_p1331.pdf)\r\n\r\nIPCC. 1997. Revised 1996 IPCC Guidelines for National Greenhouse Gas Inventories. OECD, Paris, France. (http://www.ipcc-nggip.iges.or.jp/public/gl/invs1.html)\r\n\r\nIPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Prepared by the National Greenhouse Gas Inventories Programme, Eggleston H.S., Buendia L., Miwa K., Ngara T. and Tanabe K. (Eds), IGES, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/)\r\n\r\nvan der Werf, G.R., Randerson, J.T., Giglio, L.,Collats, G.J., Mu, M., Kasibhatla, P.S., Morton, D.C., DeFries, R.S., Jin, Y., van Leewen, T.T., 2010. Global fire emissions and the contribution of deforestation, savanna, forest, agricultural, and peat fires (1997-2009). Atmos. Chem. Phys., 10, 11707-11735, 2010 (http://www.atmos-chem-phys.net/10/11707/2010/acp-10-11707-2010.html)\"\r\n"
         }
       }
+    }
+  },
+  "language" : {
+    "version" : "1998",
+    "codes" : [ {
+      "code" : "eng",
+      "label" : {
+        "EN" : "English"
+      }
+    } ],
+    "idCodeList" : "ISO639-2",
+    "extendedName" : {
+      "EN" : "International Standard Organization - Language"
     }
   }
 }

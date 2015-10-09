@@ -67,12 +67,17 @@ define(['jquery',
                 this.$title = this._getTitleFromData(data, schema.properties)
                 this.$internDataModel = this._prepareInternModelData(data, schema.properties);
                 this.$creatorVisualizationData = new VisualizationCreator;
-                this.$creatorVisualizationData.init(this.$internDataModel);
+                this.$visualizationData = this.$creatorVisualizationData.init(this.$internDataModel);
+
+                this._compileTemplate();
+
+                var templateToAdd = Handlebars.compile(Template);
+                var $compiled = templateToAdd(data);
+
             } else {
                 this.$internModel = s.defaultOptions.NOVALUE_OBJECT;
             }
 
-            this._testData();
             /*
              $('.tree').treegrid();
              */
@@ -80,7 +85,7 @@ define(['jquery',
         };
 
         Starter.prototype._initVariables = function () {
-            this.$lang = 'fr';
+            this.$lang = 'en';
             this.$specialFields = JSON.parse(SpecialFields);
         };
 
@@ -113,7 +118,10 @@ define(['jquery',
 
                 var attribute = metadataSorted[i][0];
 
-                if (s.viewerOptions.isFenixMetadata && this._isASpecialAttribute(attribute)) {
+                if (s.viewerOptions.isFenixMetadata && this._isASpecialAttribute(attribute)
+                && data[attribute] && data[attribute] != '') {
+
+                    if(attribute == 'originOfCollectedData'){debugger;}
                     result.push( this._handleFenixCodes(data, metadata, attribute));
 
                 }else {
@@ -330,6 +338,8 @@ define(['jquery',
             this._fillAttributeBean ( attribute, result);
             this._fillNoChildrenAttribute(result);
               var codes=  data[attribute]['codes'];
+
+            console.log(attribute, data[attribute]);
             result['value'] = [];
             for(var i= 0,length =codes.length; i<length; i++) {
                 if(codes[i].label) {
@@ -450,6 +460,15 @@ define(['jquery',
 
           $('.tree').treegrid();
         };
+
+        Starter.prototype._compileTemplate =function() {
+            var templateToAdd = Handlebars.compile(Template);
+            var $compiled = templateToAdd(this.$visualizationData);
+
+            $('.container').append($compiled);
+
+            $('.fx-md-viewer').treegrid();
+        }
 
         return Starter;
     })
