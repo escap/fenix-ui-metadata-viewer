@@ -17,20 +17,18 @@ requirejs.config({
         underscore: "//fenixrepo.fao.org/cdn/js/underscore/1.7.0/underscore.min",
         backbone: "//fenixrepo.fao.org/cdn/js/backbone/1.1.2/backbone.min",
         handlebars: "//fenixrepo.fao.org/cdn/js/handlebars/2.0.0/handlebars",
-        chaplin: "//fenixrepo.fao.org/cdn/js/chaplin/1.0.1/chaplin.min",
         domReady: "//fenixrepo.fao.org/cdn/js/requirejs/plugins/domready/2.0.1/domReady",
         i18n: "//fenixrepo.fao.org/cdn/js/requirejs/plugins/i18n/2.0.4/i18n",
         amplify: '//fenixrepo.fao.org/cdn/js/amplify/1.1.2/amplify.min',
         text: '//fenixrepo.fao.org/cdn/js/requirejs/plugins/text/2.0.12/text',
-        rsvp: '//fenixrepo.fao.org/cdn/js/rsvp/3.0.17/rsvp',
         swiper: "//fenixrepo.fao.org/cdn/js/swiper/3.0.7/dist/js/swiper.min",
         jstree: "//fenixrepo.fao.org/cdn/js/jstree/3.0.8/dist/jstree",
-        alpaca: '//code.cloudcms.com/alpaca/1.5.13/bootstrap/alpaca',
         treegrid : '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
-
-        'fx-md-v-visualization-creator' : 'CreatorVisualizationData'
-
-
+        'fx-md-v-visualization-creator' : 'CreatorVisualizationData',
+        'q' : '//fenixrepo.fao.org/cdn/js/q/1.1.2/q',
+        'fx-md-viewer/controller/mainController' : './controller/mainController',
+        'fx-md-viewer/model' : './model/ModelCreator',
+        'fx-md-viewer/config' : '../../config'
     },
 
     // Underscore and Backbone are not AMD-capable per default,
@@ -63,20 +61,22 @@ requirejs.config({
 
 // Bootstrap the application
 require([
-    'start',
-    'domReady!'
+    'old_start'
 ], function (Starter) {
 
 
     var optionsFenix =
     {
+        data:{
+            uid: 'GN'
+        },
         viewerOptions: {
             isFenixMetadata : true
         }
 
     };
     var starter = new Starter();
-    starter.init();
+    starter.init(optionsFenix);
 
 
 });

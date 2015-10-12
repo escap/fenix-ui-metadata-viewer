@@ -1,7 +1,23 @@
-<table class="fx-md-viewer">
-    {{#each data}}
+<div class="fx-md-viewer-wrapper">
+    <div class="row">
+        <h1 class="fx-md-viewer-title col-xs-12">{{{title_resource}}}</h1>
+    </div>
+
+    <table class="fx-md-viewer-container">
+        {{#each data}}
             <tr class="{{className}}">
-                 <td >{{title}}</td><td>{{value}}</td>
+                {{#if desc}}
+                    <td>
+                        {{title}}
+                        <div class="fx-md-viewer-description glyphicon glyphicon-info-sign" data-content="{{{desc}}}"></div>
+                    </td>
+                    <td>{{value}}</td>
+                {{else}}
+                    <td>{{title}}</td>
+                    <td>{{value}}</td>
+                {{/if}}
             </tr>
-    {{/each}}
-</table>
+        {{/each}}
+    </table>
+
+</div>

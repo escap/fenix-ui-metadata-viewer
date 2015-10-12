@@ -5,9 +5,9 @@ define(['jquery'], function($){
     function CreatorVisualizationData(){}
 
 
-    CreatorVisualizationData.prototype.init = function(model) {
+    CreatorVisualizationData.prototype.init = function(title,model) {
         var data = this._trasformDataToVisualizationModel(model, 'noParent', 0);
-       return  {'data':data};
+       return  {'title_resource': title,'data':data};
 
     };
 

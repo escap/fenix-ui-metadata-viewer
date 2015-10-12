@@ -8,7 +8,11 @@ define(function () {
             'bootstrap': '{FENIX_CDN}/js/bootstrap/3.2/js/bootstrap.min',
             underscore: "{FENIX_CDN}/js/underscore/1.7.0/underscore.min",
             text: '{FENIX_CDN}/js/requirejs/plugins/text/2.0.12/text',
-            config: "../../config"
+            config: "../../config",
+            'q' : '{FENIX_CDN}/js/q/1.1.2/q',
+            'fx-md-viewer/controller' : './controller/mainController',
+            'fx-md-viewer/model' : './model/ModelCreator',
+
 
 
         },
