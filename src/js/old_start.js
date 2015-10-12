@@ -381,7 +381,7 @@ define(['jquery',
 
             $('.container').append($compiled);
 
-            $('.fx-md-viewer').treegrid();
+            $('.fx-md-viewer-container').treegrid();
         };
 
         Starter.prototype._onclickDescription = function() {

@@ -1,35 +1,10 @@
 {
-  "creationDate" : 1416438000000,
+  "creationDate" : 1416524400000,
   "title" : {
-    "EN" : "Emissions - Agriculture, Crop Residues"
+    "EN" : "Emissions - Agriculture, Rice Cultivation"
   },
-  "uid" : "GA",
-  "rid" : "9_286",
-  "languageDetails" : {
-    "EN" : ""
-  },
-  "characterSet" : {
-    "version" : "",
-    "codes" : [ {
-      "code" : "106"
-    } ],
-    "idCodeList" : "IANAcharacterSet"
-  },
-  "metadataStandardName" : "FENIX",
-  "metadataStandardVersion" : "1.0",
-  "metadataLanguage" : {
-    "version" : "1998",
-    "codes" : [ {
-      "code" : "eng",
-      "label" : {
-        "EN" : "English"
-      }
-    } ],
-    "idCodeList" : "ISO639-2",
-    "extendedName" : {
-      "EN" : "International Standard Organization - Language"
-    }
-  },
+  "uid" : "GR",
+  "rid" : "9_296",
   "contacts" : [ {
     "organization" : {
       "EN" : "Food and Agriculture Organization of the United Nations"
@@ -47,22 +22,22 @@
   } ],
   "meContent" : {
     "description" : {
-      "EN" : "\"Greenhouse gas (GHG) emissions from crop residues consist of direct and indirect nitrous oxide (N2O) emissions from nitrogen (N) in crop residues and forage/pasture renewal left on agricultural fields by farmers. Specifically, N2O is produced by microbial processes of nitrification and de-nitrification taking place on the deposition site (direct emissions), and after volatilization/re-deposition and leaching processes (indirect emissions). The FAOSTAT data are estimated at Tier 1 following IPCC, 2006, Vol. 4, Ch. 2 and 11. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol4.html).\r\nGHG emissions are provided as direct, indirect and total by country, regions and special groups, with global coverage, relative to the period 1961-present (with annual updates) and with projections for 2030 and 2050, expressed as Gg N2O and Gg CO2eq, by crop and N content in residues.\"\r\n\r\n\"This domain contains data on GHG emissions, associated emission factors and underlying activity data. The FAOSTAT Emissions data are estimates by FAO and do not coincide with GHG data reported by member countries to UNFCCC. The database is intended primarily as a service to help member countries assess and report their emissions, as well as a useful international benchmark. The FAOSTAT Emissions data are disseminated publicly to facilitate continuous feedback from member countries.\r\n\r\nAcknowledgments:\r\nThe FAOSTAT Emissions database was produced by the FAO Monitoring and Assessment of Greenhouse Gas Emissions and Mitigation Potential in Agriculture project (MAGHG), with generous funding from the Governments of Norway and Germany, trust funds GCP/GLO/286/GER and GCP/GLO/325/NOR.\"\r\n"
+      "EN" : "Emissions - Agriculture\r\nRice Cultivation \r\n\r\n\r\n\r\n\r\nFood and Agriculture Organization of the United Nations\r\nNRC\r\nFrancesco Nicola Tubiello\r\nNatural Resources Officer\r\nViale delle Terme di Caracalla, 00153 Rome, Italy\r\n\r\n+390657052169\r\n\r\n\r\n\r\n\r\n\r\n\r\n\"Greenhouse gas (GHG) emissions from rice cultivation consist of methane gas from the anaerobic decomposition of organic matter in paddy fields.\r\nFAOSTAT emission estimates are computed at Tier 1 following the IPCC 2006 Guidelines for National GHG Inventories (http://www.ipcc-nggip.iges.or.jp/public/2006gl/vol4.html) and the IPCC 2000 Good Practice Guidance and Uncertainty Management in National GHG Inventories (http://www.ipcc-nggip.iges.or.jp/public/gp/english/).\r\nGHG emissions are provided by country, regions and special groups, with global coverage, relative to the period 1961-present (with annual updates) and with projections for 2030 and 2050, expressed both as Gg CH4 and Gg CO2eq. Implied emission factor for CH4 and activity data are also provided.\"\r\n\r\n\r\n\"This domain contains data on GHG emissions, associated emission factors and underlying activity data. The FAOSTAT Emissions data are estimates by FAO and do not coincide with GHG data reported by member countries to UNFCCC. The database is intended primarily as a service to help member countries assess and report their emissions, as well as a useful international benchmark. The FAOSTAT Emissions data are disseminated publicly to facilitate continuous feedback from member countries.\r\n\r\nAcknowledgments:\r\nThe FAOSTAT Emissions database was produced by the FAO Monitoring and Assessment of Greenhouse Gas Emissions and Mitigation Potential in Agriculture project (MAGHG), with generous funding from the Governments of Norway and Germany, trust funds GCP/GLO/286/GER and GCP/GLO/325/NOR.\"\r\n"
     },
     "resourceRepresentationTypeLabel" : {
       "EN" : "Dataset"
     },
     "resourceRepresentationType" : "dataset",
-    "keywords" : [ "Emissions", "Crop residues", "Crop residues" ],
+    "keywords" : [ "Emissions", "Rice Cultivation", "Rice Cultivation" ],
     "statisticalConceptsDefinitions" : {
-      "EN" : "Greenhouse Gas (GHG) emissions from crop residues consist of nitrous oxide gas from decomposition of nitrogen in crop residues left on managed soils.\r\n"
+      "EN" : "GHG emissions from rice cultivation consist of methane gas (CH4) emitted by anaerobic decomposition of organic matter in paddy fields.\r\n"
     },
     "seReferencePopulation" : {
       "statisticalPopulation" : {
-        "EN" : "All crops\r\n"
+        "EN" : "All enterprises cultivating rice in a country\r\n"
       },
       "statisticalUnit" : {
-        "EN" : "Crop"
+        "EN" : "Enterprise producing rice"
       },
       "referencePeriod" : {
         "version" : "1.0",
@@ -124,37 +99,31 @@
       }
     }
   },
-  "meDocuments" : [ {
-    "document" : {
-      "title" : {
-        "EN" : "FAO Statistical Yearbooks"
-      },
-      "link" : "http://www.fao.org/economic/ess/ess-publications/ess-yearbook/en/#.VJPt3sAAA",
-      "documentKind" : "scientificPaper",
-      "documentContact" : {
-        "organization" : {
-          "EN" : "FAO"
-        },
-        "role" : "distributor",
-        "contactInfo" : {
-          "emailAddress" : "FAO-statistics@fao.org",
-          "address" : "Economic and Social Development Department Viale delle Terme di Caracalla  00153 Rome, Italy   "
-        },
-        "organizationUnit" : {
-          "EN" : "ESS"
-        },
-        "roleLabel" : {
-          "EN" : "Distributor"
-        }
-      },
-      "notes" : {
-        "EN" : ""
-      },
-      "documentKindLabel" : {
-        "EN" : "Scientific paper"
+  "languageDetails" : {
+    "EN" : ""
+  },
+  "characterSet" : {
+    "version" : "",
+    "codes" : [ {
+      "code" : "106"
+    } ],
+    "idCodeList" : "IANAcharacterSet"
+  },
+  "metadataStandardName" : "FENIX",
+  "metadataStandardVersion" : "1.0",
+  "metadataLanguage" : {
+    "version" : "1998",
+    "codes" : [ {
+      "code" : "eng",
+      "label" : {
+        "EN" : "English"
       }
+    } ],
+    "idCodeList" : "ISO639-2",
+    "extendedName" : {
+      "EN" : "International Standard Organization - Language"
     }
-  } ],
+  },
   "meInstitutionalMandate" : {
     "legalActsAgreements" : {
       "EN" : "Article I of the constitution indeed requires the Organization to collect, analyse, interpret and disseminate information relating to nutrition, food and agriculture (the term “agriculture” and its derivatives includes forestry, fisheries and aquaculture). The first session of the FAO Conference in 1945 provided the rationale: “If FAO is to carry out its work successfully it will need to know where and why hunger and malnutrition exist, what forms they take, and how widespread they are. Such data will serve as a basis for making plans, determining the efficacy of measures used, and measuring progress from time to time.” Member countries reaffirmed this mandate in 2000 when formulating the Organization’s strategic thrusts for the 2000-2015 period: Corporate Strategy E1 commits the Organization to building “an integrated information resource base, with current, relevant and reliable statistics, information and knowledge made accessible to all FAO clients\r\n"
@@ -167,7 +136,7 @@
     "seDataDissemination" : {
       "seReleasePolicy" : {
         "releaseCalendar" : {
-          "EN" : "\"Data are released once a year or when they are available. \r\nAn updated calendar is available online (http://faostat3.fao.org/home/faostatReleaseCalendar.html).\"\r\n\r\nUser data access in FAOSTAT is regulated by the FAO Statistics Quality Assurance Framework (http://www.fao.org/docrep/019/i3664e/i3664e.pdf) in application of the  \" Priniciples governing international statistical activities on Fundamental Principles of Official Statistics\" (http://unstats.un.org/unsd/methods/statorg/Principles_stat_activities/principles_stat_activities.pdf).\r\n"
+          "EN" : "\"Data are released once a year or when they are available. \r\nAn updated calendar is available online (http://faostat3.fao.org/home/faostatReleaseCalendar.html).\"\r\n\r\nUser data access in FAOSTAT is regulated by the FAO Statistics Quality Assurance Framework (http://www.fao.org/docrep/019/i3664e/i3664e.pdf) in application of the \"Priniciples governing international statistical activities on Fundamental Principles of Official Statistics\" (http://unstats.un.org/unsd/methods/statorg/Principles_stat_activities/principles_stat_activities.pdf).\r\n"
         },
         "releaseCalendarAccess" : "http://faostat3.fao.org/home/faostatReleaseCalendar.html\r\n",
         "disseminationPeriodicity" : {
@@ -192,10 +161,16 @@
     },
     "seClarity" : {
       "clarity" : {
-        "EN" : "FAO Satistics Working Papers (http://www.fao.org/economic/ess/ess-publications/workingpapers/en/), other publications from the Economic and Social Development Department (ESS)  and the Monitoring and Assessment of Greenhouse Gas Emissions and Mitigation Potential in Agriculture (MAGHG) project (http://www.fao.org/climatechange/micca/ghg/en/)\r\n\r\n\r\n\"For the emission estimates: \r\n- IPCC, 1996. Climate Change 1995 - The Science of Climate Change: Contribution of Working Group I to the Second Assessment Report of the Intergovernmental Panel on Climate Change. Cambridge. (https://www.ipcc.ch/ipccreports/sar/wg_I/ipcc_sar_wg_I_full_report.pdf)\r\n\r\n- IPCC. 2000. Good practice guidance and uncertainty management in national greenhouse gas inventories. In: J. Penman et al. (Eds.), IPCC National Greenhouse Gas Inventories Programme, Technical Support Unit, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/gp/english/index.html)\r\n\r\n- IPCC, 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Prepared by the National Greenhouse Gas Inventories Programme, Eggleston H.S., Buendia L., Miwa K., Ngara T. and Tanabe K. (Eds), IGES, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/)\r\n\r\nFor source data (activity data):\r\nhttp://faostat3.fao.org/faostat-gateway/go/to/mes/methodology_list/*/E\"\r\n"
+        "EN" : "\"For the emission estimates: \r\n- IPCC, 1996. Climate Change 1995 - The Science of Climate Change: Contribution of Working Group I to the Second Assessment Report of the Intergovernmental Panel on Climate Change. Cambridge University Press. Technical Summary, Tab. 4, pg. 22 (https://www.ipcc.ch/ipccreports/sar/wg_I/ipcc_sar_wg_I_full_report.pdf)\r\n\r\n- IPCC, 1997. Revised 1996 IPCC Guidelines for National Greenhouse Gas Inventories, OECD, Paris (http://www.ipcc-nggip.iges.or.jp/public/gl/invs1.html).\r\n\r\n- IPCC, 2000. Good practice guidance and uncertainty management in national greenhouse gas inventories. In: J. Penman et al. (Eds.), IPCC National Greenhouse Gas Inventories Programme, Technical Support Unit, Hayama, Japan (http://www.ipcc-nggip.iges.or.jp/public/gp/english/).\r\n\r\n- IPCC, 2002. Background Papers, IPCC Expert Meetings on Good Practice Guidance and Uncertainty Management in National Greenhouse Gas Inventories. IPCC-NGGIP, p.399-417. (http://www.ipcc-nggip.iges.or.jp/public/gp/gpg-bgp.html)\r\n\r\nFor source data (activity data):\r\nhttp://faostat3.fao.org/faostat-gateway/go/to/mes/methodology_list/*/E\"\r\n\r\nFAO Satistics Working Papers (http://www.fao.org/economic/ess/ess-publications/workingpapers/en/), other publications from the Economic and Social Development Department (ESS)  and the Monitoring and Assessment of Greenhouse Gas Emissions and Mitigation Potential in Agriculture (MAGHG) project (http://www.fao.org/climatechange/micca/ghg/en/)\r\n"
       }
     },
     "seConfidentiality" : {
+      "confidentialityPolicy" : {
+        "EN" : "\"See FAOSTAT (http://www.fao.org/docrep/019/i3664e/i3664e.pdf)\r\n\"\r\n"
+      },
+      "confidentialityDataTreatment" : {
+        "EN" : "\"All data subject to national confidentiality policies (e.g. concerning people\r\nand legal entities, or small aggregates) are kept strictly confidential, and  re-used exclusively for statistical purposes, or for purposes mandated by legislation. (See  the FAO Statistics Quality Assurance Framework http://www.fao.org/docrep/019/i3664e/i3664e.pdf)\"\r\n"
+      },
       "confidentialityStatus" : {
         "version" : "1.0",
         "codes" : [ {
@@ -208,28 +183,22 @@
         "extendedName" : {
           "EN" : "Confidentiality status (SDMX)"
         }
-      },
-      "confidentialityPolicy" : {
-        "EN" : "\"See FAOSTAT (http://www.fao.org/docrep/019/i3664e/i3664e.pdf)\r\n\"\r\n"
-      },
-      "confidentialityDataTreatment" : {
-        "EN" : "\"All data subject to national confidentiality policies (e.g. concerning people\r\nand legal entities, or small aggregates) are kept strictly confidential, and  re-used exclusively for statistical purposes, or for purposes mandated by legislation. (See  the FAO Statistics Quality Assurance Framework http://www.fao.org/docrep/019/i3664e/i3664e.pdf)\"\r\n"
       }
     }
   },
   "meDataQuality" : {
     "qualityManagement" : {
-      "EN" : ""
+      "EN" : "\r\n"
     },
     "qualityAssessment" : {
       "EN" : "\"For emission estimates:\r\nA peer-review process was launched (details of results in http://www.fao.org/climatechange/35293-0586769eafd852c772743b5e92ca84868.pdf )\r\nFurther to this, results were presented in a series of peer-reviewed publications (links at: http://www.fao.org/climatechange/micca/ghg/en), including the IPCC Fifth Assessment Report (http://report.mitigation2014.org/drafts/final-draft-postplenary/ipcc_wg3_ar5_final-draft_postplenary_chapter11.pdf)\r\n\r\nFor source data:\r\nNo unitary quality assessment is available. See 11.2 for an assessment of data quality at country level in past years.\r\n\"\r\n"
     },
     "qualityAssurance" : {
-      "EN" : "\"For source data (activity data): \r\nthe FAO Statistics Quality Assurance Framework is applied (http://www.fao.org/docrep/019/i3664e/i3664e.pdf)\"\r\n"
+      "EN" : "\"For the emission estimates:\r\nNo quality report is available. However, quality assessment (12.2), relevance(13), accuracy (14), timeliness (15), as well as comparability (16) and coherence (17) altogether indicate a good quality of estimates, compatibly with the underlying Tier 1 IPCC methodology applied.\r\n\r\nFor source data (activity data):\r\nNo recent documentation on data quality is available. Past reports can be found at http://hqlprtomc02.hq.un.fao.org:8014/abcdq/\"\r\n\r\n\"For source data (activity data): \r\nthe FAO Statistics Quality Assurance Framework is applied (http://www.fao.org/docrep/019/i3664e/i3664e.pdf)\"\r\n"
     },
     "seAccuracy" : {
       "accuracyNonSampling" : {
-        "EN" : "\"Accuracy in estimates of GHG emissions depend on the accuracy of activity data and  emission factors as well as on the choice of methodology.  FAOSTAT emission estimates are based on standard IPCC methodology and emission factors at Tier 1 (reckoned the simplest of methods). Inaccuracy may be due to, inter alia, genericity of algorithms, natural variability, partitioning fractions, lack of spatial or temporal coverage, spatial aggregation. See 11.2 and 20.5\r\nIn the case of crop residues, more detailed information is available in the guidelines (IPCC, 2006: Vol.4, Ch. 11, Section 11.2.1.4 for direct emissions, and Section 11.2.2.4 for indirect emissions). (http://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/V4_11_Ch11_N2O&CO2.pdf)\"\r\n"
+        "EN" : "\"Accuracy in estimates of GHG emissions depend on the accuracy of activity data and  emission factors as well as on the choice of methodology.  FAOSTAT emission estimates are based on standard IPCC methodology and emission factors at Tier 1 (reckoned the simplest of methods). Inaccuracy may be due to, inter alia, genericity of algorithms, natural variability, partitioning fractions, lack of spatial or temporal coverage, spatial aggregation. See 11.2 and 20.5\r\nIn the case of rice cultivation, more detailed information is available in the IPCC 2000 guidelines Ch.4, Section 4.9.1.6 (http://www.ipcc-nggip.iges.or.jp/public/gp/english/4_Agriculture.pdf)\"\r\n"
       },
       "accuracySampling" : {
         "EN" : ""
@@ -245,13 +214,13 @@
     },
     "seRelevance" : {
       "userNeeds" : {
-        "EN" : "The main users are FAO analysts, other international organizations, national governments, trade and professional associations, research institutes and universities, journalists and general public."
+        "EN" : "The main users are FAO analysts, other international organizations, national governments, trade and professional associations, research institutes and universities, journalists and general public.\r\n"
       },
       "userSatisfaction" : {
-        "EN" : "\r\nNo user satisfaction studies have been conducted as yet.\r\n"
+        "EN" : "No user satisfaction studies have been conducted as yet.\r\n"
       },
       "completeness" : {
-        "EN" : "\"Completeness of emission estimates reflects completeness of  source data, whose metadata (http://faostat3.fao.org/faostat-gateway/go/to/mes/methodology_list/*/E) read for crops:\r\nIn general, figures have been supplied by governments throught national publications and FAO questionnaires (both paper or electronic). To make the coverage of this data collection as complete as possible, official data have sometimes been supplemented with data from unofficial sources. Use has also been made of information supplied by other national or international agencies or organizations.\r\n\r\nAll countries are covered with various degrees of completeness depending on the country, the year and the crop. Aggregated emission estimates (by country, by crop) necessarily reflect this.\"\r\n"
+        "EN" : "\"Completeness of emission estimates reflects completeness of  source data, whose metadata (http://faostat.fao.org/site/362/DesktopDefault.aspx?PageID=362) read:\r\nIn general, figures have been supplied by governments throught national publications and FAO questionnaires (both paper or electronic). To make the coverage of this data collection as complete as possible, official data have sometimes been supplemented with data from unofficial sources. Use has also been made of information supplied by other national or international agencies or organizations.\r\n\r\nAll countries are covered with various degrees of completeness depending on the country and the year.\"\r\n"
       }
     },
     "seComparability" : {
@@ -262,7 +231,7 @@
         "EN" : "Fairly good comparability in the short and medium terms.\r\n"
       },
       "coherenceIntern" : {
-        "EN" : "It is expected that the internal coherence be checked by Countries based on the application of a IPCC tier methoology (tier 2 or 3) higher than FAOSTAT (tier 1), if possible\r\n"
+        "EN" : "Fairly good comparability in the short and medium terms.\r\n\r\n\r\nCross domain coherence is fair with EPA (2006 and 2011) and EDGAR, as reported in the IPCC Assessment Report 5, WG III, chapter 11, Figure 11.4 (statistics not available) (http://report.mitigation2014.org/drafts/final-draft-postplenary/ipcc_wg3_ar5_final-draft_postplenary_chapter11.pdf)\r\n\r\nIt is expected that the internal coherence be checked by Countries based on the application of a IPCC tier methoology (tier 2 or 3) higher than FAOSTAT (tier 1), if possible.\r\n\r\n"
       }
     },
     "seTimelinessPunctuality" : {
@@ -274,20 +243,18 @@
       }
     }
   },
-  "meMaintenance" : {
-    "maintenanceAgency" : {
-      "EN" : "Food and Agriculture Organization of the United Nations\r\n"
-    }
-  },
   "meStatisticalProcessing" : {
     "seDataSource" : {
       "seSecondaryDataCollection" : {
+        "dataCollection" : {
+          "EN" : "FAOSTAT Emissions data are computed based on Activity Data from the FAOSTAT Production/Crops domain (collected from country statistics offices through questionnaires) and on conversion factors in IPCC, 1997 Vol. 3, Ch. 4 (http://www.ipcc-nggip.iges.or.jp/public/gl/invs1.html) and IPCC, 2000, Ch. 4. (http://www.ipcc-nggip.iges.or.jp/public/gp/english/).\r\n\r\n\"When no activity (source) data is available, FAOSTAT emissions database results in no data (i.e. no imputations are made) .\r\n\r\nGHG emissions from rice cultivation consist of methane gas (CH4) emitted by anaerobic decomposition of organic matter in paddy fields. The FAOSTAT data are computed at Tier 1 following IPCC, 1997 Vol. 3, Ch. 4 and IPCC, 2000, Ch. 4.\r\nThe emissions are estimated at country level, using the formula:\r\nEmission = A * EF \r\nwhere:\r\nEmission = GHG emissions in g CH4 m-2 yr-1;\r\nA = Activity data, representing rice paddy annual harvested area in m-2  (1);\r\nEF = Tier 1, default IPCC emission factors, in g CH4 m-2 yr-1 (2).\r\n\r\n(1) Activity data are disaggregated into irrigated, rain-fed and upland water regimes, using default IPCC percentages in IPCC, 1997, Vol. 3, Ch. 4, Tab. 4.11. For the period 1961-present, activity data are taken directly from FAOSTAT (domain: Production/Crops) \r\nProjections of activity data for 2030 and 2050 are computed with respect to a baseline, defined as the 2005-2007 average of the corresponding FAOSTAT activity data, and by applying percentage growth rates from FAO perspective studies (Alexandratos and Bruinsma, 2012). The FAO projections used cover some 140 countries. Projections of activity data for countries not included assume the same growth rate of neighboring countries.\r\n\r\n(2) Seasonally integrated EF values are specified for key rice producing countries in the guidelines (IPCC, 1997: Vol. 3, Ch. 4, Tab. 4.13). For countries with no default value for EF, the following strategy is applied: for Asia, countries are assigned an area-weighted average EF (15.7 g CH4 m-2 yr-1); in all other regions, countries are either assigned the IPCC EF value reported for a neighbouring country, where one existed, or they are assigned the IPCC global default EF value (20 g CH4 m-2 yr-1). Furthermore, seasonally integrated EF values are further modified by the application of a dimensionless scaling factor for water regime (i) and a dimensionless correction factor for organic amendments (ii).\r\n\r\n(i) The scaling factors for rice paddy water regime (IPCC, 1997: Vol. 3, Ch. 4, Tab. 4.12) are in the range 0-1. Specifically for all countries a scaling factor of 0.7 is used for rain-fed rice and 0 for upland rice or dry conditions (IPCC, 2000: Tab. 3, page 403).\r\n\r\n(ii) The correction factor for organic amendments is the default value of 2 for all countries, corresponding to the assumption that 40% of farmers use organic amendments (IPCC, 2000: Tab. 3, page 403).\r\n\r\nDimensionless conversion factors used are:\r\n10-4, to convert the activity data from m-2  to ha;\r\n10-9, to convert the emissions from g CH4 to Gg CH4; and\r\nGWP-CH4 = 21 (100-year time horizon global warming potential), to convert Gg CH4 to Gg CO2eq. (IPCC, 1996: Technical Summary, Tab.4, pg. 22).\r\n\r\n\r\nReferences\r\n\r\nAlexandratos, N. and J. Bruinsma. 2012. World agriculture towards 2030/2050: the 2012 revision. ESA Working paper No. 12-03. Rome, FAO. (http://www.fao.org/fileadmin/templates/esa/Global_persepctives/world_ag_2030_50_2012_rev.pdf)\r\n\r\nIPCC. 1996. Climate Change 1995 - The Science of Climate Change: Contribution of Working Group I to the Second Assessment Report of the Intergovernmental Panel on Climate Change. Cambridge. (https://www.ipcc.ch/ipccreports/sar/wg_I/ipcc_sar_wg_I_full_report.pdf)\r\n\r\nIPCC. 1997. Revised 1996 IPCC Guidelines for National Greenhouse Gas Inventories, OECD, Paris. (http://www.ipcc-nggip.iges.or.jp/public/gl/invs1.html)\r\n\r\nIPCC. 2000. Good practice guidance and uncertainty management in national greenhouse gas inventories. In: J. Penman et al. (Eds.), IPCC National Greenhouse Gas Inventories Programme, Technical Support Unit, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/gp/english/index.html)\r\n\r\nIPCC. 2002. Background Papers, IPCC Expert Meetings on Good Practice Guidance and Uncertainty Management in National Greenhouse Gas Inventories. IPCC-NGGIP, p.399-417. (http://www.ipcc-nggip.iges.or.jp/public/gp/bgp/4_7_CH4_Rice_Agriculture.pdf)\r\n\"\r\n"
+        },
         "originOfCollectedData" : {
           "version" : "1.0",
           "codes" : [ {
             "code" : "G",
             "label" : {
-              "EN" : "Mixture of data source"
+              "EN" : "Other sources and mixture of data source"
             }
           } ],
           "idCodeList" : "FAOSTAT_OriginData",
@@ -296,10 +263,7 @@
           }
         },
         "rawDataDescription" : {
-          "EN" : "FAOSTAT crop production data (activity data) are collected from country statistics offices through FAOSTAT questionnaires.\r\n"
-        },
-        "dataCollection" : {
-          "EN" : "FAOSTAT Emissions data are computed based on Activity Data from the FAOSTAT Production/Crops domain (Barley, Beans-dry, Maize, Millet, Oats, Potatoes, Rice-paddy, Rye, Sorghum, Soybeans, and Wheat), collected by FAOSTAT from country statistics offices through questionnaires, and on conversion factors in IPCC, , 2006: Vol. 4, Ch. 11, Tab. 11.1. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/V4_11_Ch11_N2O&CO2.pdf).\r\n\r\n\"When no activity (source) data is available, FAOSTAT emissions database results in no data (i.e. no imputations are made) .\r\n\r\nGreenhouse gas (GHG) emissions from crop residues consist of direct and indirect nitrous oxide (N2O) emissions from nitrogen (N) in crop residues and forage/pasture renewal left on agricultural fields by farmers. Specifically, N2O is produced by microbial processes of nitrification and de-nitrification taking place on the deposition site (direct emissions), and after volatilization/re-deposition and leaching processes (indirect emissions). The FAOSTAT data are estimated at Tier 1 following IPCC, 2006, Vol. 4, Ch. 2 and 11. \r\n\r\nDirect emissions are estimated at country level, using the formula: \r\nEmission = A * EF     \r\nwhere:\r\nEmission = GHG emissions in units of kg N2O yr-1;\r\nA = Activity data, representing the total amount of N in crop residues in kg N yr-1, (1);\r\nEF = Tier 1, default IPCC emission factors, expressed in kg N2O-N/kg N yr-1 (2).\r\n\r\n(1) Activity data are calculated from Crop yield and harvested area and cover for the following crop categories: Barley, Beans-dry, Maize, Millet, Oats, Potatoes, Rice-paddy, Rye, Sorghum, Soybeans, and Wheat. Crop yield and harvested area are used to estimate the amount of biomass N in above and below-ground residues by crop and by country, using IPCC, 2006: Vol.4, Ch. 11, Eq. 11.6 default crop values in Tab. 11.2. In a few cases where default parameters were not provided (N content of below-ground residues for Rice and Millet, and Ratio of below-ground residues to above-ground biomass for Millet, Sorghum, Rye, and Dry bean) the correspondent default values for crops with similar biophysical characteristics were used. This biomass N amount is then reduced by the fraction of crop residue burnt on site—assumed to be 10% by area, following IPCC, 2000: Ch. 4, Section 4A.2.1.1 —with specified combustion coefficients by crop, as per IPCC, 2006: Vol.4, Ch. 2, Tab. 2.6. Finally, all N in crop residues, net of amount burnt, is assumed to remain on the field, as per IPCC, 2006: Vol.4, Ch. 11, Eq. 11.6. \r\nFor the period 1961-present, Crop yield and harvested area are taken from FAOSTAT (domain: Production/Crops). Projections of crop yield and harvested area for 2030 and 2050 are computed with respect to a baseline, defined as the 2005-2007 average of the corresponding FAOSTAT activity data, and by applying percentage growth rates from FAO perspective studies (Alexandratos and Bruinsma, 2012). The FAO projections used cover some 140 countries. Projections of activity data for countries not included assume the same growth rate of neighbouring countries.\r\n\r\n(2) Global default EF values taken from IPCC, 2006: Vol. 4, Ch. 11, Tab. 11.1.\r\n\r\nIndirect emissions are estimated at country level, using the formula:\r\nEmission = A * EF where:\r\nEmission = GHG emissions, in units of Gg N2O yr-1;\r\nA = Activity data, representing the fraction of N in crop residues forage/pasture renewal that is lost through runoff and leaching in kg N yr-1 (3);\r\nEF = Tier 1, default IPCC emission factors, expressed in kg N2O-N / kg N yr-1 (4).\r\n\r\n(3) Obtained through the leaching factor in IPCC, 2006: Vol.4, Ch. 11,Tab. 11.3.  \r\n\r\n(4) Global IPCC default EF values from IPCC, 2006: Vol.4, Ch. 11, Tab. 11.1.\r\n\r\nDimensionless conversion factors used are:\r\n10-3, to convert the activity data from kg to tonnes;\r\n44/28, to convert the emissions from kg N2O-N to kg N2O gas;\r\n10-6, to convert the emissions from kg N2O to Gg N2O; and\r\nGWP-N2O = 310 (100-year time horizon global warming potential), to convert Gg N2O to Gg CO2eq (IPCC, 1996: Technical Summary, Tab. 4 pg. 22).\r\n\r\n\r\nReferences\r\n\r\nAlexandratos, N. and J. Bruinsma. 2012. World agriculture towards 2030/2050: the 2012 revision. ESA Working paper No. 12-03. Rome, FAO. (http://www.fao.org/fileadmin/templates/esa/Global_persepctives/world_ag_2030_50_2012_rev.pdf)\r\n\r\nIPCC. 1996. Climate Change 1995 - The Science of Climate Change: Contribution of Working Group I to the Second Assessment Report of the Intergovernmental Panel on Climate Change. Cambridge. (https://www.ipcc.ch/ipccreports/sar/wg_I/ipcc_sar_wg_I_full_report.pdf)\r\n\r\nIPCC. 2000. Good practice guidance and uncertainty management in national greenhouse gas inventories. In: J. Penman et al. (Eds.), IPCC National Greenhouse Gas Inventories Programme, Technical Support Unit, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/gp/english/index.html)\r\n\r\nIPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Prepared by the National Greenhouse Gas Inventories Programme, Eggleston H.S., Buendia L., Miwa K., Ngara T. and Tanabe K. (Eds), IGES, Hayama, Japan. (http://www.ipcc-nggip.iges.or.jp/public/2006gl/)\r\n\"\r\n"
+          "EN" : "FAOSTAT production data (activity data) are collected from country statistics offices through FAOSTAT questionnaires.\r\n"
         }
       }
     }
