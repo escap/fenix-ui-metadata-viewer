@@ -1,6 +1,6 @@
 define(['jquery',
-    'fx-md-viewer/config/config',
-    'fx-md-viewer/config/config-default',
+    'fx-mdviewer/config/config',
+    'fx-mdviewer/config/config-default',
     'q'
 ], function($,C,DC,Q){
 
@@ -8,19 +8,20 @@ define(['jquery',
 
     var o = {};
 
-    function ModelCreator() {
-
-    };
+    function ModelCreator() {};
 
 
     ModelCreator.prototype.init = function (opts) {
         this.o = $.extend(true, {}, o ,opts);
+        debugger;
         this._initVariables();
-        this._makeCalls();
+        this._getMDSD().then(function(){debugger;})
     };
 
     ModelCreator.prototype._initVariables  =function() {
 
+        debugger;
+        this.$originalMetadata = this.o.data;
         this.$prefixUrlMetadata = C.SERVICE_BASE_ADDRESS || DC.SERVICE_BASE_ADDRESS;
         this.$urlMDSD = C.SERVICE_MDSD_ADDRESS || DC.SERVICE_MDSD_ADDRESS;
 
@@ -42,6 +43,7 @@ define(['jquery',
         var self = this;
         return Q.Promise(function (resolve, reject) {
 
+            debugger;
             $.ajax({
                 type: 'GET',
                 url: self.$urlMDSD,
@@ -60,47 +62,8 @@ define(['jquery',
             });
 
         });
-    }
-
-
-
-    ModelCreator.prototype._getMetadata  =function() {
-
-        var url,
-            self = this;
-
-        if (!this.o.data.hasOwnProperty('version')) {
-            url = '/msd/resources/metadata/uid/' + this.o.data.uid;
-        } else {
-            url = '/msd/resources/metadata/' + this.o.data.uid + '/' + this.o.data.version;
-        }
-
-        return Q.Promise(function (resolve, reject) {
-
-            $.ajax({
-                type: 'GET',
-                url:   self.$prefixUrlMetadata + "?full=true&dsd=true",
-                context: this,
-                contentType: 'application/json',
-                success: function (data, textStatus, jqXHR) {
-
-                    if (jqXHR.status === 200) {
-                        self.$metadata = data
-                        resolve();
-                    } else {
-                        reject(new Error("Status code was " + jqXHR.status));
-                    }
-                },
-                error: reject
-            });
-        });
-
     };
 
-
-    ModelCreator.prototype._initVariables  =function() {
-
-    };
 
 
     ModelCreator.prototype.render = function () {
@@ -110,6 +73,9 @@ define(['jquery',
     ModelCreator.prototype.destroy  =function() {
 
     };
+
+
+    return ModelCreator;
 
 
 })

@@ -22,7 +22,7 @@ define(['jquery'], function($){
 
                 var className = (parentBean!= 'noParent') ?
                 'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean + ' '+'depth-level-'+levelCounter:
-                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter;
+                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter + ' treegrid-collapsed';
 
                 result.push({
                     'title' : model[i]['title'],
@@ -38,7 +38,7 @@ define(['jquery'], function($){
             else if(model[i].hasChildren === false) {
                 var className = (parentBean!= 'noParent') ?
                 'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean+ ' '+'depth-level-'+levelCounter:
-                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter;
+                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter + ' treegrid-collapsed';
 
                 result.push({
                     'title' : model[i]['title'],

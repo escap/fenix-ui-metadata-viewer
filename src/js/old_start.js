@@ -2,7 +2,7 @@ define(['jquery',
         'text!../../config/special_metadata_fenix.json',
         'text!../../tests/schema.json',
         'fx-md-v-visualization-creator',
-        'text!../../tests/GN.json', 'text!template/template.hbs', 'handlebars', 'treegrid', 'bootstrap'],
+        'text!../../tests/GN.json', 'text!template/template.hbs', 'handlebars', 'treegrid', 'bootstrap', 'moment'],
     function ($, SpecialFields,SCHEMA,VisualizationCreator, DATA, Template, Handlebars) {
 
         'use strict';
@@ -41,7 +41,8 @@ define(['jquery',
                 SUBSTR_ROOT_DEFINITIONS: 14,
                 CODES: 'codes',
                 HAS_CHILDREN : 'hasChildren',
-                BEAN : 'bean'
+                BEAN : 'bean',
+                DATE_FORMAT: 'format'
 
             },
 
@@ -107,7 +108,6 @@ define(['jquery',
 
         Starter.prototype._getTitleFromData = function (data, metadata) {
             var result = (data[s.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()]) ? data[s.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()] : data[s.defaultOptions.TITLE_ATTRIBUTE][s.defaultOptions.DEFAULT_LANG.toUpperCase()];
-            debugger;
             delete data[s.defaultOptions.TITLE_ATTRIBUTE];
             delete metadata[s.defaultOptions.TITLE_ATTRIBUTE]
             return result;
@@ -268,7 +268,9 @@ define(['jquery',
             this._fillDescription(metadata, attribute, result);
             this._fillAttributeBean(attribute,result);
             this._fillNoChildrenAttribute(result);
-            result['value'] = data;
+            var value = (metadata[s.metadataOptions.DATE_FORMAT] && metadata[s.metadataOptions.DATE_FORMAT] == 'date')?
+                moment(new Date(data)).format("DD/MM/YYYY") : data;
+            result['value'] = value;
             return result;
         };
 
@@ -346,7 +348,6 @@ define(['jquery',
             this._fillNoChildrenAttribute(result);
             var codes=  data[attribute]['codes'];
 
-            console.log(attribute, data[attribute]);
             result['value'] = [];
             for(var i= 0,length =codes.length; i<length; i++) {
                 if(codes[i].label) {
@@ -381,7 +382,7 @@ define(['jquery',
 
             $('.container').append($compiled);
 
-            $('.fx-md-viewer-container').treegrid();
+            $('.fx-md-viewer-container').treegrid({initialState: 'collapsed'});
         };
 
         Starter.prototype._onclickDescription = function() {
@@ -391,7 +392,6 @@ define(['jquery',
 
                 e.preventDefault();
                 e.stopImmediatePropagation();
-                debugger;
 
                 if($('.popover')){
                     $('.popover').popover('destroy');

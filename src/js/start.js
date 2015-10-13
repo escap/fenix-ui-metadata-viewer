@@ -1,24 +1,18 @@
-
-define(['jquery', 'mainController'], function ($, Controller) {
+define( ["jquery", "fx-mdviewer/controller/mainController"], function ($,Controller) {
 
     'use strict';
 
     var o = {}
 
-    function Starter(options) {
-    /*    this.o = $.extend(true, o, options);*/
-        console.log(Controller)
-        this.$controller = new Controller;
-    };
+    function Starter() {};
 
     Starter.prototype._validateInput = function () {
-//return (typeof this.o.data !== 'undefined' && typeof this.o.data.uid !== 'undefined');
-    return true;
+        return (typeof this.o.data !== 'undefined');
     };
 
-    Starter.prototype.init = function () {
+    Starter.prototype.init = function (options) {
+        this.o = $.extend(true, o, options);
         this._validateInput();
-
         this.$controller = new Controller;
         this.$controller.init(this.o);
     };

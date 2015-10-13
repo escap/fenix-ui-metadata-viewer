@@ -21,14 +21,15 @@ requirejs.config({
         i18n: "//fenixrepo.fao.org/cdn/js/requirejs/plugins/i18n/2.0.4/i18n",
         amplify: '//fenixrepo.fao.org/cdn/js/amplify/1.1.2/amplify.min',
         text: '//fenixrepo.fao.org/cdn/js/requirejs/plugins/text/2.0.12/text',
+        moment : '//fenixrepo.fao.org/cdn/js/moment/2.9.0/moment.min',
         swiper: "//fenixrepo.fao.org/cdn/js/swiper/3.0.7/dist/js/swiper.min",
         jstree: "//fenixrepo.fao.org/cdn/js/jstree/3.0.8/dist/jstree",
         treegrid : '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
         'fx-md-v-visualization-creator' : 'CreatorVisualizationData',
         'q' : '//fenixrepo.fao.org/cdn/js/q/1.1.2/q',
-        'fx-md-viewer/controller/mainController' : './controller/mainController',
-        'fx-md-viewer/model' : './model/ModelCreator',
-        'fx-md-viewer/config' : '../../config'
+        "fx-mdviewer/controller/mainController" : "./controller/mainController",
+        'fx-mdviewer/model/ModelCreator' : './model/ModelCreator',
+        'fx-mdviewer/config' : '../../config'
     },
 
     // Underscore and Backbone are not AMD-capable per default,
@@ -60,23 +61,16 @@ requirejs.config({
 });
 
 // Bootstrap the application
-require([
-    'old_start'
-], function (Starter) {
+require(['start', 'text!../../tests/GN.json'], function (Starter, DATA) {
 
-
-    var optionsFenix =
-    {
-        data:{
-            uid: 'GN'
-        },
-        viewerOptions: {
-            isFenixMetadata : true
-        }
-
-    };
+    'use strict';
+   var optionsMD = {
+    data: JSON.parse(DATA),
+    lang: 'en',
+    //placeholder_id: 'metadata_panel',
+    placeholder: '.container'
+};
     var starter = new Starter();
-    starter.init(optionsFenix);
-
+    starter.init(optionsMD);
 
 });

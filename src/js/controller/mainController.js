@@ -1,4 +1,5 @@
-define(['jquery', 'ModelCreator'], function($, ModelCreator){
+
+define(['jquery', 'fx-mdviewer/model/ModelCreator'], function($, ModelCreator){
 
     'use strict'
 
@@ -28,5 +29,7 @@ define(['jquery', 'ModelCreator'], function($, ModelCreator){
 
     };
 
+
+    return MainController;
 
 })
