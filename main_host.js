@@ -29,6 +29,8 @@ requirejs.config({
         'q' : '//fenixrepo.fao.org/cdn/js/q/1.1.2/q',
         "fx-mdviewer/controller/mainController" : "./controller/mainController",
         'fx-mdviewer/model/ModelCreator' : './model/ModelCreator',
+        'fx-mdviewer/output/TreegridAdapter' : './output/TreegridAdapter',
+        'fx-mdviewer/template' : './template',
         'fx-mdviewer/config' : '../../config'
     },
 

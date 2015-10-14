@@ -32,6 +32,7 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
 
 
     TreegridAdapter.prototype.init = function (dataModel) {
+        debugger;
         this.$visualizationData =  this._trasformDataToVisualizationModel(dataModel.model, 'noParent', 0);
         return {'title_resource': dataModel.title, 'data':  this.$visualizationData};
 
