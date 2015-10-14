@@ -1,6 +1,6 @@
 
-define(['jquery','q' ,'fx-mdviewer/model/ModelCreator'
-,'fx-mdviewer/output/TreegridAdapter'], function($,Q, ModelCreator, ViewAdapter){
+define(['jquery','q' ,'underscore','fx-mdviewer/model/ModelCreator'
+,'fx-mdviewer/output/TreegridAdapter'], function($,Q,_, ModelCreator, ViewAdapter){
 
     'use strict'
 
@@ -19,18 +19,9 @@ define(['jquery','q' ,'fx-mdviewer/model/ModelCreator'
 
         this.$modelCreator.init(this.o);
 
-        this.$modelCreator.getMDSD();
 
-        this.$modelCreator.initInternModelDAta();
+        this.$modelCreator._startInternModelData(_.bind(self.render, this))
 
-        this.render();
-        /*).done(function(){
-            self.render()
-        })
-*/
-      /*  this.$modelCreator.init(this.o).then( self.render);
-
-        this.render();*/
     };
 
     MainController.prototype._initVariables  =function() {
@@ -38,12 +29,15 @@ define(['jquery','q' ,'fx-mdviewer/model/ModelCreator'
     };
 
 
-    MainController.prototype.render = function () {
+    MainController.prototype.render = function (internmodel) {
+
         this.$viewAdapter  = new ViewAdapter(this.o);
 
         this.$internModel  = this.$modelCreator.getInternModelData();
 
         this.$viewAdapter.init(this.$internModel);
+
+        this.$viewAdapter._visualizeData();
     };
 
     MainController.prototype.destroy  =function() {

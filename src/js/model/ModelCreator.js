@@ -4,11 +4,11 @@ define(['jquery',
     'text!fx-mdviewer/config/special_metadata_fenix.json',
     'q',
     'moment'
-], function($,C,DC,SpecialFields,Q){
+], function ($, C, DC, SpecialFields, Q) {
 
     'use strict'
 
-    var o  = {
+    var o = {
         viewerOptions: {
             isFenixMetadata: true
         },
@@ -47,16 +47,18 @@ define(['jquery',
         }
     };
 
-    function ModelCreator() {};
+    function ModelCreator() {
+    };
 
 
     ModelCreator.prototype.init = function (opts) {
-        var self = this;
-        this.o = $.extend(true, {}, o ,opts);
+        this.o = $.extend(true, {}, o, opts);
         this._initVariables();
+        this.getMDSD();
+        this.initInternModelDAta();
     };
 
-    ModelCreator.prototype._initVariables  =function() {
+    ModelCreator.prototype._initVariables = function () {
 
         this.$originalMetadata = this.o.data;
         this.$prefixUrlMetadata = C.SERVICE_BASE_ADDRESS || DC.SERVICE_BASE_ADDRESS;
@@ -65,74 +67,80 @@ define(['jquery',
     };
 
     ModelCreator.prototype.getInternModelData = function () {
-        return this.$internDataModel;
-    };
+        return {'title': this.$title, 'model': this.$internDataModel};
+    }
 
 
-    ModelCreator.prototype.getMDSD = function() {
+    ModelCreator.prototype.getMDSD = function () {
 
         var self = this;
 
-            $.ajax({
-                type: 'GET',
-                url: self.$urlMDSD,
-                context: this,
-                contentType: 'application/json',
-                success: function (data, textStatus, jqXHR) {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: self.$urlMDSD,
+            context: this,
+            contentType: 'application/json',
+            success: function (data, textStatus, jqXHR) {
 
-                    if (jqXHR.status === 200) {
-                        self.$mdsd = data
-                        self._initInternModelDAta()
-                    } else {
-                       throw new Error("Status code was " + jqXHR.status);
-                    }
-                },
-            });
+                if (jqXHR.status === 200) {
+                    self.$mdsd = data
+                } else {
+                    throw new Error("Status code was " + jqXHR.status);
+                }
+            },
+        });
+
+    };
+
+    ModelCreator.prototype._startInternModelData = function(callback) {
+        var data = this.o.data,
+            properties = this.$properties;
+        this.$internDataModel = this._prepareInternModelData(data, properties, 0, callback);
+        console.log(this.$internDataModel)
 
     };
 
 
-    ModelCreator.prototype.initInternModelDAta = function() {
+    ModelCreator.prototype.initInternModelDAta = function () {
 
-        if(this._checkValidityOfData()) {
+        if (this._checkValidityOfData()) {
             this.$definitions = this.$mdsd.definitions;
             this.$properties = this.$mdsd.properties;
             this.$lang = this.o.lang;
             this.$title = this._getTitleFromData();
             this.$specialFields = JSON.parse(SpecialFields);
-
-            var data = this.o.data,
-                properties = this.$properties;
-            this.$internDataModel = this._prepareInternModelData(data, properties);
         }
     };
 
 
-    ModelCreator.prototype._isASpecialAttribute =function(attribute) {
+    ModelCreator.prototype._isASpecialAttribute = function (attribute) {
         return typeof this.$specialFields[attribute] !== 'undefined';
     };
 
 
-    ModelCreator.prototype._prepareInternModelData = function (data, metadata) {
+    ModelCreator.prototype._prepareInternModelData = function (data, metadata, counter, callback) {
 
+        console.log(counter, 'cc');
 
         var result = [];
 
         var metadataSorted = this._sortMetadataByPropertyOrder(metadata);
 
 
-        for(var i= 0,length = metadataSorted.length; i<length; i++) {
+        for (var i = 0, length = metadataSorted.length; i < length; i++) {
 
             var attribute = metadataSorted[i][0];
 
             if (this.o.viewerOptions.isFenixMetadata && this._isASpecialAttribute(attribute)
-                && data[attribute] && data[attribute] != '' && data[attribute]['codes'] && data[attribute]['codes'].length >0) {
+                && data[attribute] && data[attribute] != '' && data[attribute]['codes'] && data[attribute]['codes'].length > 0) {
 
-                result.push( this._handleFenixCodes(data, metadata, attribute));
+                result.push(this._handleFenixCodes(data, metadata, attribute));
 
-            }else {
+            } else {
 
                 if (data[attribute] && data[attribute] != '') {
+
                     if (this._isCaseBase(metadata[attribute])) {
                         result.push(this._addBaseModel(metadata[attribute], data[attribute], attribute));
                     }
@@ -144,23 +152,24 @@ define(['jquery',
                         if (this._existsPropertiesAttribute(metadata[attribute])) {
                             var temporaryObject = {};
                             temporaryObject = this._addRecursiveModel(metadata[attribute], attribute);
-                            temporaryObject['value']= this._prepareInternModelData(data[attribute], metadata[attribute][this.o.metadataOptions.PROPERTIES_ATTR])
+
+                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], metadata[attribute][this.o.metadataOptions.PROPERTIES_ATTR],counter+1)
                             result.push(temporaryObject);
 
                         }
 
                         else if (this._existsPatternProperties(metadata[attribute]) && this._existsPatternPropertiesValue(data[attribute])) {
                             var temporaryObject = {};
-                            temporaryObject= this._addPatternModel(metadata[attribute], data[attribute], attribute);
+                            temporaryObject = this._addPatternModel(metadata[attribute], data[attribute], attribute);
                             result.push(temporaryObject);
                         }
 
                         else if (this._existsAReference(metadata[attribute])) {
                             var temporaryObject = {};
 
-                            temporaryObject= this._addRecursiveModel(metadata[attribute], attribute);
+                            temporaryObject = this._addRecursiveModel(metadata[attribute], attribute);
                             var refAttribute = this._getAttributeFromReference(metadata[attribute]);
-                            temporaryObject['value']= this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR]);
+                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR],counter+1);
                             result.push(temporaryObject);
 
                         }
@@ -179,8 +188,10 @@ define(['jquery',
                             this._fillChildrenAttribute(temporaryObject);
                             temporaryObject['value'] = [];
                             var refAttribute = this._getAttributeFromReference(metadata[attribute][this.o.metadataOptions.ITEMS_PROPERTIES]);
+
                             for (var j = 0, lengthArray = data[attribute].length; j < lengthArray; j++) {
-                                temporaryObject['value'] =  temporaryObject['value'].concat(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR]));
+
+                                temporaryObject['value'] = temporaryObject['value'].concat(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR], counter+1));
                             }
                             result.push(temporaryObject);
                         }
@@ -189,18 +200,27 @@ define(['jquery',
                 }
             }
         }
+        counter--;
+
+
+        if (counter ==-1) {
+            this.$internDataModel = result;
+            callback(result);
+        }
         return result;
     };
 
 
-    ModelCreator.prototype._sortMetadataByPropertyOrder = function(metadata) {
+    ModelCreator.prototype._sortMetadataByPropertyOrder = function (metadata) {
 
         var sortedElements = [];
 
-        for(var attribute in metadata) {
+        for (var attribute in metadata) {
             sortedElements.push([attribute, metadata[attribute][this.o.metadataOptions.SORTABLE_ATTRIBUTE]])
         }
-        sortedElements.sort(function(a, b) {return a[1] - b[1]});
+        sortedElements.sort(function (a, b) {
+            return a[1] - b[1]
+        });
         return sortedElements;
     };
 
@@ -215,28 +235,34 @@ define(['jquery',
         }
     };
 
+
     ModelCreator.prototype._existsPropertiesAttribute = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.PROPERTIES_ATTR) && Object.keys(objectMetadata[this.o.metadataOptions.PROPERTIES_ATTR]).length > 0
     };
 
+
     ModelCreator.prototype._existsPatternProperties = function (objectMetadata) {
-        return objectMetadata.hasOwnProperty(this.o.metadataOptions.PATTERN_PROPERTIES) && Object.keys(objectMetadata[this.o.metadataOptions.PATTERN_PROPERTIES]).length > 0
+        return objectMetadata.hasOwnProperty(this.o.metadataOptions.PATTERN_PROPERTIES) &&
+            Object.keys(objectMetadata[this.o.metadataOptions.PATTERN_PROPERTIES]).length > 0
     };
 
 
     ModelCreator.prototype._existsAReference = function (objectMetadata) {
-        return objectMetadata.hasOwnProperty(this.o.metadataOptions.REF_TYPE) && Object.keys(objectMetadata[this.o.metadataOptions.REF_TYPE]).length > 0
+        return objectMetadata.hasOwnProperty(this.o.metadataOptions.REF_TYPE) &&
+            Object.keys(objectMetadata[this.o.metadataOptions.REF_TYPE]).length > 0
     };
 
     ModelCreator.prototype._isObjectAttribute = function (objectMetadata) {
-        return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) && objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.OBJECT_TYPE;
+        return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) &&
+            objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.OBJECT_TYPE;
     };
 
 
     ModelCreator.prototype._isAnArrayAttribute = function (objectMetadata) {
-        return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) && objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.ARRAY_TYPE;
+        return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) &&
+            objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.ARRAY_TYPE;
     };
-    
+
     ModelCreator.prototype._getTitleFromData = function () {
         var result = (this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()]) ? this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()] : this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.o.defaultOptions.DEFAULT_LANG.toUpperCase()];
         delete this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE];
@@ -268,21 +294,20 @@ define(['jquery',
         var result = {};
         this._fillTitle(metadata, attribute, result);
         this._fillDescription(metadata, attribute, result);
-        this._fillAttributeBean(attribute,result);
+        this._fillAttributeBean(attribute, result);
         this._fillNoChildrenAttribute(result);
-        var value = (metadata[this.o.metadataOptions.DATE_FORMAT] && metadata[this.o.metadataOptions.DATE_FORMAT] == 'date')?
+        var value = (metadata[this.o.metadataOptions.DATE_FORMAT] && metadata[this.o.metadataOptions.DATE_FORMAT] == 'date') ?
             moment(new Date(data)).format("DD/MM/YYYY") : data;
         result['value'] = value;
         return result;
     };
 
 
-
     ModelCreator.prototype._addPatternModel = function (metadata, data, attribute) {
         var result = {};
         this._fillTitle(metadata, attribute, result);
         this._fillDescription(metadata, attribute, result);
-        this._fillAttributeBean(attribute,result);
+        this._fillAttributeBean(attribute, result);
         this._fillNoChildrenAttribute(result);
         result['value'] = (data[this.$lang.toUpperCase()]) ? data[this.$lang.toUpperCase()] : (data[this.o.defaultOptions.DEFAULT_LANG.toUpperCase()]);
         return result;
@@ -312,7 +337,6 @@ define(['jquery',
     };
 
 
-
     ModelCreator.prototype._isCaseBase = function (objectMetadata) {
 
         return objectMetadata.hasOwnProperty('type') && (
@@ -336,26 +360,26 @@ define(['jquery',
             Object.keys(objectMetadata[this.o.metadataOptions.ITEMS_PROPERTIES][this.o.metadataOptions.REF_TYPE]).length > 0
     };
 
-    ModelCreator.prototype._isASpecialAttribute =function(attribute) {
+    ModelCreator.prototype._isASpecialAttribute = function (attribute) {
         return typeof this.$specialFields[attribute] !== 'undefined';
     };
 
 
-    ModelCreator.prototype._handleFenixCodes = function ( data,metadata, attribute) {
+    ModelCreator.prototype._handleFenixCodes = function (data, metadata, attribute) {
         var result = {};
 
         this._fillTitle(metadata[attribute], attribute, result);
         this._fillDescription(metadata[attribute], attribute, result);
-        this._fillAttributeBean ( attribute, result);
+        this._fillAttributeBean(attribute, result);
         this._fillNoChildrenAttribute(result);
-        var codes=  data[attribute]['codes'];
+        var codes = data[attribute]['codes'];
 
         result['value'] = [];
-        for(var i= 0,length =codes.length; i<length; i++) {
-            if(codes[i].label) {
-                var labelValue = (typeof codes[i].label[this.$lang]!== 'undefined') ? codes[i].label[this.$lang] : codes[i].label[this.o.defaultOptions.DEFAULT_LANG.toUpperCase()];
+        for (var i = 0, length = codes.length; i < length; i++) {
+            if (codes[i].label) {
+                var labelValue = (typeof codes[i].label[this.$lang] !== 'undefined') ? codes[i].label[this.$lang] : codes[i].label[this.o.defaultOptions.DEFAULT_LANG.toUpperCase()];
                 result['value'].push(labelValue);
-            }else{
+            } else {
                 result['value'].push('');
             }
         }
@@ -363,17 +387,17 @@ define(['jquery',
     };
 
 
-    ModelCreator.prototype._fillAttributeBean = function( attributeObject, result) {
+    ModelCreator.prototype._fillAttributeBean = function (attributeObject, result) {
         result[this.o.metadataOptions.BEAN] = attributeObject;
     };
 
 
-    ModelCreator.prototype._fillChildrenAttribute = function(result){
+    ModelCreator.prototype._fillChildrenAttribute = function (result) {
         result[this.o.metadataOptions.HAS_CHILDREN] = true;
     };
 
 
-    ModelCreator.prototype._fillNoChildrenAttribute = function( result) {
+    ModelCreator.prototype._fillNoChildrenAttribute = function (result) {
         result[this.o.metadataOptions.HAS_CHILDREN] = false;
     };
 
@@ -389,12 +413,11 @@ define(['jquery',
     };
 
 
-
     ModelCreator.prototype.render = function () {
 
     };
 
-    ModelCreator.prototype.destroy  =function() {
+    ModelCreator.prototype.destroy = function () {
 
     };
 

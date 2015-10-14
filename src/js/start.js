@@ -17,6 +17,11 @@ define( ["jquery", "fx-mdviewer/controller/mainController"], function ($,Control
         this.$controller.init(this.o);
     };
 
+    Starter.prototype.render = function() {
+
+        this.$controller.render();
+    };
+
     Starter.prototype.destroy = function () {
         this.$controller.destroy();
     };
