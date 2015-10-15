@@ -1,4 +1,5 @@
-define(['jquery',
+define(
+    ['jquery',
     'fx-mdviewer/config/config',
     'fx-mdviewer/config/config-default',
     'text!fx-mdviewer/config/special_metadata_fenix.json',
@@ -6,7 +7,9 @@ define(['jquery',
     'moment'
 ], function ($, C, DC, SpecialFields, Q) {
 
+
     'use strict'
+
 
     var o = {
         viewerOptions: {
@@ -47,6 +50,7 @@ define(['jquery',
         }
     };
 
+
     function ModelCreator() {
     };
 
@@ -58,6 +62,7 @@ define(['jquery',
         this.initInternModelDAta();
     };
 
+
     ModelCreator.prototype._initVariables = function () {
 
         this.$originalMetadata = this.o.data;
@@ -66,9 +71,10 @@ define(['jquery',
 
     };
 
+
     ModelCreator.prototype.getInternModelData = function () {
         return {'title': this.$title, 'model': this.$internDataModel};
-    }
+    };
 
 
     ModelCreator.prototype.getMDSD = function () {
@@ -92,6 +98,7 @@ define(['jquery',
         });
 
     };
+
 
     ModelCreator.prototype._startInternModelData = function(callback) {
         var data = this.o.data,
@@ -120,8 +127,6 @@ define(['jquery',
 
 
     ModelCreator.prototype._prepareInternModelData = function (data, metadata, counter, callback) {
-
-        console.log(counter, 'cc');
 
         var result = [];
 
@@ -252,6 +257,7 @@ define(['jquery',
             Object.keys(objectMetadata[this.o.metadataOptions.REF_TYPE]).length > 0
     };
 
+
     ModelCreator.prototype._isObjectAttribute = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) &&
             objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.OBJECT_TYPE;
@@ -262,6 +268,7 @@ define(['jquery',
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) &&
             objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.ARRAY_TYPE;
     };
+
 
     ModelCreator.prototype._getTitleFromData = function () {
         var result = (this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()]) ? this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()] : this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.o.defaultOptions.DEFAULT_LANG.toUpperCase()];
@@ -325,6 +332,7 @@ define(['jquery',
         }
     };
 
+
     ModelCreator.prototype._fillDescription = function (metadata, attribute, result) {
 
         if (metadata[this.o.metadataOptions.DESC_I18N] && metadata[this.o.metadataOptions.DESC_I18N][this.$lang] && metadata[this.o.metadataOptions.DESC_I18N][this.$lang] != '') {
@@ -359,6 +367,7 @@ define(['jquery',
             objectMetadata[this.o.metadataOptions.ITEMS_PROPERTIES][this.o.metadataOptions.REF_TYPE] &&
             Object.keys(objectMetadata[this.o.metadataOptions.ITEMS_PROPERTIES][this.o.metadataOptions.REF_TYPE]).length > 0
     };
+
 
     ModelCreator.prototype._isASpecialAttribute = function (attribute) {
         return typeof this.$specialFields[attribute] !== 'undefined';
@@ -413,16 +422,5 @@ define(['jquery',
     };
 
 
-    ModelCreator.prototype.render = function () {
-
-    };
-
-    ModelCreator.prototype.destroy = function () {
-
-    };
-
-
     return ModelCreator;
-
-
-})
+});

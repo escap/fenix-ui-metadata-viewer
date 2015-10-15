@@ -306,6 +306,7 @@ define(['jquery',
             }
         };
 
+
         Starter.prototype._getAttributeFromReference = function (objectMetadata) {
             return objectMetadata[s.metadataOptions.REF_TYPE].substr(s.metadataOptions.SUBSTR_ROOT_DEFINITIONS)
         };
@@ -338,6 +339,7 @@ define(['jquery',
         Starter.prototype._isASpecialAttribute =function(attribute) {
             return typeof this.$specialFields[attribute] !== 'undefined';
         };
+
 
         Starter.prototype._handleFenixCodes = function ( data,metadata, attribute) {
             var result = {};
@@ -385,6 +387,7 @@ define(['jquery',
             $('.fx-md-viewer-container').treegrid({initialState: 'collapsed'});
         };
 
+
         Starter.prototype._onclickDescription = function() {
 
 
@@ -405,8 +408,10 @@ define(['jquery',
                 e.stopImmediatePropagation();
                 if (($('.popover').has(e.target).length == 0) || $(e.target).is('.close')) {
                     $('.popover').popover('destroy');
-                }});
+                }
+            });
         };
+
 
         return Starter;
     })

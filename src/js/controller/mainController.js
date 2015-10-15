@@ -24,6 +24,7 @@ define(['jquery','q' ,'underscore','fx-mdviewer/model/ModelCreator'
 
     };
 
+
     MainController.prototype._initVariables  =function() {
 
     };
@@ -37,8 +38,9 @@ define(['jquery','q' ,'underscore','fx-mdviewer/model/ModelCreator'
 
         this.$viewAdapter.init(this.$internModel);
 
-        this.$viewAdapter._visualizeData();
+        this.$viewAdapter._visualizeData(this.$viewAdapter._onListening());
     };
+
 
     MainController.prototype.destroy  =function() {
 
@@ -46,5 +48,4 @@ define(['jquery','q' ,'underscore','fx-mdviewer/model/ModelCreator'
 
 
     return MainController;
-
-})
+});

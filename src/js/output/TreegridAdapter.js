@@ -7,7 +7,7 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
         'identifiers': {
             noParentId: 'noParent',
             depth_level: 'depth-level',
-            parent_class: 'treegrid-parent',
+            parent_class: 'treegrid-parent-',
             treegrid_class: 'treegrid-',
             bean: {
                 title: 'title',
@@ -19,7 +19,18 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
             container: '.container'
         },
         s: {
-            'table_container' : '.fx-md-viewer-container'
+            'table_container' : '.fx-md-viewer-container',
+            'description_class': '.fx-md-viewer-description',
+            'popover_class': '.popover'
+        },
+        popoverSettings :{
+            placement: 'top',
+                html: true,
+                trigger: 'focus',
+                animation: true,
+                title: '<span class="text-info"><strong>Description</strong></span>'+
+            '<button type="button" data-toggle="popover" data-trigger="focus" class="close" >&times;</button>'
+
         }
     };
 
@@ -31,8 +42,7 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
 
     TreegridAdapter.prototype.init = function (dataModel) {
         this.$visualizationData =  this._trasformDataToVisualizationModel(dataModel.model, 'noParent', 0);
-       this.$dataForTreeGRid =  {'title_resource': dataModel.title, 'data':  this.$visualizationData};
-
+        this.$dataForTreeGRid =  {'title_resource': dataModel.title, 'data':  this.$visualizationData};
     };
 
 
@@ -44,17 +54,17 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
 
             if (model[i].hasChildren && model[i].hasChildren === true) {
 
-                var className = (parentBean != this.o.identifiers.noParentId) ?
-                this.o.identifiers.treegrid_class + model[i][this.o.identifiers.bean.bean_name] + ' ' + this.o.identifiers.parent_class + parentBean + ' '
-                + this.o.identifiers.depth_level + levelCounter :
-                this.o.identifiers.treegrid_class + model[i][this.o.identifiers.bean.bean_name] + ' ' + parentBean + ' ' + this.o.identifiers.depth_level + levelCounter;
+
+                var className = (parentBean!= 'noParent') ?
+                'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean + ' '+'depth-level-'+levelCounter:
+                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter + ' treegrid-collapsed';
 
                 result.push({
-                    'title': model[i]['title'],
-                    'desc': model[i]['description'],
-                    'bean': model[i]['bean'],
-                    'parentBean': parentBean,
-                    'className': className
+                    'title' : model[i]['title'],
+                    'desc' : model[i]['description'],
+                    'bean' : model[i]['bean'],
+                    'parentBean' : parentBean,
+                    'className' : className
                 })
 
                 result = result.concat(this._trasformDataToVisualizationModel(model[i]['value'], model[i]['bean'], levelCounter + 1))
@@ -80,15 +90,40 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
 
 
     TreegridAdapter.prototype._visualizeData = function() {
-        debugger;
+
         var templateToAdd = Handlebars.compile(Template);
         var $compiled = templateToAdd(this.$dataForTreeGRid);
 
         $(this.o.visualizationInfo.container).append($compiled);
 
-        $(this.o.s.table_container).treegrid();
+        var r = $(this.o.s.table_container).treegrid({initialState: 'collapsed'});
+
+        if(r) {this._onListening() }
+    };
+
+
+    TreegridAdapter.prototype._onListening = function () {
+
+        var self = this;
+
+        $(self.o.s.description_class).on('click', function(e) {
+
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            if($(self.o.s.popover_class)){$('.popover').popover('destroy');}
+            $(this).popover(self.o.popoverSettings);
+            $(this).popover('show');
+        });
+
+        $(document).click(function (e) {
+            e.stopImmediatePropagation();
+            if (($('.popover').has(e.target).length == 0) || $(e.target).is('.close')) {
+                $('.popover').popover('destroy');
+            }
+        });
+
     };
 
 
     return TreegridAdapter;
-})
+});
