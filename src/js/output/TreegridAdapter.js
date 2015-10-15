@@ -28,7 +28,6 @@ define(['jquery',
             'popover_class': '.popover',
             'template_wrapper' :'#fx-md-viewer-wrapper'
         }
-
     };
 
 
@@ -39,6 +38,7 @@ define(['jquery',
 
     TreegridAdapter.prototype.init = function (dataModel) {
 
+        this.$whitelist = C.WHITELIST || DC.WHITELIST;
         this.$treegridSettings = C.TREEGRID_SEETINGS || DC.TREEGRID_SEETINGS;
         this.$popoverSettings = C.POPOVER_SETTINGS || DC.POPOVER_SETTINGS;
         this.$visualizationData =  this._trasformDataToVisualizationModel(dataModel.model, 'noParent', 0);
@@ -48,12 +48,10 @@ define(['jquery',
 
     TreegridAdapter.prototype._trasformDataToVisualizationModel = function (model, parentBean, levelCounter) {
 
-
         var result = [];
         for (var i = 0, length = model.length; i < length; i++) {
 
             if (model[i].hasChildren && model[i].hasChildren === true) {
-
 
                 var className = (parentBean!= 'noParent') ?
                 'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean + ' '+'depth-level-'+levelCounter:
@@ -91,6 +89,11 @@ define(['jquery',
 
     TreegridAdapter.prototype._visualizeData = function() {
 
+        if(Object.keys(this.$whitelist).length>0){
+            debugger;
+            this.$dataForTreeGRid.data = this._filterWhiteList();
+        }
+
         var templateToAdd = Handlebars.compile(Template);
         var $compiled = templateToAdd(this.$dataForTreeGRid);
 
@@ -123,6 +126,18 @@ define(['jquery',
         });
 
     };
+
+        TreegridAdapter.prototype._filterWhiteList = function() {
+
+            var result = [];
+            for(var i= 0, length = this.$dataForTreeGRid.data.length; i<length; i++) {
+                if(this.$whitelist[this.$dataForTreeGRid.data[i]['bean']] && this.$whitelist[this.$dataForTreeGRid.data[i]['bean']] ==true) {
+                    result.push(this.$dataForTreeGRid.data[i]);
+                }
+            }
+
+            return result;
+        };
 
     TreegridAdapter.prototype.destroy = function() {
 
