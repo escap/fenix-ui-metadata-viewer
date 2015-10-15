@@ -1,7 +1,7 @@
 define(['jquery',
         'fx-mdviewer/config/config',
         'fx-mdviewer/config/config-default',
-        'text!template/template.hbs',
+        'text!fx-mdviewer/template/template.hbs',
         'handlebars', 'treegrid', 'bootstrap'],
     function ($,C,DC,Template, Handlebars) {
 
@@ -93,7 +93,8 @@ define(['jquery',
         var templateToAdd = Handlebars.compile(Template);
         var $compiled = templateToAdd(this.$dataForTreeGRid);
 
-        $(this.o.visualizationInfo.container).append($compiled);
+        debugger;
+        $(this.o.placeholder).append($compiled);
 
         var r = $(this.o.s.table_container).treegrid(this.$treegridSettings);
 

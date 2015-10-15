@@ -14,7 +14,8 @@ define(function () {
             'fx-mdviewer/model/ModelCreator': './model/ModelCreator',
             'fx-mdviewer/output/TreegridAdapter': './output/TreegridAdapter',
             'fx-mdviewer/template': './template',
-            'fx-mdviewer/config': '../../config'
+            'fx-mdviewer/config': '../../config',
+            FENIX_UI_METADATA_VIEWER : 'start'
         },
         shim: {
             bootstrap: {
