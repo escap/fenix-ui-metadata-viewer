@@ -8,20 +8,29 @@ define(function () {
             'bootstrap': '{FENIX_CDN}/js/bootstrap/3.2/js/bootstrap.min',
             underscore: "{FENIX_CDN}/js/underscore/1.7.0/underscore.min",
             text: '{FENIX_CDN}/js/requirejs/plugins/text/2.0.12/text',
-            config: "../../config",
-            'q' : '{FENIX_CDN}/js/q/1.1.2/q',
-            'fx-md-viewer/controller' : './controller/mainController',
-            'fx-md-viewer/model' : './model/ModelCreator',
-
-
-
+            'q': '//fenixrepo.fao.org/cdn/js/q/1.1.2/q',
+            treegrid: '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
+            "fx-mdviewer/controller/mainController": "./controller/mainController",
+            'fx-mdviewer/model/ModelCreator': './model/ModelCreator',
+            'fx-mdviewer/output/TreegridAdapter': './output/TreegridAdapter',
+            'fx-mdviewer/template': './template',
+            'fx-mdviewer/config': '../../config'
         },
         shim: {
+            bootstrap: {
+                deps: ["jquery"]
+            },
+            treegrid: {
+                deps: ["jquery"]
+            },
+            underscore: {
+                exports: '_'
+            },
             'amplify' : {
                 deps : ['jquery']
             },
-            'fx-rp-plugins-factory':{
-                deps : ['fx-rp-metadata','fx-rp-table','fx-rp-surveyFMD']
+            handlebars: {
+                exports: 'Handlebars'
             }
         }
     };

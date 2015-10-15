@@ -1,5 +1,9 @@
-define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstrap'],
-    function ($,Template, Handlebars) {
+define(['jquery',
+        'fx-mdviewer/config/config',
+        'fx-mdviewer/config/config-default',
+        'text!template/template.hbs',
+        'handlebars', 'treegrid', 'bootstrap'],
+    function ($,C,DC,Template, Handlebars) {
 
     'use strict'
 
@@ -22,16 +26,8 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
             'table_container' : '.fx-md-viewer-container',
             'description_class': '.fx-md-viewer-description',
             'popover_class': '.popover'
-        },
-        popoverSettings :{
-            placement: 'top',
-                html: true,
-                trigger: 'focus',
-                animation: true,
-                title: '<span class="text-info"><strong>Description</strong></span>'+
-            '<button type="button" data-toggle="popover" data-trigger="focus" class="close" >&times;</button>'
-
         }
+
     };
 
 
@@ -41,6 +37,9 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
 
 
     TreegridAdapter.prototype.init = function (dataModel) {
+
+        this.$treegridSettings = C.TREEGRID_SEETINGS || DC.TREEGRID_SEETINGS;
+        this.$popoverSettings = C.POPOVER_SETTINGS || DC.POPOVER_SETTINGS;
         this.$visualizationData =  this._trasformDataToVisualizationModel(dataModel.model, 'noParent', 0);
         this.$dataForTreeGRid =  {'title_resource': dataModel.title, 'data':  this.$visualizationData};
     };
@@ -96,7 +95,7 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
 
         $(this.o.visualizationInfo.container).append($compiled);
 
-        var r = $(this.o.s.table_container).treegrid({initialState: 'collapsed'});
+        var r = $(this.o.s.table_container).treegrid(this.$treegridSettings);
 
         if(r) {this._onListening() }
     };
@@ -111,7 +110,7 @@ define(['jquery','text!template/template.hbs','handlebars', 'treegrid', 'bootstr
             e.preventDefault();
             e.stopImmediatePropagation();
             if($(self.o.s.popover_class)){$('.popover').popover('destroy');}
-            $(this).popover(self.o.popoverSettings);
+            $(this).popover(self.$popoverSettings);
             $(this).popover('show');
         });
 
