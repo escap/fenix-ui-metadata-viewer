@@ -1,23 +1,26 @@
 <div class="fx-md-viewer-wrapper">
-    <div class="row">
-        <h1 class="fx-md-viewer-title col-xs-12">{{{title_resource}}}</h1>
+    <div class="fx-md-viewer-header">
+        <div class="row">
+            <h1 class="fx-md-viewer-title col-xs-12">{{{title_resource}}}</h1>
+        </div>
     </div>
-
-    <table class="fx-md-viewer-container">
-        {{#each data}}
-            <tr class="{{className}}">
-                {{#if desc}}
-                    <td>
-                        {{title}}
-                        <div class="fx-md-viewer-description glyphicon glyphicon-info-sign" data-content="{{{desc}}}"></div>
-                    </td>
-                    <td>{{value}}</td>
-                {{else}}
-                    <td>{{title}}</td>
-                    <td>{{value}}</td>
-                {{/if}}
-            </tr>
-        {{/each}}
-    </table>
-
+    <div class="fx-md-viewer-body">
+        <table class="fx-md-viewer-container">
+            {{#each data}}
+                <tr class="{{className}}">
+                    {{#if desc}}
+                        <td>
+                            {{title}}
+                            <div class="fx-md-viewer-description glyphicon glyphicon-info-sign" data-content="{{{desc}}}"></div>
+                        </td>
+                        <td>{{value}}</td>
+                    {{else}}
+                        <td>{{title}}</td>
+                        <td>{{value}}</td>
+                    {{/if}}
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="fx-md-viewer-footer"></div>
 </div>
