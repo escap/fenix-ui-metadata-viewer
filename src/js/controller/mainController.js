@@ -44,6 +44,8 @@ define(['jquery','q' ,'underscore','fx-mdviewer/model/ModelCreator'
 
     MainController.prototype.destroy  =function() {
 
+        this.$viewAdapter.destroy();
+
     };
 
 

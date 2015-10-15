@@ -25,7 +25,8 @@ define(['jquery',
         s: {
             'table_container' : '.fx-md-viewer-container',
             'description_class': '.fx-md-viewer-description',
-            'popover_class': '.popover'
+            'popover_class': '.popover',
+            'template_wrapper' :'#fx-md-viewer-wrapper'
         }
 
     };
@@ -93,7 +94,6 @@ define(['jquery',
         var templateToAdd = Handlebars.compile(Template);
         var $compiled = templateToAdd(this.$dataForTreeGRid);
 
-        debugger;
         $(this.o.placeholder).append($compiled);
 
         var r = $(this.o.s.table_container).treegrid(this.$treegridSettings);
@@ -121,6 +121,13 @@ define(['jquery',
                 $('.popover').popover('destroy');
             }
         });
+
+    };
+
+    TreegridAdapter.prototype.destroy = function() {
+
+        // TODO: not exists a destroy function for this library
+        $(this.o.placeholder).empty();
 
     };
 
