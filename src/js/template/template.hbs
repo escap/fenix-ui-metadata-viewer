@@ -9,14 +9,14 @@
             {{#each data}}
                 <tr class="{{className}}">
                     {{#if desc}}
-                        <td>
+                        <td  class="metadata-viewer-title">
                             {{title}}
-                            <div class="fx-md-viewer-description glyphicon glyphicon-info-sign" data-content="{{{desc}}}"></div>
+                            <div class="pull-right fx-md-viewer-description glyphicon glyphicon-info-sign" data-content="{{{desc}}}"></div>
                         </td>
-                        <td>{{value}}</td>
+                        <td class="metadata-viewer-value">{{value}}</td>
                     {{else}}
-                        <td>{{title}}</td>
-                        <td>{{value}}</td>
+                        <td class="metadata-viewer-title">{{title}}</td>
+                        <td class="metadata-viewer-value">{{value}}</td>
                     {{/if}}
                 </tr>
             {{/each}}
