@@ -42,7 +42,12 @@ define(['jquery',
         this.$treegridSettings = C.TREEGRID_SEETINGS || DC.TREEGRID_SEETINGS;
         this.$popoverSettings = C.POPOVER_SETTINGS || DC.POPOVER_SETTINGS;
         this.$visualizationData =  this._trasformDataToVisualizationModel(dataModel.model, 'noParent', 0);
-        this.$dataForTreeGRid =  {'title_resource': dataModel.title, 'data':  this.$visualizationData};
+        this.$hasExport = C.HAS_EXPORT || DC.HAS_EXPORT;
+        debugger;
+        this.$dataForTreeGRid = (this.$hasExport == true) ?
+        {'title_resource': dataModel.title, 'data':  this.$visualizationData, 'hasExport' : this.$hasExport}:
+        {'title_resource': dataModel.title, 'data':  this.$visualizationData};
+
     };
 
 

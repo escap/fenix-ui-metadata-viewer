@@ -36,6 +36,7 @@ define(function () {
             "organizationUnit": true,
             "position": true,
             "role": true*/
-        }
+        },
+        HAS_EXPORT : false
     };
 });

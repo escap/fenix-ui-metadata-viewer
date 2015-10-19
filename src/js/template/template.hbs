@@ -2,7 +2,11 @@
     <div class="fx-md-viewer-header">
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="fx-md-viewer-title ">{{{title_resource}}} <button  type="button" class="btn pull-right" >Export Metadata </button></h1>
+                <h1 class="fx-md-viewer-title ">{{{title_resource}}}
+                    {{#if hasExport}}
+                        <button type="button" class="fx-md-report-btn btn pull-right">Export Metadata</button>
+                    {{/if}}
+                </h1>
 
             </div>
 
@@ -13,9 +17,10 @@
             {{#each data}}
                 <tr class="{{className}}">
                     {{#if desc}}
-                        <td  class="metadata-viewer-title">
+                        <td class="metadata-viewer-title">
                             {{title}}
-                            <div class="pull-right fx-md-viewer-description glyphicon glyphicon-info-sign" data-content="{{{desc}}}"></div>
+                            <div class="pull-right fx-md-viewer-description glyphicon glyphicon-info-sign"
+                                 data-content="{{{desc}}}"></div>
                         </td>
                         <td class="metadata-viewer-value">{{value}}</td>
                     {{else}}
