@@ -90,7 +90,6 @@ define(['jquery',
     TreegridAdapter.prototype._visualizeData = function() {
 
         if(Object.keys(this.$whitelist).length>0){
-            debugger;
             this.$dataForTreeGRid.data = this._filterWhiteList();
         }
 
