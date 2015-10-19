@@ -104,7 +104,6 @@ define(
         var data = this.o.data,
             properties = this.$properties;
         this.$internDataModel = this._prepareInternModelData(data, properties, 0, callback);
-        console.log(this.$internDataModel)
 
     };
 

@@ -43,7 +43,6 @@ define(['jquery',
         this.$popoverSettings = C.POPOVER_SETTINGS || DC.POPOVER_SETTINGS;
         this.$visualizationData =  this._trasformDataToVisualizationModel(dataModel.model, 'noParent', 0);
         this.$hasExport = C.HAS_EXPORT || DC.HAS_EXPORT;
-        debugger;
         this.$dataForTreeGRid = (this.$hasExport == true) ?
         {'title_resource': dataModel.title, 'data':  this.$visualizationData, 'hasExport' : this.$hasExport}:
         {'title_resource': dataModel.title, 'data':  this.$visualizationData};
