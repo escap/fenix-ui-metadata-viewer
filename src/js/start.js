@@ -4,7 +4,8 @@ define( ["jquery", "fx-mdviewer/controller/mainController"], function ($,Control
 
     var o = {}
 
-    function Starter() {};
+    function Starter() {        debugger;
+    };
 
     Starter.prototype._validateInput = function () {
         return (typeof this.o.data !== 'undefined');
