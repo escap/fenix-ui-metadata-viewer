@@ -155,9 +155,7 @@ define(['jquery',
 
 
     TreegridAdapter.prototype._checkExpandNodesOptions = function() {
-
-        debugger;
-
+        
         var opts = [C.EXPAND_RECURSIVE, C.EXPAND_SINGLE];
         for(var i=0; i<opts.length; i++) {
             if(opts[i] && opts[i].length >0) {
