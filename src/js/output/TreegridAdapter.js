@@ -58,8 +58,8 @@ define(['jquery',
             if (model[i].hasChildren && model[i].hasChildren === true) {
 
                 var className = (parentBean!= 'noParent') ?
-                'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean + ' '+'depth-level-'+levelCounter:
-                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter + ' treegrid-collapsed';
+                'treegrid-'+model[i]['bean']+' '+'treegrid-parent-'+parentBean + ' '+'depth-level-'+levelCounter+ ' element':
+                'treegrid-'+model[i]['bean']+' '+parentBean+ ' '+'depth-level-'+levelCounter + ' treegrid-collapsed'+ ' element';
 
                 result.push({
                     'title' : model[i]['title'],
@@ -74,8 +74,8 @@ define(['jquery',
 
             else if (model[i].hasChildren === false) {
                 var className = (parentBean != 'noParent') ?
-                'treegrid-' + model[i]['bean'] + ' ' + 'treegrid-parent-' + parentBean + ' ' + 'depth-level-' + levelCounter :
-                'treegrid-' + model[i]['bean'] + ' ' + parentBean + ' ' + 'depth-level-' + levelCounter;
+                'treegrid-' + model[i]['bean'] + ' ' + 'treegrid-parent-' + parentBean + ' ' + 'depth-level-' + levelCounter + ' element':
+                'treegrid-' + model[i]['bean'] + ' ' + parentBean + ' ' + 'depth-level-' + levelCounter+ ' element';
 
                 result.push({
                     'title': model[i]['title'],
@@ -104,7 +104,11 @@ define(['jquery',
 
         var r = $(this.o.s.table_container).treegrid(this.$treegridSettings);
 
-        if(r) {this._onListening() }
+        if(r) {
+            this._onListening();
+            this._checkExpandNodesOptions();
+        }
+
     };
 
 
@@ -149,6 +153,20 @@ define(['jquery',
 
     };
 
+
+    TreegridAdapter.prototype._checkExpandNodesOptions = function() {
+
+        debugger;
+
+        var opts = [C.EXPAND_RECURSIVE, C.EXPAND_SINGLE];
+        for(var i=0; i<opts.length; i++) {
+            if(opts[i] && opts[i].length >0) {
+                for(var j=0; j<opts[i].length; j++) {
+                    (i==0)? $('.treegrid-'+opts[i][j]).treegrid('expandRecursive') : $('.treegrid-'+opts[i][j]).treegrid('expand');
+                }
+            }
+        }
+    }
 
     return TreegridAdapter;
 });
