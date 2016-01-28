@@ -1,6 +1,8 @@
 
-define(['jquery','q' ,'underscore','fx-mdv/model/ModelCreator'
-,'fx-mdv/output/TreegridAdapter'], function($,Q,_, ModelCreator, ViewAdapter){
+define(['jquery','q' ,'underscore',
+    'fx-md-v/model/ModelCreator',
+    'fx-md-v/output/TreegridAdapter'],
+    function($,Q,_, ModelCreator, ViewAdapter){
 
     'use strict'
 
@@ -16,9 +18,7 @@ define(['jquery','q' ,'underscore','fx-mdv/model/ModelCreator'
 
         this.$modelCreator = new ModelCreator;
 
-
         this.$modelCreator.init(this.o);
-
 
         this.$modelCreator._startInternModelData(_.bind(self.render, this))
 

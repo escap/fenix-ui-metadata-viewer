@@ -1,8 +1,8 @@
 define(
     ['jquery',
-    'fx-mdv/config/config',
-    'fx-mdv/config/config-default',
-    'text!fx-mdv/config/special_metadata_fenix.json',
+    'fx-md-v/config/config',
+    'fx-md-v/config/config-default',
+    'text!fx-md-v/config/special_metadata_fenix.json',
     'q',
     'moment'
 ], function ($, C, DC, SpecialFields, Q) {
