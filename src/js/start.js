@@ -1,4 +1,4 @@
-define( ["jquery", "fx-mdviewer/controller/mainController"], function ($,Controller) {
+define( ["jquery", "fx-mdv/controller/mainController"], function ($,Controller) {
 
     'use strict';
 

@@ -30,11 +30,11 @@ requirejs.config({
         treegrid: '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
         'fx-md-v-visualization-creator': 'CreatorVisualizationData',
         'q': '//fenixrepo.fao.org/cdn/js/q/1.1.2/q',
-        "fx-mdviewer/controller/mainController": "./controller/mainController",
-        'fx-mdviewer/model/ModelCreator': './model/ModelCreator',
-        'fx-mdviewer/output/TreegridAdapter': './output/TreegridAdapter',
-        'fx-mdviewer/template': './template',
-        'fx-mdviewer/config': '../../config'
+        "fx-mdv/controller/mainController": "./controller/mainController",
+        'fx-mdv/model/ModelCreator': './model/ModelCreator',
+        'fx-mdv/output/TreegridAdapter': './output/TreegridAdapter',
+        'fx-mdv/template': './template',
+        'fx-mdv/config': '../../config'
     },
 
     // Underscore and Backbone are not AMD-capable per default,

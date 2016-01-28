@@ -1,7 +1,7 @@
 define(['jquery',
-        'fx-mdviewer/config/config',
-        'fx-mdviewer/config/config-default',
-        'text!fx-mdviewer/template/template.hbs',
+        'fx-mdv/config/config',
+        'fx-mdv/config/config-default',
+        'text!fx-mdv/template/template.hbs',
         'handlebars', 'treegrid', 'bootstrap'],
     function ($, C, DC, Template, Handlebars) {
 

@@ -1,6 +1,6 @@
 
-define(['jquery','q' ,'underscore','fx-mdviewer/model/ModelCreator'
-,'fx-mdviewer/output/TreegridAdapter'], function($,Q,_, ModelCreator, ViewAdapter){
+define(['jquery','q' ,'underscore','fx-mdv/model/ModelCreator'
+,'fx-mdv/output/TreegridAdapter'], function($,Q,_, ModelCreator, ViewAdapter){
 
     'use strict'
 
