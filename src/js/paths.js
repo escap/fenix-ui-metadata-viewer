@@ -10,12 +10,12 @@ define(function () {
             text: '{FENIX_CDN}/js/requirejs/plugins/text/2.0.12/text',
             'q': '//fenixrepo.fao.org/cdn/js/q/1.1.2/q',
             treegrid: '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
-            "fx-mdviewer/controller/mainController": "./controller/mainController",
-            'fx-mdviewer/model/ModelCreator': './model/ModelCreator',
-            'fx-mdviewer/output/TreegridAdapter': './output/TreegridAdapter',
-            'fx-mdviewer/template': './template',
-            'fx-mdviewer/config': '../../config',
-            FENIX_UI_METADATA_VIEWER : 'start'
+            "fx-mdv/controller/mainController": "./controller/mainController",
+            'fx-mdv/model/ModelCreator': './model/ModelCreator',
+            'fx-mdv/output/TreegridAdapter': './output/TreegridAdapter',
+            'fx-mdv/template': '../../html/templates',
+            'fx-mdv/config': '../../config',
+            'fx-mdv/start' : 'start'
         },
         shim: {
             bootstrap: {

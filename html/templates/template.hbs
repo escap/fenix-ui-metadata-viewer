@@ -17,14 +17,14 @@
             {{#each data}}
                 <tr class="{{className}}">
                     {{#if desc}}
-                        <td class="metadata-viewer-title">
+                        <td class="metadata-viewer-title truncate">
                             {{title}}
                             <div class="pull-right fx-md-viewer-description glyphicon glyphicon-info-sign"
                                  data-content="{{{desc}}}"></div>
                         </td>
                         <td class="metadata-viewer-value">{{value}}</td>
                     {{else}}
-                        <td class="metadata-viewer-title">{{title}}</td>
+                        <td class="metadata-viewer-title truncate">{{title}}</td>
                         <td class="metadata-viewer-value">{{value}}</td>
                     {{/if}}
                 </tr>
