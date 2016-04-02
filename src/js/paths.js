@@ -10,6 +10,7 @@ define(function () {
             text: '{FENIX_CDN}/js/requirejs/plugins/text/2.0.12/text',
             'q': '//fenixrepo.fao.org/cdn/js/q/1.1.2/q',
             treegrid: '//fenixrepo.fao.org/cdn/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
+            moment : '{FENIX_CDN}/js/moment/2.12.0/min/moment.min',
             "fx-md-v/controller/mainController": "./controller/mainController",
             'fx-md-v/model/ModelCreator': './model/ModelCreator',
             'fx-md-v/output/TreegridAdapter': './output/TreegridAdapter',
