@@ -5,7 +5,7 @@ define(
     'text!fx-md-v/config/special_metadata_fenix.json',
     'q',
     'moment'
-], function ($, C, DC, SpecialFields, Q) {
+], function ($, C, DC, SpecialFields, Q, Moment) {
 
 
     'use strict'
@@ -303,7 +303,7 @@ define(
         this._fillAttributeBean(attribute, result);
         this._fillNoChildrenAttribute(result);
         var value = (metadata[this.o.metadataOptions.DATE_FORMAT] && metadata[this.o.metadataOptions.DATE_FORMAT] == 'date') ?
-            moment(new Date(data)).format("DD/MM/YYYY") : data;
+            Moment(new Date(data)).format("DD/MM/YYYY") : data;
         result['value'] = value;
         return result;
     };
