@@ -33,8 +33,7 @@ define(['jquery',
 
         function TreegridAdapter(options) {
             this.o = $.extend(true, o, options);
-        };
-
+        }
 
         TreegridAdapter.prototype.init = function (dataModel) {
 
@@ -48,7 +47,6 @@ define(['jquery',
             {'title_resource': dataModel.title, 'data': this.$visualizationData};
 
         };
-
 
         TreegridAdapter.prototype._trasformDataToVisualizationModel = function (model, parentBean, levelCounter) {
 
@@ -90,7 +88,6 @@ define(['jquery',
             return result;
         };
 
-
         TreegridAdapter.prototype._visualizeData = function () {
 
             if (Object.keys(this.$whitelist).length > 0) {
@@ -98,11 +95,16 @@ define(['jquery',
             }
 
             var templateToAdd = Handlebars.compile(Template);
-            var $compiled = templateToAdd(this.$dataForTreeGRid);
+            var $compiled = templateToAdd(this.$dataForTreeGRid),
+                $el = $(this.o.placeholder);
 
-            $(this.o.placeholder).append($compiled);
+            $el.append($compiled);
 
-            var r = $(this.o.s.table_container).treegrid(this.$treegridSettings);
+            console.log($compiled)
+            console.log(this.$treegridSettings)
+            console.log(this.o.s.table_container)
+
+            var r = $el.find(this.o.s.table_container).treegrid(this.$treegridSettings);
 
             if (r) {
                 this._onListening();
@@ -110,7 +112,6 @@ define(['jquery',
             }
 
         };
-
 
         TreegridAdapter.prototype._onListening = function () {
 
@@ -176,8 +177,8 @@ define(['jquery',
         };
 
 
-        TreegridAdapter.prototype._unbindListeners = function() {
-            $(self.o.s.description_class).off();
+        TreegridAdapter.prototype._unbindListeners = function () {
+            $(this.o.s.description_class).off();
             $(this.o.s.table_container + " tr").off();
 
         };
