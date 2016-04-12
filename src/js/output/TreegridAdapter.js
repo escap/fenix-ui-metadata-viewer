@@ -99,11 +99,6 @@ define(['jquery',
                 $el = $(this.o.placeholder);
 
             $el.append($compiled);
-
-            console.log($compiled)
-            console.log(this.$treegridSettings)
-            console.log(this.o.s.table_container)
-
             var r = $el.find(this.o.s.table_container).treegrid(this.$treegridSettings);
 
             if (r) {
