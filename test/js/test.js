@@ -40,18 +40,14 @@ define([
 
         var metadataViewer = new MetadataViewer();
 
-        console.log(valid_model.metadata)
-
-        metadataViewer.init({
-            data: valid_model,
+        metadataViewer.render({
+            model: valid_model,
             lang: 'en',
-            placeholder: $(s.STANDARD)
+            el: $(s.STANDARD)
         });
 
         log.trace("Rendering standard metadata viewer: end");
-
     };
-
 
     Test.prototype._renderSecond = function () {
 
@@ -59,14 +55,13 @@ define([
 
         var metadataViewer = new MetadataViewer();
 
-        metadataViewer.init({
-            data: valid_model,
+        metadataViewer.render({
+            model: valid_model,
             lang: 'en',
-            placeholder: $(s.SECOND)
+            el: $(s.SECOND)
         });
 
         log.trace("Rendering second metadata viewer: end");
-
     };
 
     return new Test();
