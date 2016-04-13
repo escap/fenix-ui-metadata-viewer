@@ -23,7 +23,7 @@ define( ["jquery", "fx-md-v/controller/mainController"], function ($,Controller)
         this.$controller.init(this.o);
     };
 
-    Starter.prototype.destroy = function () {
+    Starter.prototype.dispose = function () {
         this.$controller.destroy();
     };
 
