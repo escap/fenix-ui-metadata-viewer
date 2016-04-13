@@ -12,15 +12,13 @@ define(['jquery','q' ,'underscore',
 
     MainController.prototype.init = function (opts) {
 
-        var self = this;
-
         this.o = $.extend(true,{}, opts);
 
         this.$modelCreator = new ModelCreator;
 
         this.$modelCreator.init(this.o);
 
-        this.$modelCreator._startInternModelData(_.bind(self.render, this))
+        this.$modelCreator._startInternModelData(_.bind(this.render, this))
 
     };
 

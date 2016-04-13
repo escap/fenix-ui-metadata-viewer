@@ -10,16 +10,17 @@ define( ["jquery", "fx-md-v/controller/mainController"], function ($,Controller)
         return (typeof this.o.data !== 'undefined');
     };
 
-    Starter.prototype.init = function (options) {
+    Starter.prototype.render = function (opts) {
+
+        var options = $.extend(true, {}, opts);
+
+        options.data = options.model.hasOwnProperty("metadata") ? options.model.metadata :  options.model;
+        options.placeholder = options.el;
+
         this.o = $.extend(true, o, options);
         this._validateInput();
         this.$controller = new Controller;
         this.$controller.init(this.o);
-    };
-
-    Starter.prototype.render = function() {
-
-        this.$controller.render();
     };
 
     Starter.prototype.destroy = function () {

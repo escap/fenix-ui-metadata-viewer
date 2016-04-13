@@ -270,12 +270,22 @@ define(
 
 
     ModelCreator.prototype._getTitleFromData = function () {
-        var result = (this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()]) ? this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()] : this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.o.defaultOptions.DEFAULT_LANG.toUpperCase()];
+        var result = "";
+
+        if (typeof this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE] === "object") {
+
+            if (this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()]) {
+                result = this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.$lang.toUpperCase()];
+            } else {
+                result = this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE][this.o.defaultOptions.DEFAULT_LANG.toUpperCase()]
+            }
+        }
+
         delete this.o.data[this.o.defaultOptions.TITLE_ATTRIBUTE];
-        delete this.$properties[this.o.defaultOptions.TITLE_ATTRIBUTE]
+        delete this.$properties[this.o.defaultOptions.TITLE_ATTRIBUTE];
+
         return result;
     };
-
 
     ModelCreator.prototype._addRecursiveModel = function (metadata, attribute) {
         var result = {};
@@ -285,7 +295,6 @@ define(
         this._fillChildrenAttribute(result)
         return result;
     };
-
 
     ModelCreator.prototype._addArrayModel = function (metadata, attribute) {
         var result = {};
