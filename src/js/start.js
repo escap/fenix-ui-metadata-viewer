@@ -1,10 +1,13 @@
-define( ["jquery", "fx-md-v/controller/mainController"], function ($,Controller) {
+define( [
+    "jquery",
+    "fx-md-v/controller/mainController"
+], function ($,Controller) {
 
     'use strict';
 
-    var o = {}
+    var o = {};
 
-    function Starter() {};
+    function Starter() {}
 
     Starter.prototype._validateInput = function () {
         return (typeof this.o.data !== 'undefined');
@@ -27,6 +30,5 @@ define( ["jquery", "fx-md-v/controller/mainController"], function ($,Controller)
         this.$controller.destroy();
     };
 
-
     return Starter;
-})
+});

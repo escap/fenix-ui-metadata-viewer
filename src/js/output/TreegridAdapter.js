@@ -30,9 +30,9 @@ define(['jquery',
             }
         };
 
-
         function TreegridAdapter(options) {
             this.o = $.extend(true, o, options);
+            this.$el = $(this.o.placeholder);
         }
 
         TreegridAdapter.prototype.init = function (dataModel) {
@@ -95,11 +95,11 @@ define(['jquery',
             }
 
             var templateToAdd = Handlebars.compile(Template);
-            var $compiled = templateToAdd(this.$dataForTreeGRid),
-                $el = $(this.o.placeholder);
+            var $compiled = templateToAdd(this.$dataForTreeGRid);
 
-            $el.append($compiled);
-            var r = $el.find(this.o.s.table_container).treegrid(this.$treegridSettings);
+            this.$el.empty();
+            this.$el.append($compiled);
+            var r = this.$el.find(this.o.s.table_container).treegrid(this.$treegridSettings);
 
             if (r) {
                 this._onListening();
@@ -154,10 +154,8 @@ define(['jquery',
             // TODO: not exists a destroy function for this library
 
             this._unbindListeners();
-            $(this.o.placeholder).empty();
-
+            this.$el .empty();
         };
-
 
         TreegridAdapter.prototype._checkExpandNodesOptions = function () {
 

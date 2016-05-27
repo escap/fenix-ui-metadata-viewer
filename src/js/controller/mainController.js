@@ -1,14 +1,14 @@
-
-define(['jquery','q' ,'underscore',
+define([
+    'jquery',
+    'underscore',
     'fx-md-v/model/ModelCreator',
-    'fx-md-v/output/TreegridAdapter'],
-    function($,Q,_, ModelCreator, ViewAdapter){
+    'fx-md-v/output/TreegridAdapter'
+],
+    function($,_, ModelCreator, ViewAdapter){
 
-    'use strict'
+    'use strict';
 
-
-    function MainController() {};
-
+    function MainController() {}
 
     MainController.prototype.init = function (opts) {
 
@@ -22,11 +22,9 @@ define(['jquery','q' ,'underscore',
 
     };
 
-
     MainController.prototype._initVariables  =function() {
 
     };
-
 
     MainController.prototype.render = function (internmodel) {
 
