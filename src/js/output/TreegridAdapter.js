@@ -1,9 +1,11 @@
 define(['jquery',
+        'underscore',
+        'loglevel',
         'fx-md-v/config/config',
         'fx-md-v/config/config-default',
         'text!fx-md-v/template/template.hbs',
         'handlebars', 'treegrid', 'bootstrap'],
-    function ($, C, DC, Template, Handlebars) {
+    function ($, _, log, C, DC, Template, Handlebars) {
 
         'use strict'
 
@@ -26,7 +28,8 @@ define(['jquery',
                 'table_container': '.fx-md-viewer-container',
                 'description_class': '.fx-md-viewer-description',
                 'popover_class': '.popover',
-                'template_wrapper': '#fx-md-viewer-wrapper'
+                'template_wrapper': '#fx-md-viewer-wrapper',
+                'treegrid_expander_arrow': 'span.treegrid-expander'
             }
         };
 
@@ -112,29 +115,57 @@ define(['jquery',
 
             var self = this;
 
-            $(self.o.s.description_class).on('click', function (e) {
-
+            // create description popover
+            $(self.o.s.description_class, self.$el).on('click', function (e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
-                if ($(self.o.s.popover_class)) {
-                    $('.popover').popover('destroy');
+                if ($(self.o.s.popover_class, self.$el)) {
+                    $(self.o.s.popover_class, self.$el).popover('destroy');
                 }
-                $(this).popover(self.$popoverSettings);
-                $(this).popover('show');
+
+                $(this, self.$el).popover(self.$popoverSettings);
+                $(this, self.$el).popover('show');
             });
 
-            $(document).click(function (e) {
+            // destroy popovers when clicking in the context but out of the buttons
+            $(self.$el).click(function (e) {
                 e.stopImmediatePropagation();
-                if (($('.popover').has(e.target).length == 0) || $(e.target).is('.close')) {
-                    $('.popover').popover('destroy');
+                log.info('el - event')
+                if (!event.target.hasAttribute('data-toggle')) {
+                    self._destroyPopups(event, self);
                 }
             });
 
-            $(this.o.s.table_container + " tr").on("click", function (event) {
-                $(this).treegrid('toggle');
+            // on click on the row
+            $(this.o.s.table_container + " tr > td", self.$el).on("click", function (event) {
+                log.info(event.target)
+                // if it is not an element of bootstrap
+                if (!event.target.hasAttribute('data-toggle')) {
+                    event.stopImmediatePropagation();
+                    var parent = $(this, self.$el).parents("tr").first();
+                    parent.treegrid('toggle');
+                    log.info('tc - event')
+                }
+                self._destroyPopups(event, self);
+
             });
 
+            // on click on the arrow
+            $(self.o.s.treegrid_expander_arrow, self.$el).on('click', function (event) {
+                event.stopImmediatePropagation();
+                log.info('arrow - event')
+                self._destroyPopups(event, self);
+            });
         };
+
+
+        TreegridAdapter.prototype._destroyPopups = function (e, context) {
+
+            var that = context;
+            if (($(that.o.s.popover_class, that.$el).has(e.target).length == 0) || $(e.target, that.$el).is('.close')) {
+                $(that.o.s.popover_class, that.$el).popover('destroy');
+            }
+        }
 
 
         TreegridAdapter.prototype._filterWhiteList = function () {
@@ -154,7 +185,7 @@ define(['jquery',
             // TODO: not exists a destroy function for this library
 
             this._unbindListeners();
-            this.$el .empty();
+            this.$el.empty();
         };
 
         TreegridAdapter.prototype._checkExpandNodesOptions = function () {
@@ -163,7 +194,7 @@ define(['jquery',
             for (var i = 0; i < opts.length; i++) {
                 if (opts[i] && opts[i].length > 0) {
                     for (var j = 0; j < opts[i].length; j++) {
-                        (i == 0) ? $('.treegrid-' + opts[i][j]).treegrid('expandRecursive') : $('.treegrid-' + opts[i][j]).treegrid('expand');
+                        (i == 0) ? $('.treegrid-' + opts[i][j], this.$el).treegrid('expandRecursive') : $('.treegrid-' + opts[i][j], this.$el).treegrid('expand');
                     }
                 }
             }
@@ -171,8 +202,11 @@ define(['jquery',
 
 
         TreegridAdapter.prototype._unbindListeners = function () {
-            $(this.o.s.description_class).off();
-            $(this.o.s.table_container + " tr").off();
+            $(this.o.s.description_class, this.$el).off();
+            $(this.o.s.table_container + " tr > td", this.$el).off();
+            $(this.o.s.treegrid_expander_arrow, this.$el).off();
+            $(this.$el).off();
+
 
         };
 
