@@ -8,7 +8,7 @@ define(
 ], function ($, C, DC, SpecialFields, Q, Moment) {
 
 
-    'use strict'
+    'use strict';
 
 
     var o = {
@@ -22,7 +22,8 @@ define(
             DESCRIPTION_ATTRIBUTE: 'description',
             NOVALUE_OBJECT: {
                 'noValue': true
-            }
+            },
+            HARMONIZE_TITLE:true
         },
         metadataOptions: {
             PROPERTIES_ATTR: 'properties',
@@ -51,8 +52,7 @@ define(
     };
 
 
-    function ModelCreator() {
-    };
+    function ModelCreator() {}
 
 
     ModelCreator.prototype.init = function (opts) {
@@ -94,7 +94,7 @@ define(
                 } else {
                     throw new Error("Status code was " + jqXHR.status);
                 }
-            },
+            }
         });
 
     };
@@ -332,11 +332,15 @@ define(
     ModelCreator.prototype._fillTitle = function (metadata, attribute, result) {
 
         if (metadata[this.o.metadataOptions.TITLE_I18N] && metadata[this.o.metadataOptions.TITLE_I18N][this.$lang] && metadata[this.o.metadataOptions.TITLE_I18N][this.$lang] != '') {
-            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = metadata[this.o.metadataOptions.TITLE_I18N][this.$lang];
+            result[this.o.defaultOptions.TITLE_ATTRIBUTE] =
+                metadata[this.o.metadataOptions.TITLE_I18N][this.$lang].charAt(0).toUpperCase()+
+                metadata[this.o.metadataOptions.TITLE_I18N][this.$lang].substr(1).toLowerCase();
         } else if (metadata[this.o.metadataOptions.TITLE_DEFAULT]) {
-            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = metadata[this.o.metadataOptions.TITLE_DEFAULT]
+            result[this.o.defaultOptions.TITLE_ATTRIBUTE] =
+                metadata[this.o.metadataOptions.TITLE_DEFAULT].charAt(0).toUpperCase() +
+            metadata[this.o.metadataOptions.TITLE_DEFAULT].substr(1).toLowerCase();
         } else {
-            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = attribute;
+            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = attribute.charAt(0).toUpperCase() +attribute.substr(1).toLowerCase();
         }
     };
 
@@ -344,7 +348,8 @@ define(
     ModelCreator.prototype._fillDescription = function (metadata, attribute, result) {
 
         if (metadata[this.o.metadataOptions.DESC_I18N] && metadata[this.o.metadataOptions.DESC_I18N][this.$lang] && metadata[this.o.metadataOptions.DESC_I18N][this.$lang] != '') {
-            result[this.o.defaultOptions.DESCRIPTION_ATTRIBUTE] = metadata[this.o.metadataOptions.DESC_I18N][this.$lang];
+            result[this.o.defaultOptions.DESCRIPTION_ATTRIBUTE] =
+                metadata[this.o.metadataOptions.DESC_I18N][this.$lang];
         } else if (metadata[this.o.metadataOptions.DESC_DEFAULT]) {
             result[this.o.defaultOptions.DESCRIPTION_ATTRIBUTE] = metadata[this.o.metadataOptions.DESC_DEFAULT]
         } else {

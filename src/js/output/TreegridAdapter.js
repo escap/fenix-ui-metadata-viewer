@@ -206,8 +206,6 @@ define(['jquery',
             $(this.o.s.table_container + " tr > td", this.$el).off();
             $(this.o.s.treegrid_expander_arrow, this.$el).off();
             $(this.$el).off();
-
-
         };
 
         return TreegridAdapter;
