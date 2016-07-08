@@ -1,15 +1,13 @@
-define(
-    ['jquery',
+define([
+    'jquery',
     'fx-md-v/config/config',
     'fx-md-v/config/config-default',
     'text!fx-md-v/config/special_metadata_fenix.json',
-    'q',
+    "fx-common/bridge",
     'moment'
-], function ($, C, DC, SpecialFields, Q, Moment) {
-
+], function ($, C, DC, SpecialFields, Bridge, Moment) {
 
     'use strict';
-
 
     var o = {
         viewerOptions: {
@@ -23,7 +21,7 @@ define(
             NOVALUE_OBJECT: {
                 'noValue': true
             },
-            HARMONIZE_TITLE:true
+            HARMONIZE_TITLE: true
         },
         metadataOptions: {
             PROPERTIES_ATTR: 'properties',
@@ -51,56 +49,40 @@ define(
         }
     };
 
+    function ModelCreator() {
+    }
 
-    function ModelCreator() {}
+    ModelCreator.prototype.init = function (opts, callback) {
 
+        var self = this;
+        this.o = $.extend(true, this.o, o, opts);
 
-    ModelCreator.prototype.init = function (opts) {
-        this.o = $.extend(true, {}, o, opts);
-        this._initVariables();
-        this.getMDSD();
-        this.initInternModelDAta();
+        this.callback = callback;
+
+        this.bridge = new Bridge({
+            environment: this.o.environment,
+            cache: this.o.cache
+        });
+
+        this.getMDSD().then(function (data) {
+            self.$mdsd = data;
+            self.initInternModelData();
+            self._startInternModelData(callback);
+            self.callback();
+        });
+
     };
-
-
-    ModelCreator.prototype._initVariables = function () {
-
-        this.$originalMetadata = this.o.data;
-        this.$prefixUrlMetadata = C.SERVICE_BASE_ADDRESS || DC.SERVICE_BASE_ADDRESS;
-        this.$urlMDSD = C.SERVICE_MDSD_ADDRESS || DC.SERVICE_MDSD_ADDRESS;
-
-    };
-
 
     ModelCreator.prototype.getInternModelData = function () {
         return {'title': this.$title, 'model': this.$internDataModel};
     };
 
-
     ModelCreator.prototype.getMDSD = function () {
 
-        var self = this;
-
-        $.ajax({
-            type: 'GET',
-            async: false,
-            url: self.$urlMDSD,
-            context: this,
-            contentType: 'application/json',
-            success: function (data, textStatus, jqXHR) {
-
-                if (jqXHR.status === 200) {
-                    self.$mdsd = data
-                } else {
-                    throw new Error("Status code was " + jqXHR.status);
-                }
-            }
-        });
-
+        return this.bridge.getMDSD();
     };
 
-
-    ModelCreator.prototype._startInternModelData = function(callback) {
+    ModelCreator.prototype._startInternModelData = function (callback) {
         var data = this.o.data,
             properties = this.$properties;
         this.$internDataModel = this._prepareInternModelData(data, properties, 0, callback);
@@ -108,7 +90,7 @@ define(
     };
 
 
-    ModelCreator.prototype.initInternModelDAta = function () {
+    ModelCreator.prototype.initInternModelData = function () {
 
         if (this._checkValidityOfData()) {
             this.$definitions = this.$mdsd.definitions;
@@ -116,6 +98,8 @@ define(
             this.$lang = this.o.lang;
             this.$title = this._getTitleFromData();
             this.$specialFields = JSON.parse(SpecialFields);
+        } else {
+            alert("Invalid MDSD")
         }
     };
 
@@ -157,7 +141,7 @@ define(
                             var temporaryObject = {};
                             temporaryObject = this._addRecursiveModel(metadata[attribute], attribute);
 
-                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], metadata[attribute][this.o.metadataOptions.PROPERTIES_ATTR],counter+1)
+                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], metadata[attribute][this.o.metadataOptions.PROPERTIES_ATTR], counter + 1)
                             result.push(temporaryObject);
 
                         }
@@ -173,7 +157,7 @@ define(
 
                             temporaryObject = this._addRecursiveModel(metadata[attribute], attribute);
                             var refAttribute = this._getAttributeFromReference(metadata[attribute]);
-                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR],counter+1);
+                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR], counter + 1);
                             result.push(temporaryObject);
 
                         }
@@ -195,7 +179,7 @@ define(
 
                             for (var j = 0, lengthArray = data[attribute].length; j < lengthArray; j++) {
 
-                                temporaryObject['value'] = temporaryObject['value'].concat(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR], counter+1));
+                                temporaryObject['value'] = temporaryObject['value'].concat(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR], counter + 1));
                             }
                             result.push(temporaryObject);
                         }
@@ -207,7 +191,7 @@ define(
         counter--;
 
 
-        if (counter ==-1) {
+        if (counter == -1) {
             this.$internDataModel = result;
             callback(result);
         }
@@ -333,14 +317,14 @@ define(
 
         if (metadata[this.o.metadataOptions.TITLE_I18N] && metadata[this.o.metadataOptions.TITLE_I18N][this.$lang] && metadata[this.o.metadataOptions.TITLE_I18N][this.$lang] != '') {
             result[this.o.defaultOptions.TITLE_ATTRIBUTE] =
-                metadata[this.o.metadataOptions.TITLE_I18N][this.$lang].charAt(0).toUpperCase()+
+                metadata[this.o.metadataOptions.TITLE_I18N][this.$lang].charAt(0).toUpperCase() +
                 metadata[this.o.metadataOptions.TITLE_I18N][this.$lang].substr(1).toLowerCase();
         } else if (metadata[this.o.metadataOptions.TITLE_DEFAULT]) {
             result[this.o.defaultOptions.TITLE_ATTRIBUTE] =
                 metadata[this.o.metadataOptions.TITLE_DEFAULT].charAt(0).toUpperCase() +
-            metadata[this.o.metadataOptions.TITLE_DEFAULT].substr(1).toLowerCase();
+                metadata[this.o.metadataOptions.TITLE_DEFAULT].substr(1).toLowerCase();
         } else {
-            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = attribute.charAt(0).toUpperCase() +attribute.substr(1).toLowerCase();
+            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = attribute.charAt(0).toUpperCase() + attribute.substr(1).toLowerCase();
         }
     };
 

@@ -7,6 +7,9 @@ define(function () {
 
     return {
 
+        cache : false,
+        lang : 'EN',
+
         SERVICE_BASE_ADDRESS: host,
 
         IS_METADATA_FENIX : true,

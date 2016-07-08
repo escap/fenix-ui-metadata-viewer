@@ -12,17 +12,11 @@ define([
 
     MainController.prototype.init = function (opts) {
 
-        this.o = $.extend(true,{}, opts);
+        this.o = $.extend(true,this.o, opts);
 
         this.$modelCreator = new ModelCreator;
 
-        this.$modelCreator.init(this.o);
-
-        this.$modelCreator._startInternModelData(_.bind(this.render, this))
-
-    };
-
-    MainController.prototype._initVariables  =function() {
+        this.$modelCreator.init(this.o, _.bind(this.render, this));
 
     };
 
@@ -37,13 +31,11 @@ define([
         this.$viewAdapter._visualizeData(this.$viewAdapter._onListening());
     };
 
-
     MainController.prototype.destroy  =function() {
 
         this.$viewAdapter.destroy();
 
     };
-
 
     return MainController;
 });

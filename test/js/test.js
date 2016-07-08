@@ -10,13 +10,14 @@ define([
 
     var s = {
             STANDARD: "#standard",
-            SECOND : "#second"
+            SECOND: "#second"
         },
         empty_model = {data: []},
         error_model = {},
         valid_model = JSON.parse(UnecaModel);
 
-    function Test() {  }
+    function Test() {
+    }
 
     Test.prototype.start = function () {
 
@@ -38,11 +39,10 @@ define([
 
         log.trace("Rendering standard metadata viewer: start");
 
-        var metadataViewer = new MetadataViewer();
-
-        metadataViewer.render({
+        var metadataViewer = new MetadataViewer({
             model: valid_model,
             lang: 'en',
+            environment : "develop",
             el: $(s.STANDARD)
         });
 
@@ -53,9 +53,7 @@ define([
 
         log.trace("Rendering second metadata viewer: start");
 
-        var metadataViewer = new MetadataViewer();
-
-        metadataViewer.render({
+        var metadataViewer = new MetadataViewer({
             model: valid_model,
             lang: 'en',
             el: $(s.SECOND)

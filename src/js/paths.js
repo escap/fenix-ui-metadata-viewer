@@ -16,7 +16,7 @@ define(function () {
             'fx-md-v/output/TreegridAdapter': './output/TreegridAdapter',
             'fx-md-v/template': '../../html/templates',
             'fx-md-v/config': '../../config',
-            'fx-md-v/start' : 'start'
+            'fx-md-v/start' : 'metadataViewer'
         },
         shim: {
             bootstrap: {
