@@ -1,15 +1,11 @@
-define(
-    ['jquery',
-    'fx-md-v/config/config',
-    'fx-md-v/config/config-default',
-    'text!fx-md-v/config/special_metadata_fenix.json',
-    'q',
+/*global define*/
+define([
+    'jquery',
+    'text!fx-md-v/config/specialMetadataAttributes.json',
     'moment'
-], function ($, C, DC, SpecialFields, Q, Moment) {
+], function ($, SpecialFields, Moment) {
 
-
-    'use strict'
-
+    'use strict';
 
     var o = {
         viewerOptions: {
@@ -22,7 +18,8 @@ define(
             DESCRIPTION_ATTRIBUTE: 'description',
             NOVALUE_OBJECT: {
                 'noValue': true
-            }
+            },
+            HARMONIZE_TITLE: true
         },
         metadataOptions: {
             PROPERTIES_ATTR: 'properties',
@@ -50,87 +47,61 @@ define(
         }
     };
 
+    function ModelCreator(opts) {
 
-    function ModelCreator() {
+        this.o = $.extend(true, {}, this.o, o, opts);
+
+        return this;
+    }
+
+    /**
+     * Return the processed model
+     * @param data
+     * @returns {{title, model}}
+     */
+    ModelCreator.prototype.process = function (data) {
+
+        this.$mdsd = data;
+
+        this._initInternModelData();
+
+        this._startInternModelData();
+
+        return this._getInternModelData();
+
     };
 
-
-    ModelCreator.prototype.init = function (opts) {
-        this.o = $.extend(true, {}, o, opts);
-        this._initVariables();
-        this.getMDSD();
-        this.initInternModelDAta();
-    };
-
-
-    ModelCreator.prototype._initVariables = function () {
-
-        this.$originalMetadata = this.o.data;
-        this.$prefixUrlMetadata = C.SERVICE_BASE_ADDRESS || DC.SERVICE_BASE_ADDRESS;
-        this.$urlMDSD = C.SERVICE_MDSD_ADDRESS || DC.SERVICE_MDSD_ADDRESS;
-
-    };
-
-
-    ModelCreator.prototype.getInternModelData = function () {
+    ModelCreator.prototype._getInternModelData = function () {
         return {'title': this.$title, 'model': this.$internDataModel};
     };
 
+    ModelCreator.prototype._initInternModelData = function () {
 
-    ModelCreator.prototype.getMDSD = function () {
-
-        var self = this;
-
-        $.ajax({
-            type: 'GET',
-            async: false,
-            url: self.$urlMDSD,
-            context: this,
-            contentType: 'application/json',
-            success: function (data, textStatus, jqXHR) {
-
-                if (jqXHR.status === 200) {
-                    self.$mdsd = data
-                } else {
-                    throw new Error("Status code was " + jqXHR.status);
-                }
-            },
-        });
-
+        this.$definitions = this.$mdsd.definitions;
+        this.$properties = this.$mdsd.properties;
+        this.$lang = this.o.lang;
+        this.$title = this._getTitleFromData();
+        this.$specialFields = JSON.parse(SpecialFields);
     };
 
+    ModelCreator.prototype._startInternModelData = function () {
 
-    ModelCreator.prototype._startInternModelData = function(callback) {
         var data = this.o.data,
             properties = this.$properties;
-        this.$internDataModel = this._prepareInternModelData(data, properties, 0, callback);
+
+        this.$internDataModel = this._prepareInternModelData(data, properties, 0);
 
     };
-
-
-    ModelCreator.prototype.initInternModelDAta = function () {
-
-        if (this._checkValidityOfData()) {
-            this.$definitions = this.$mdsd.definitions;
-            this.$properties = this.$mdsd.properties;
-            this.$lang = this.o.lang;
-            this.$title = this._getTitleFromData();
-            this.$specialFields = JSON.parse(SpecialFields);
-        }
-    };
-
 
     ModelCreator.prototype._isASpecialAttribute = function (attribute) {
         return typeof this.$specialFields[attribute] !== 'undefined';
     };
 
-
-    ModelCreator.prototype._prepareInternModelData = function (data, metadata, counter, callback) {
+    ModelCreator.prototype._prepareInternModelData = function (data, metadata, counter) {
 
         var result = [];
 
         var metadataSorted = this._sortMetadataByPropertyOrder(metadata);
-
 
         for (var i = 0, length = metadataSorted.length; i < length; i++) {
 
@@ -157,7 +128,7 @@ define(
                             var temporaryObject = {};
                             temporaryObject = this._addRecursiveModel(metadata[attribute], attribute);
 
-                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], metadata[attribute][this.o.metadataOptions.PROPERTIES_ATTR],counter+1)
+                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], metadata[attribute][this.o.metadataOptions.PROPERTIES_ATTR], counter + 1)
                             result.push(temporaryObject);
 
                         }
@@ -173,7 +144,7 @@ define(
 
                             temporaryObject = this._addRecursiveModel(metadata[attribute], attribute);
                             var refAttribute = this._getAttributeFromReference(metadata[attribute]);
-                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR],counter+1);
+                            temporaryObject['value'] = this._prepareInternModelData(data[attribute], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR], counter + 1);
                             result.push(temporaryObject);
 
                         }
@@ -195,7 +166,7 @@ define(
 
                             for (var j = 0, lengthArray = data[attribute].length; j < lengthArray; j++) {
 
-                                temporaryObject['value'] = temporaryObject['value'].concat(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR], counter+1));
+                                temporaryObject['value'] = temporaryObject['value'].concat(this._prepareInternModelData(data[attribute][j], this.$definitions[refAttribute][this.o.metadataOptions.PROPERTIES_ATTR], counter + 1));
                             }
                             result.push(temporaryObject);
                         }
@@ -204,16 +175,15 @@ define(
                 }
             }
         }
+
         counter--;
 
-
-        if (counter ==-1) {
+        if (counter == -1) {
             this.$internDataModel = result;
-            callback(result);
         }
+
         return result;
     };
-
 
     ModelCreator.prototype._sortMetadataByPropertyOrder = function (metadata) {
 
@@ -228,7 +198,6 @@ define(
         return sortedElements;
     };
 
-
     ModelCreator.prototype._existsPatternPropertiesValue = function (objectWithPattern) {
         if (objectWithPattern[(this.$lang).toUpperCase()] && objectWithPattern[(this.$lang).toUpperCase()] !== '') {
             return true
@@ -239,35 +208,29 @@ define(
         }
     };
 
-
     ModelCreator.prototype._existsPropertiesAttribute = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.PROPERTIES_ATTR) && Object.keys(objectMetadata[this.o.metadataOptions.PROPERTIES_ATTR]).length > 0
     };
-
 
     ModelCreator.prototype._existsPatternProperties = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.PATTERN_PROPERTIES) &&
             Object.keys(objectMetadata[this.o.metadataOptions.PATTERN_PROPERTIES]).length > 0
     };
 
-
     ModelCreator.prototype._existsAReference = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.REF_TYPE) &&
             Object.keys(objectMetadata[this.o.metadataOptions.REF_TYPE]).length > 0
     };
-
 
     ModelCreator.prototype._isObjectAttribute = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) &&
             objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.OBJECT_TYPE;
     };
 
-
     ModelCreator.prototype._isAnArrayAttribute = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.TYPE_ATTRIBUTE) &&
             objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.ARRAY_TYPE;
     };
-
 
     ModelCreator.prototype._getTitleFromData = function () {
         var result = "";
@@ -292,7 +255,7 @@ define(
         this._fillTitle(metadata, attribute, result);
         this._fillDescription(metadata, attribute, result);
         this._fillAttributeBean(attribute, result);
-        this._fillChildrenAttribute(result)
+        this._fillChildrenAttribute(result);
         return result;
     };
 
@@ -303,7 +266,6 @@ define(
         this._fillAttributeBean(attribute, result);
         return result;
     };
-
 
     ModelCreator.prototype._addBaseModel = function (metadata, data, attribute) {
         var result = {};
@@ -317,7 +279,6 @@ define(
         return result;
     };
 
-
     ModelCreator.prototype._addPatternModel = function (metadata, data, attribute) {
         var result = {};
         this._fillTitle(metadata, attribute, result);
@@ -328,30 +289,32 @@ define(
         return result;
     };
 
-
     ModelCreator.prototype._fillTitle = function (metadata, attribute, result) {
 
         if (metadata[this.o.metadataOptions.TITLE_I18N] && metadata[this.o.metadataOptions.TITLE_I18N][this.$lang] && metadata[this.o.metadataOptions.TITLE_I18N][this.$lang] != '') {
-            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = metadata[this.o.metadataOptions.TITLE_I18N][this.$lang];
+            result[this.o.defaultOptions.TITLE_ATTRIBUTE] =
+                metadata[this.o.metadataOptions.TITLE_I18N][this.$lang].charAt(0).toUpperCase() +
+                metadata[this.o.metadataOptions.TITLE_I18N][this.$lang].substr(1).toLowerCase();
         } else if (metadata[this.o.metadataOptions.TITLE_DEFAULT]) {
-            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = metadata[this.o.metadataOptions.TITLE_DEFAULT]
+            result[this.o.defaultOptions.TITLE_ATTRIBUTE] =
+                metadata[this.o.metadataOptions.TITLE_DEFAULT].charAt(0).toUpperCase() +
+                metadata[this.o.metadataOptions.TITLE_DEFAULT].substr(1).toLowerCase();
         } else {
-            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = attribute;
+            result[this.o.defaultOptions.TITLE_ATTRIBUTE] = attribute.charAt(0).toUpperCase() + attribute.substr(1).toLowerCase();
         }
     };
-
 
     ModelCreator.prototype._fillDescription = function (metadata, attribute, result) {
 
         if (metadata[this.o.metadataOptions.DESC_I18N] && metadata[this.o.metadataOptions.DESC_I18N][this.$lang] && metadata[this.o.metadataOptions.DESC_I18N][this.$lang] != '') {
-            result[this.o.defaultOptions.DESCRIPTION_ATTRIBUTE] = metadata[this.o.metadataOptions.DESC_I18N][this.$lang];
+            result[this.o.defaultOptions.DESCRIPTION_ATTRIBUTE] =
+                metadata[this.o.metadataOptions.DESC_I18N][this.$lang];
         } else if (metadata[this.o.metadataOptions.DESC_DEFAULT]) {
             result[this.o.defaultOptions.DESCRIPTION_ATTRIBUTE] = metadata[this.o.metadataOptions.DESC_DEFAULT]
         } else {
             result[this.o.defaultOptions.DESCRIPTION_ATTRIBUTE] = '';
         }
     };
-
 
     ModelCreator.prototype._isCaseBase = function (objectMetadata) {
 
@@ -361,7 +324,6 @@ define(
             objectMetadata[this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.BOOLEAN_TYPE)
     };
 
-
     ModelCreator.prototype._isASimpleArrayItem = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.ITEMS_PROPERTIES) && (
             objectMetadata[this.o.metadataOptions.ITEMS_PROPERTIES][this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.STRING_TYPE ||
@@ -369,18 +331,15 @@ define(
             objectMetadata[this.o.metadataOptions.ITEMS_PROPERTIES][this.o.metadataOptions.TYPE_ATTRIBUTE] === this.o.metadataOptions.BOOLEAN_TYPE)
     };
 
-
     ModelCreator.prototype._isARefArrayItem = function (objectMetadata) {
         return objectMetadata.hasOwnProperty(this.o.metadataOptions.ITEMS_PROPERTIES) &&
             objectMetadata[this.o.metadataOptions.ITEMS_PROPERTIES][this.o.metadataOptions.REF_TYPE] &&
             Object.keys(objectMetadata[this.o.metadataOptions.ITEMS_PROPERTIES][this.o.metadataOptions.REF_TYPE]).length > 0
     };
 
-
     ModelCreator.prototype._isASpecialAttribute = function (attribute) {
         return typeof this.$specialFields[attribute] !== 'undefined';
     };
-
 
     ModelCreator.prototype._handleFenixCodes = function (data, metadata, attribute) {
         var result = {};
@@ -403,32 +362,21 @@ define(
         return result;
     };
 
-
     ModelCreator.prototype._fillAttributeBean = function (attributeObject, result) {
         result[this.o.metadataOptions.BEAN] = attributeObject;
     };
-
 
     ModelCreator.prototype._fillChildrenAttribute = function (result) {
         result[this.o.metadataOptions.HAS_CHILDREN] = true;
     };
 
-
     ModelCreator.prototype._fillNoChildrenAttribute = function (result) {
         result[this.o.metadataOptions.HAS_CHILDREN] = false;
     };
 
-
     ModelCreator.prototype._getAttributeFromReference = function (objectMetadata) {
         return objectMetadata[this.o.metadataOptions.REF_TYPE].substr(this.o.metadataOptions.SUBSTR_ROOT_DEFINITIONS)
     };
-
-
-    ModelCreator.prototype._checkValidityOfData = function () {
-        //TODO: check validty of data
-        return this.o.data && this.o.data != null && this.$mdsd && this.$mdsd != null;
-    };
-
 
     return ModelCreator;
 });

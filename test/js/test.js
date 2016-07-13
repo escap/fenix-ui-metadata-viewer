@@ -10,13 +10,16 @@ define([
 
     var s = {
             STANDARD: "#standard",
-            SECOND : "#second"
+            SECOND: "#second",
+            DISPOSE_BTN: "[data-role='dispose']"
         },
         empty_model = {data: []},
         error_model = {},
+        lang = 'en',
         valid_model = JSON.parse(UnecaModel);
 
-    function Test() {  }
+    function Test() {
+    }
 
     Test.prototype.start = function () {
 
@@ -38,13 +41,29 @@ define([
 
         log.trace("Rendering standard metadata viewer: start");
 
-        var metadataViewer = new MetadataViewer();
-
-        metadataViewer.render({
+        var metadataViewer = new MetadataViewer({
             model: valid_model,
-            lang: 'en',
-            el: $(s.STANDARD)
-        });
+            lang: lang,
+            environment: "develop",
+            el: s.STANDARD,
+            export: true,
+            expandedRecursiveAttributes: ['meContent'],
+            popover: {
+                placement: 'left'
+            }
+        })
+            .on("ready", function (model) {
+                log.warn("listening 'ready' event");
+                log.warn(model);
+
+                $(s.DISPOSE_BTN).on("click", function () {
+                    metadataViewer.dispose();
+                })
+            })
+            .on("export", function (model) {
+                log.warn("listening 'export' event");
+                log.warn(model);
+            });
 
         log.trace("Rendering standard metadata viewer: end");
     };
@@ -53,12 +72,10 @@ define([
 
         log.trace("Rendering second metadata viewer: start");
 
-        var metadataViewer = new MetadataViewer();
-
-        metadataViewer.render({
+        var metadataViewer = new MetadataViewer({
             model: valid_model,
-            lang: 'en',
-            el: $(s.SECOND)
+            lang: lang,
+            el: s.SECOND
         });
 
         log.trace("Rendering second metadata viewer: end");

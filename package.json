@@ -1,38 +1,36 @@
 {
-  "name": "fenix-ui-chaplinjs-skeleton",
-  "version": "0.1",
-  "description": "FENIX Skeleton based on ChaplinJS",
-  "homepage": "https://github.com/FENIX-Platform/fenix-ui-chaplinjs-skeleton",
-  "author": "FENIX Development Team",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:FENIX-Platform/fenix-ui-chaplinjs-skeleton.git"
-  },
-  "bugs": {
-    "url": "https://github.com/FENIX-Platform/fenix-ui-chaplinjs-skeleton/issues"
-  },
-  "license": "GPL3",
-  "keywords": [
-    "fenix",
-    "platform"
-  ],
-  "dependencies": {
-
-  },
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-cli": "~0.1.11",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-jsonlint": "~1.0.4",
-    "grunt-jsdoc": "~0.5.4"
+  "name": "fenix-ui-metadata-viewer",
+  "version": "2.0.0-beta.0",
+  "description": "FENIX metadata viewer",
+  "main": "src/js/metadataViewer.js",
+  "directories": {
+    "test": "test"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "main": "main.js"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FENIX-Platform/fenix-ui-metadata-viewer.git"
+  },
+  "keywords": [
+    "fenix",
+    "metadata",
+    "viewer"
+  ],
+  "author": "FENIX team (http://fenix.fao.org/)",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/FENIX-Platform/fenix-ui-metadata-viewer/issues"
+  },
+  "homepage": "https://github.com/FENIX-Platform/fenix-ui-metadata-viewer#readme",
+  "dependencies": {
+    "amplify": "0.0.11",
+    "handlebars": "4.0.5",
+    "jquery": "3.1.0",
+    "moment": "2.14.1"
+  },
+  "devDependencies": {
+    "jquery-treegrid": "0.3.0"
+  }
 }
