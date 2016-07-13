@@ -2,7 +2,7 @@
 
 ```javascript
 
-var Viewer = require('fx-md-v/start/start');
+var Viewer = require('fx-md-v/start');
 
 var viewer = new Viewer(options);
 ```

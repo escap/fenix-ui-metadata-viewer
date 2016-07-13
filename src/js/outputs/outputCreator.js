@@ -2,14 +2,13 @@
 
 define([
     'jquery',
-    'underscore',
     'loglevel',
     'fx-md-v/config/config',
     'text!fx-md-v/html/template.hbs',
     'fx-md-v/config/events',
     'handlebars',
     'treegrid'
-], function ($, _, log, C, Template, EVT, Handlebars) {
+], function ($, log, C, Template, EVT, Handlebars) {
 
     'use strict';
 

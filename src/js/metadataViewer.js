@@ -2,7 +2,6 @@
 define([
     'jquery',
     'require',
-    'underscore',
     'loglevel',
     'fx-md-v/config/errors',
     'fx-md-v/config/events',
@@ -10,7 +9,7 @@ define([
     'fx-md-v/models/modelCreator',
     'fx-md-v/outputs/outputCreator',
     "fx-common/bridge"
-], function ($, require, _, log, ERR, EVT, C, ModelCreator, OutputCreator, Bridge) {
+], function ($, require, log, ERR, EVT, C, ModelCreator, OutputCreator, Bridge) {
 
     'use strict';
 
@@ -31,8 +30,8 @@ define([
             this._bindEventListeners();
 
             this._getMDSD().then(
-                _.bind(this._onGetMDSDSuccess, this),
-                _.bind(this._onGetMDSDError, this)
+                $.proxy(this._onGetMDSDSuccess, this),
+                $.proxy(this._onGetMDSDError, this)
             );
 
             return this;
