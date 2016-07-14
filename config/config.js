@@ -38,11 +38,11 @@ define(function () {
              "role": true*/
         },
 
-        export: false,
+        hideExportButton: true,
 
-        expandedSingleAttributes: [],
+        expandAttributes: [],
 
-        expandedRecursiveAttributes: []
+        expandAttributesRecursively: []
 
     };
 });

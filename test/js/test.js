@@ -46,8 +46,8 @@ define([
             lang: lang,
             environment: "develop",
             el: s.STANDARD,
-            export: true,
-            expandedRecursiveAttributes: ['meContent'],
+            hideExportButton: false,
+            expandAttributesRecursively: ['meContent'],
             popover: {
                 placement: 'left'
             }

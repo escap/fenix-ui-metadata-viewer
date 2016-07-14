@@ -1,4 +1,4 @@
-# FENIX Visualization box
+# FENIX metadata viewer
 
 ```javascript
 
@@ -72,18 +72,18 @@ Check `fx-md-v/config/config.js` to have a look of the default configuration.
          <td>Whether or not to show export button</td>
       </tr>
       <tr>
-         <td>expandedSingleAttributes</td>
+         <td>expandAttributes</td>
          <td>Array of metadata attributes</td>
          <td>[]</td>
          <td>["uid"]</td>
-         <td>Expanded single metadata attributes by default</td>
+         <td>Expand metadata attributes by default</td>
       </tr>
       <tr>
-         <td>expandedRecursiveAttributes</td>
+         <td>expandAttributesRecursively</td>
          <td>Array of metadata attributes</td>
          <td>[]</td>
          <td>['meContent']</td>
-         <td>Expanded recursive metadata attributes by default</td>
+         <td>Expand metadata attributes and their children by default</td>
       </tr>
       <tr>
          <td>environment</td>

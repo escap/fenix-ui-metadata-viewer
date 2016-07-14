@@ -103,11 +103,11 @@ define([
 
         this.whiteList = this.initial.whiteList || C.whiteList;
 
-        this.expandedRecursiveAttributes = this.initial.expandedRecursiveAttributes || C.expandedRecursiveAttributes;
-        this.expandedSingleAttributes = this.initial.expandedSingleAttributes || C.expandedSingleAttributes;
+        this.expandAttributesRecursively = this.initial.expandAttributesRecursively || C.expandAttributesRecursively;
+        this.expandAttributes = this.initial.expandAttributes || C.expandAttributes;
 
-        this.export = typeof this.initial.export === 'boolean' ? this.initial.export : C.export;
-
+        this.hideExportButton = typeof this.initial.hideExportButton === 'boolean' ? this.initial.hideExportButton : C.hideExportButton;
+        
     };
 
     MetadataViewer.prototype._validateInput = function () {
@@ -150,12 +150,12 @@ define([
 
         this.outputCreator = new OutputCreator({
             el: this.$el,
-            export: this.export,
+            hideExportButton: this.hideExportButton,
             popover: this.popover,
             whiteList: this.whiteList,
             config: this.config,
-            expandedRecursiveAttributes: this.expandedRecursiveAttributes,
-            expandedSingleAttributes: this.expandedSingleAttributes,
+            expandAttributesRecursively: this.expandAttributesRecursively,
+            expandAttributes: this.expandAttributes,
 
         });
 
@@ -207,8 +207,6 @@ define([
     MetadataViewer.prototype._processModel = function () {
 
         this.outputModel = this.modelCreator.process(this.mdsd);
-
-        this._renderOutput();
 
     };
 
