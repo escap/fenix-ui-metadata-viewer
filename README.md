@@ -65,10 +65,10 @@ Check `fx-md-v/config/config.js` to have a look of the default configuration.
          <td>-</td>
       </tr>
       <tr>
-         <td>export</td>
+         <td>hideExportButton</td>
          <td>boolean</td>
-         <td>false</td>
          <td>true</td>
+         <td>false</td>
          <td>Whether or not to show export button</td>
       </tr>
       <tr>
