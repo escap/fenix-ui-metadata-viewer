@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-xs-12">
                 <h4 class="fx-md-viewer-title ">{{{title_resource}}}
-                    {{#if hasExport}}
+                    {{#unless hideExportButton}}
                         <button data-role="export" type="button" class="fx-md-report-btn btn pull-right">Export Metadata</button>
-                    {{/if}}
+                    {{/unless}}
                 </h4>
 
             </div>

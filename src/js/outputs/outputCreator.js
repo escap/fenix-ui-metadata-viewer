@@ -44,9 +44,9 @@ define([
         this.$whitelist = this.o.whiteList;
         this.$treegridSettings = this.o.config;
         this.$popoverSettings = this.o.popover;
-        this.$hasExport = this.o.export;
-        this.expandedRecursiveAttributes = this.o.expandedRecursiveAttributes;
-        this.expandedSingleAttributes = this.o.expandedSingleAttributes;
+        this.hideExportButton = this.o.hideExportButton;
+        this.expandAttributesRecursively = this.o.expandAttributesRecursively;
+        this.expandAttributes = this.o.expandAttributes;
 
     }
 
@@ -57,9 +57,7 @@ define([
 
         this.$visualizationData = this._transformDataToVisualizationModel(model.model, 'noParent', 0);
 
-        this.$dataForTreeGRid = (this.$hasExport == true) ?
-        {'title_resource': model.title, 'data': this.$visualizationData, 'hasExport': this.$hasExport} :
-        {'title_resource': model.title, 'data': this.$visualizationData};
+        this.$dataForTreeGRid = {'title_resource': model.title, 'data': this.$visualizationData, 'hideExportButton': this.hideExportButton};
 
         if (Object.keys(this.$whitelist).length > 0) {
             this.$dataForTreeGRid.data = this._filterWhiteList();
@@ -203,7 +201,7 @@ define([
 
     OutputCreator.prototype._checkExpandNodesOptions = function () {
 
-        var opts = [this.expandedRecursiveAttributes, this.expandedSingleAttributes];
+        var opts = [this.expandAttributesRecursively, this.expandAttributes];
 
         for (var i = 0; i < opts.length; i++) {
             if (opts[i] && opts[i].length > 0) {
