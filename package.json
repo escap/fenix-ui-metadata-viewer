@@ -1,6 +1,6 @@
 {
   "name": "fenix-ui-metadata-viewer",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0",
   "description": "FENIX metadata viewer",
   "main": "src/js/metadataViewer.js",
   "directories": {
