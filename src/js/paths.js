@@ -1,4 +1,6 @@
-/*global define*/
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
 
 define(function () {
 
@@ -13,8 +15,8 @@ define(function () {
             treegrid: '{FENIX_CDN}/js/jquery-treegrid/0.3.0/js/jquery.treegrid.min',
             moment: '{FENIX_CDN}/js/moment/2.12.0/min/moment.min',
 
-            'fx-md-v/config': '../../config',
-            'fx-md-v/html': '../../html',
+            'fx-md-v/config': '../config',
+            'fx-md-v/html': '../html',
             'fx-md-v/models': './models/',
             'fx-md-v/outputs': './outputs/',
             'fx-md-v/start': './metadataViewer'
