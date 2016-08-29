@@ -1,4 +1,6 @@
-/*global require*/
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
 
 var pathProjectRoot = "../../../";
 var projectRoot = "./";
