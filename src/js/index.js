@@ -1,17 +1,14 @@
-if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
-}
 define([
     'jquery',
-    'require',
     'loglevel',
-    'fx-md-v/config/errors',
-    'fx-md-v/config/events',
-    'fx-md-v/config/config',
-    'fx-md-v/models/modelCreator',
-    'fx-md-v/outputs/outputCreator',
-    "fx-common/bridge"
-], function ($, require, log, ERR, EVT, C, ModelCreator, OutputCreator, Bridge) {
+    '../config/errors',
+    '../config/events',
+    '../config/config',
+    'src/js/models/modelCreator',
+    'src/js/outputs/outputCreator',
+    "fenix-ui-bridge",
+    "amplify-pubsub"
+], function ($, log, ERR, EVT, C, ModelCreator, OutputCreator, Bridge, amplify) {
 
     'use strict';
 

@@ -1,16 +1,12 @@
-if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
-}
-
 define([
     'jquery',
     'loglevel',
-    'fx-md-v/config/config',
-    'text!fx-md-v/html/template.hbs',
-    'fx-md-v/config/events',
+    '../../config/config',
+    '../../config/events',
+    '../../html/template.hbs',
     'handlebars',
     'treegrid'
-], function ($, log, C, Template, EVT, Handlebars) {
+], function ($, log, C, EVT, Template, Handlebars) {
 
     'use strict';
 

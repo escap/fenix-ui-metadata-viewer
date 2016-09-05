@@ -1,10 +1,9 @@
 define([
     'loglevel',
     'jquery',
-    'fx-md-v/start',
-    'text!test/assets/uneca_population.json',
-    'text!test/assets/GN.json'
-], function (log, $, MetadataViewer, UnecaModel, GN) {
+    '../../src/js/index',
+    '../../assets/uneca_population.json'
+], function (log, $, MetadataViewer, UnecaModel) {
 
     'use strict';
 
@@ -18,18 +17,18 @@ define([
         lang = 'en',
         valid_model = JSON.parse(UnecaModel);
 
-    function Test() {
+    function Dev() {
+        console.log("dev");
+        log.setLevel('trace')
+        this.start();
     }
 
-    Test.prototype.start = function () {
-
+    Dev.prototype.start = function () {
         log.trace("Test started");
-
         this._render();
-
     };
 
-    Test.prototype._render = function () {
+    Dev.prototype._render = function () {
 
         this._renderStandard();
 
@@ -37,7 +36,7 @@ define([
 
     };
 
-    Test.prototype._renderStandard = function () {
+    Dev.prototype._renderStandard = function () {
 
         log.trace("Rendering standard metadata viewer: start");
 
@@ -68,7 +67,7 @@ define([
         log.trace("Rendering standard metadata viewer: end");
     };
 
-    Test.prototype._renderSecond = function () {
+    Dev.prototype._renderSecond = function () {
 
         log.trace("Rendering second metadata viewer: start");
 
@@ -81,6 +80,6 @@ define([
         log.trace("Rendering second metadata viewer: end");
     };
 
-    return new Test();
+    return new Dev();
 
 });
