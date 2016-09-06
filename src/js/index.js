@@ -195,6 +195,7 @@ define([
 
     MetadataViewer.prototype._render = function () {
 
+
         this._processModel();
 
         this._renderOutput();
@@ -204,14 +205,17 @@ define([
     };
 
     MetadataViewer.prototype._processModel = function () {
+        console.log("MAVERICK render 3")
 
         this.outputModel = this.modelCreator.process(this.mdsd);
 
+        console.log("MAVERICK render 4")
     };
 
     MetadataViewer.prototype._renderOutput = function () {
 
         this.outputCreator.render(this.outputModel);
+
     };
 
     MetadataViewer.prototype._onExport = function () {

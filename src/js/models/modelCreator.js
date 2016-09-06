@@ -80,7 +80,7 @@ define([
         this.$properties = this.$mdsd.properties;
         this.$lang = this.o.lang;
         this.$title = this._getTitleFromData();
-        this.$specialFields = JSON.parse(SpecialFields);
+        this.$specialFields = SpecialFields;
     };
 
     ModelCreator.prototype._startInternModelData = function () {

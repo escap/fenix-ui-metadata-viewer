@@ -21,8 +21,8 @@ module.exports = {
         root: Path.resolve(__dirname),
         alias: {
             handlebars: 'handlebars/dist/handlebars.min.js',
-            jquery: Path.join(__dirname, 'node_modules/jquery/dist/jquery'), //needed by eonasdan-bootstrap-datetimepicker
-            treegrid: Path.join(__dirname, 'node_modules/jquery-treegrid/js/jquery.treegrid') //error on its `package.json` - see tonic
+            jquery: Path.join(__dirname, 'node_modules/jquery/dist/jquery.js'), //needed by eonasdan-bootstrap-datetimepicker
+            treegrid: Path.join(__dirname, 'node_modules/jquery-treegrid/js/jquery.treegrid.js') //error on its `package.json` - see tonic
         }
     },
 

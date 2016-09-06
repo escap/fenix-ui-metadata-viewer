@@ -4,9 +4,9 @@ define([
     '../../config/config',
     '../../config/events',
     '../../html/template.hbs',
-    'handlebars',
+    'amplify-pubsub',
     'treegrid'
-], function ($, log, C, EVT, Template, Handlebars) {
+], function ($, log, C, EVT, Template, amplify) {
 
     'use strict';
 
@@ -53,6 +53,8 @@ define([
      */
     OutputCreator.prototype.render = function (model) {
 
+
+
         this.$visualizationData = this._transformDataToVisualizationModel(model.model, 'noParent', 0);
 
         this.$dataForTreeGRid = {'title_resource': model.title, 'data': this.$visualizationData, 'hideExportButton': this.hideExportButton};
@@ -61,13 +63,15 @@ define([
             this.$dataForTreeGRid.data = this._filterWhiteList();
         }
 
-        var templateToAdd = Handlebars.compile(Template);
+        var templateToAdd = Template;
         var $compiled = templateToAdd(this.$dataForTreeGRid);
 
         this.$el.empty();
         this.$el.append($compiled);
         var r = this.$el.find(this.o.s.table_container).treegrid(this.$treegridSettings);
 
+
+        
         if (r) {
             this._bindEventListeners();
             this._checkExpandNodesOptions();

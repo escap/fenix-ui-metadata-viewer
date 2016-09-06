@@ -1,8 +1,8 @@
 define([
     'loglevel',
     'jquery',
-    '../../src/js/index',
-    '../../assets/uneca_population.json'
+    '../../../src/js/index',
+    '../assets/uneca_population.json'
 ], function (log, $, MetadataViewer, UnecaModel) {
 
     'use strict';
@@ -15,10 +15,9 @@ define([
         empty_model = {data: []},
         error_model = {},
         lang = 'en',
-        valid_model = JSON.parse(UnecaModel);
+        valid_model = UnecaModel;
 
     function Dev() {
-        console.log("dev");
         log.setLevel('trace')
         this.start();
     }
