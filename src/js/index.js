@@ -4,8 +4,8 @@ define([
     '../config/errors',
     '../config/events',
     '../config/config',
-    'src/js/models/modelCreator',
-    'src/js/outputs/outputCreator',
+    './models/modelCreator',
+    './outputs/outputCreator',
     "fenix-ui-bridge",
     "amplify-pubsub"
 ], function ($, log, ERR, EVT, C, ModelCreator, OutputCreator, Bridge, amplify) {

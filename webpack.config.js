@@ -49,24 +49,28 @@ module.exports = {
 
 function getEntry() {
 
+    "use strict";
+
     var entry = {};
 
     switch (getEnvironment()) {
 
         case "demo" :
-            entry["app"] = ["demo/src/js/demo.js"];
+            entry.app = ["demo/src/js/demo.js"];
             break;
         case "develop" :
-            entry["app"] = ["dev/src/js/dev.js"];
+            entry.app = ["dev/src/js/dev.js"];
             break;
         default :
-            entry["app"] = ["./src/js/index.js"];
+            entry.app = ["./src/js/index.js"];
     }
 
     return entry;
 }
 
 function getOutput() {
+
+    "use strict";
 
     var output;
 
