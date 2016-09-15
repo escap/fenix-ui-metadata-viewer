@@ -1,6 +1,6 @@
 {
   "name": "fenix-ui-metadata-viewer",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.4",
   "description": "FENIX metadata viewer",
   "main": "src/js/index.js",
   "directories": {
@@ -36,8 +36,10 @@
     "bootstrap": "^3.3.7",
     "fenix-ui-bridge": "^1.0.0-beta.6",
     "handlebars": "^4.0.5",
+    "handlebars-loader": "^1.4.0",
     "jquery": "^3.1.0",
-    "jquery-treegrid": "^0.3.0",
+    "jquery-treegrid-webpack": "^0.0.2",
+    "json-loader": "^0.5.4",
     "loglevel": "^1.4.1",
     "moment": "^2.14.1"
   },

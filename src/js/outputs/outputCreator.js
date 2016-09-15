@@ -5,8 +5,8 @@ define([
     '../../config/events',
     '../../html/template.hbs',
     'amplify-pubsub',
-    'treegrid'
-], function ($, log, C, EVT, Template, amplify) {
+    'jquery-treegrid-webpack'
+], function ($, log, C, EVT, Template, amplify, treegrid) {
 
     'use strict';
 
