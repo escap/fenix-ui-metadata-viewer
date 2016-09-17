@@ -18,6 +18,9 @@ define([
         valid_model = UnecaModel;
 
     function Dev() {
+
+        this._importThirdPartyCss();
+
         log.setLevel('trace')
         this.start();
     }
@@ -77,6 +80,17 @@ define([
         });
 
         log.trace("Rendering second metadata viewer: end");
+    };
+
+    // utils
+
+    Dev.prototype._importThirdPartyCss = function () {
+
+        //Bootstrap
+        require("bootstrap-loader");
+
+        require("../../../node_modules/jquery-treegrid-webpack/css/jquery.treegrid.css");
+
     };
 
     return new Dev();
