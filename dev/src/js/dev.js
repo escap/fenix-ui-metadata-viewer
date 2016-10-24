@@ -15,13 +15,17 @@ define([
         empty_model = {data: []},
         error_model = {},
         lang = 'en',
-        valid_model = UnecaModel;
+        valid_model = UnecaModel,
+        environment = "production";
 
     function Dev() {
 
         this._importThirdPartyCss();
 
-        log.setLevel('trace')
+        console.clear();
+
+        log.setLevel('silent'); //trace silent
+
         this.start();
     }
 
@@ -45,7 +49,7 @@ define([
         var metadataViewer = new MetadataViewer({
             model: valid_model,
             lang: lang,
-            environment: "develop",
+            environment: environment,
             el: s.STANDARD,
             hideExportButton: false,
             expandAttributesRecursively: ['meContent'],
@@ -76,7 +80,8 @@ define([
         var metadataViewer = new MetadataViewer({
             model: valid_model,
             lang: lang,
-            el: s.SECOND
+            el: s.SECOND,
+            environment: environment,
         });
 
         log.trace("Rendering second metadata viewer: end");
