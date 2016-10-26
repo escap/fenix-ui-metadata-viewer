@@ -1,0 +1,2 @@
+body:before{white-space:pre;font-family:monospace;content:"Error: Undefined mixin 'animate'.\A           on line 44 of fenix-ui-metadata-viewer.scss, in `animate'\A           from line 44 of fenix-ui-metadata-viewer.scss\A   \A   39: \A   40:     .fx-md-viewer-description{\A   41:       top: 3px;\A   42:       cursor: pointer;\A   43:       opacity: 0;\A   44:       @include animate();\A   45:     }\A   46: \A   47:     &:hover{\A   48: \A   49:       .fx-md-viewer-description{"}
+/*# sourceMappingURL=fenix-ui-metadata-viewer.min.css.map*/

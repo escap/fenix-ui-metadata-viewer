@@ -1,6 +1,6 @@
 {
   "name": "fenix-ui-metadata-viewer",
-  "version": "3.0.0-beta.6",
+  "version": "3.0.0-beta.7",
   "description": "FENIX metadata viewer",
   "main": "src/js/index.js",
   "directories": {
@@ -40,10 +40,14 @@
     "moment": "^2.14.1"
   },
   "devDependencies": {
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "style-loader": "^0.13.1",
     "chai": "^3.5.0",
     "clean-webpack-plugin": "^0.1.10",
     "handlebars": "^4.0.5",
     "handlebars-loader": "^1.4.0",
+    "html-webpack-plugin": "^2.24.0",
     "imports-loader": "^0.6.5",
     "jshint": "^2.9.3",
     "jshint-loader": "^0.8.3",

@@ -16,6 +16,7 @@ define([
         log.info("FENIX metadata viewer");
         log.info(o);
 
+        require("../css/fenix-ui-metadata-viewer.css");
         $.extend(true, this, C, {initial: o});
 
         this._parseInput();
