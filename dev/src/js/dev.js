@@ -14,7 +14,7 @@ define([
         },
         empty_model = {data: []},
         error_model = {},
-        lang = 'en',
+        lang = 'fr',
         valid_model = UnecaModel,
         environment = "production";
 
@@ -92,7 +92,7 @@ define([
     Dev.prototype._importThirdPartyCss = function () {
 
         //Bootstrap
-        require("bootstrap-loader");
+        require("bootstrap");
 
         require("../../../node_modules/jquery-treegrid-webpack/css/jquery.treegrid.css");
 

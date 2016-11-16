@@ -78,7 +78,7 @@ define([
 
         this.$definitions = this.$mdsd.definitions;
         this.$properties = this.$mdsd.properties;
-        this.$lang = this.o.lang;
+        this.$lang = this.o.lang.toLowerCase();
         this.$title = this._getTitleFromData();
         this.$specialFields = SpecialFields;
     };
